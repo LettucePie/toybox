@@ -17,5 +17,5 @@ In the case of this project, a Toy is;
    - Points
    - Timers
    - Conventional Physics
-     - Try to explain or frame unconventional physics in some way.
+	 - Try to explain or frame unconventional physics in some way.
  
