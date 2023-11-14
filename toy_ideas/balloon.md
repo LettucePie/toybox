@@ -1,0 +1,2 @@
+# Balloon Toy
+Player can tap and hold the deflated balloon. Drag it towards the bottom and blow on the microphone to inflate it. They can then draw a figure eight while still holding to tie the balloon, or let go to let it fly. 
