@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://cv88tkyh53efe"]
+
+[ext_resource type="Script" path="res://components/basic_physics.gd" id="1_awhoq"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f65vf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bv5l8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_7hr04"]
+
+[node name="basic_block_toy" type="RigidBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_f65vf")
+script = ExtResource("1_awhoq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_bv5l8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." groups=["physics", "toy"]]
+mesh = SubResource("BoxMesh_7hr04")

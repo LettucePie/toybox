@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://5mcocinxucc8"]
+[gd_scene load_steps=9 format=3 uid="uid://5mcocinxucc8"]
 
 [ext_resource type="Script" path="res://rooms/camera_doll.gd" id="1_omuq4"]
+[ext_resource type="PackedScene" uid="uid://cv88tkyh53efe" path="res://toys/blocks/basic_block_toy.tscn" id="2_wryf0"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_bewp4"]
 size = Vector2(12, 10)
@@ -9,6 +10,9 @@ size = Vector2(12, 10)
 
 [sub_resource type="BoxMesh" id="BoxMesh_qd36c"]
 size = Vector3(2, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3ke4o"]
+size = Vector3(40, 2, 40)
 
 [sub_resource type="BoxMesh" id="BoxMesh_1rwh6"]
 size = Vector3(0.2, 8, 10)
@@ -34,6 +38,12 @@ mesh = SubResource("CylinderMesh_2nn6d")
 [node name="test3" type="MeshInstance3D" parent="floor/props"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3)
 mesh = SubResource("BoxMesh_qd36c")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_3ke4o")
 
 [node name="walls" type="Node3D" parent="."]
 
@@ -75,3 +85,6 @@ active = false
 
 [node name="camera_room" type="Camera3D" parent="camera_doll"]
 transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 3, 3, 3)
+
+[node name="basic_block_toy" parent="." instance=ExtResource("2_wryf0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.36756, 1.39268, -0.392322)
