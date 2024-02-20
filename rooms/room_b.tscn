@@ -1,0 +1,77 @@
+[gd_scene load_steps=7 format=3 uid="uid://5mcocinxucc8"]
+
+[ext_resource type="Script" path="res://rooms/camera_doll.gd" id="1_omuq4"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bewp4"]
+size = Vector2(12, 10)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2nn6d"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qd36c"]
+size = Vector3(2, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1rwh6"]
+size = Vector3(0.2, 8, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5c68u"]
+size = Vector3(12, 8, 0.2)
+
+[node name="room_b" type="Node3D"]
+
+[node name="floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_bewp4")
+
+[node name="props" type="Node3D" parent="floor"]
+
+[node name="test" type="MeshInstance3D" parent="floor/props"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -3)
+mesh = SubResource("CylinderMesh_2nn6d")
+
+[node name="test2" type="MeshInstance3D" parent="floor/props"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -2)
+mesh = SubResource("CylinderMesh_2nn6d")
+
+[node name="test3" type="MeshInstance3D" parent="floor/props"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3)
+mesh = SubResource("BoxMesh_qd36c")
+
+[node name="walls" type="Node3D" parent="."]
+
+[node name="wall_-x" type="MeshInstance3D" parent="walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, 0)
+mesh = SubResource("BoxMesh_1rwh6")
+skeleton = NodePath("../..")
+
+[node name="wall_+x" type="MeshInstance3D" parent="walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 0)
+mesh = SubResource("BoxMesh_1rwh6")
+skeleton = NodePath("../..")
+
+[node name="wall_-z" type="MeshInstance3D" parent="walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5)
+mesh = SubResource("BoxMesh_5c68u")
+skeleton = NodePath("../..")
+
+[node name="wall_+z" type="MeshInstance3D" parent="walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
+mesh = SubResource("BoxMesh_5c68u")
+skeleton = NodePath("../..")
+
+[node name="lights" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="lights"]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 4, 0)
+shadow_enabled = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 4, 3.5)
+light_color = Color(1, 1, 0.858824, 1)
+shadow_enabled = true
+omni_range = 8.48624
+
+[node name="camera_doll" type="Node3D" parent="."]
+script = ExtResource("1_omuq4")
+active = false
+
+[node name="camera_room" type="Camera3D" parent="camera_doll"]
+transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 3, 3, 3)
