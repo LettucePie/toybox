@@ -1,7 +1,7 @@
 # Toybox
 A Virtual Space for Android where players are presented with virtual toys. Toys should all be fairly unique, and are ultimately bi-products of the joy of developing them. This Project also serves as a playground for trying out different features and functions of both Android SDK and Godot Engine.
 
-Made with Godot 4.1.3-stable
+Made with Godot 4.2.2-stable
 
 ## What is a "Toy"
 I think it would be best to define what a Toy is to this project, and all the extra functions it would require to make it a cohesive and understandable.
