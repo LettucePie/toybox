@@ -3,7 +3,7 @@ class_name ScrollPadArea
 
 @export var scroll_container : ScrollHaptics = null
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	if scroll_container == null:
 		print("Scroll Pad Area searching for Scroll Container Haptics")
@@ -26,6 +26,6 @@ func _find_scroll_container() -> ScrollHaptics:
 		print("Failed to find Sibling or Child Scroll Container Haptics!")
 	return target
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(delta):
 	pass
