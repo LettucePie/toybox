@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://4ypddxy4wwie"]
+[gd_scene load_steps=13 format=3 uid="uid://4ypddxy4wwie"]
 
 [ext_resource type="Script" path="res://ui/tools/scroll_pad_area.gd" id="1_fk7r4"]
 [ext_resource type="Script" path="res://ui/play_ui.gd" id="1_ucswn"]
 [ext_resource type="Script" path="res://ui/tools/scroll_container_haptics.gd" id="2_8rjpd"]
 [ext_resource type="PackedScene" uid="uid://ba0uwf0hm8sfe" path="res://ui/toy_listing.tscn" id="2_aus8r"]
+[ext_resource type="PackedScene" uid="uid://cen2intikceej" path="res://toys/blocks/ui/block_toy_ui.tscn" id="3_om3d5"]
 
 [sub_resource type="Animation" id="Animation_ymro4"]
 resource_name = "hide"
@@ -533,8 +534,8 @@ anchors_preset = -1
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -335.0
-offset_bottom = 0.00390625
+offset_top = 625.0
+offset_bottom = 960.004
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -568,11 +569,24 @@ layout_mode = 2
 size_flags_horizontal = 7
 text = "Next"
 
+[node name="toymenu_frame" type="Control" parent="bottom_drawer"]
+layout_mode = 1
+anchor_top = 0.197
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.00422668
+offset_bottom = -0.00390625
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="block_toy_ui" parent="bottom_drawer/toymenu_frame" instance=ExtResource("3_om3d5")]
+layout_mode = 1
+
 [node name="side_drawer" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_bottom = 0.902
-offset_right = 328.0
+offset_left = -328.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="side_drawer"]
 root_node = NodePath("../..")

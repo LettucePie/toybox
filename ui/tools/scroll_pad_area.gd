@@ -3,7 +3,6 @@ class_name ScrollPadArea
 
 @export var scroll_container : ScrollHaptics = null
 
-
 func _ready():
 	if scroll_container == null:
 		print("Scroll Pad Area searching for Scroll Container Haptics")

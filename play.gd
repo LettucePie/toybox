@@ -30,3 +30,11 @@ func load_toy(toy_name : String):
 	for scene in new_instance.meta.objects:
 		new_instance.objects.append(scene.instantiate())
 	room.add_toys(new_instance.objects, new_instance.random_id)
+
+
+## This function is meant to be reached from the Play UI.
+## When player toggles through the different toymenus in the bottom \
+## drawer, we want the game to highlight and "fit in screen" all the pieces \
+## of the toy.
+func toy_menu_focused(toy_menu : Control):
+	print("Find toy instance and highlight pieces")

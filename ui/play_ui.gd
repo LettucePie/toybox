@@ -18,6 +18,7 @@ class_name PlayUI
 @onready var bottom_prev : Button = $bottom_drawer/drawer_controls/previous
 @onready var bottom_next : Button = $bottom_drawer/drawer_controls/next
 @onready var side_toy_list : VBoxContainer = $side_drawer/ScrollPadArea/ScrollHaptics/VBoxContainer
+@onready var toymenu_frame : Control = $bottom_drawer/toymenu_frame
 
 ## Drawer States
 var side_drawer_visible : bool = true
@@ -75,10 +76,12 @@ func _connect_buttons():
 
 func toy_selected(toy_name : String):
 	print("Toy Selected: ", toy_name)
+	
 
 
 func add_toy_menu(menu_node : Control):
 	print("Adding MenuNode: ", menu_node)
+	toymenu_frame.add_child(menu_node)
 	toy_menus.append(menu_node)
 
 
