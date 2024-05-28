@@ -1,0 +1,70 @@
+[gd_scene load_steps=3 format=3 uid="uid://cen2intikceej"]
+
+[ext_resource type="PackedScene" uid="uid://cbpx7bdptb7n0" path="res://toys/blocks/ui/toy_block_button.tscn" id="1_hs6mw"]
+[ext_resource type="Script" path="res://ui/tools/scroll_container_haptics.gd" id="1_qf5sk"]
+
+[node name="BlockToyUi" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 2
+anchor_top = 0.783
+anchor_right = 1.0
+anchor_bottom = 0.928
+offset_top = 0.319946
+offset_bottom = 0.119995
+follow_focus = true
+vertical_scroll_mode = 0
+script = ExtResource("1_qf5sk")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 5
+
+[node name="toy_block_button" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
+layout_mode = 2
+
+[node name="toy_block_button2" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
+layout_mode = 2
+
+[node name="toy_block_button3" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
+layout_mode = 2
+
+[node name="toy_block_button4" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
+layout_mode = 2
+
+[node name="toy_block_button5" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
+layout_mode = 2
+
+[node name="toy_block_button6" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
+layout_mode = 2
+
+[node name="toy_block_button7" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
+layout_mode = 2
+
+[node name="toy_block_button8" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
+layout_mode = 2
+
+[node name="toy_block_button9" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
+layout_mode = 2
+
+[node name="toy_block_button10" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
+layout_mode = 2
+
+[node name="toy_block_button11" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
+layout_mode = 2
+
+[node name="toy_block_button12" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
+layout_mode = 2
+
+[node name="toy_block_button13" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
+layout_mode = 2
+
+[node name="toy_block_button14" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
+layout_mode = 2
