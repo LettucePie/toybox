@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=3 uid="uid://cen2intikceej"]
+[gd_scene load_steps=3 format=3 uid="uid://cen2intikceej"]
 
-[ext_resource type="PackedScene" uid="uid://cbpx7bdptb7n0" path="res://toys/blocks/ui/toy_block_button.tscn" id="1_hs6mw"]
 [ext_resource type="Script" path="res://ui/tools/scroll_container_haptics.gd" id="1_qf5sk"]
 [ext_resource type="Script" path="res://ui/tools/scroll_pad_area.gd" id="1_y7qp4"]
 
@@ -37,45 +36,3 @@ script = ExtResource("1_qf5sk")
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 5
-
-[node name="toy_block_button" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
-layout_mode = 2
-
-[node name="toy_block_button2" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
-layout_mode = 2
-
-[node name="toy_block_button3" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
-layout_mode = 2
-
-[node name="toy_block_button4" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
-layout_mode = 2
-
-[node name="toy_block_button5" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
-layout_mode = 2
-
-[node name="toy_block_button6" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
-layout_mode = 2
-
-[node name="toy_block_button7" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
-layout_mode = 2
-
-[node name="toy_block_button8" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
-layout_mode = 2
-
-[node name="toy_block_button9" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
-layout_mode = 2
-
-[node name="toy_block_button10" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
-layout_mode = 2
-
-[node name="toy_block_button11" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
-layout_mode = 2
-
-[node name="toy_block_button12" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
-layout_mode = 2
-
-[node name="toy_block_button13" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
-layout_mode = 2
-
-[node name="toy_block_button14" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_hs6mw")]
-layout_mode = 2

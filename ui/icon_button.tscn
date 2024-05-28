@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cbpx7bdptb7n0"]
+[gd_scene load_steps=2 format=3 uid="uid://cmkghrca14c7n"]
 
-[ext_resource type="Texture2D" uid="uid://b3uetoaqhe2ki" path="res://icon.svg" id="1_4sv73"]
+[ext_resource type="Texture2D" uid="uid://b3uetoaqhe2ki" path="res://icon.svg" id="1_8ja6f"]
 
-[node name="toy_block_button" type="MarginContainer"]
+[node name="icon_button" type="MarginContainer"]
 custom_minimum_size = Vector2(100, 0)
 anchors_preset = -1
 anchor_right = 0.256
@@ -11,6 +11,10 @@ offset_right = -1.24001
 offset_bottom = -0.12001
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
@@ -21,11 +25,13 @@ layout_mode = 2
 [node name="icon" type="TextureRect" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("1_4sv73")
+texture = ExtResource("1_8ja6f")
 expand_mode = 3
 stretch_mode = 5
 
 [node name="label" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "block"
+horizontal_alignment = 1
+vertical_alignment = 1
 clip_text = true
