@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cen2intikceej"]
+[gd_scene load_steps=4 format=3 uid="uid://cen2intikceej"]
 
 [ext_resource type="PackedScene" uid="uid://cbpx7bdptb7n0" path="res://toys/blocks/ui/toy_block_button.tscn" id="1_hs6mw"]
 [ext_resource type="Script" path="res://ui/tools/scroll_container_haptics.gd" id="1_qf5sk"]
+[ext_resource type="Script" path="res://ui/tools/scroll_pad_area.gd" id="1_y7qp4"]
 
 [node name="BlockToyUi" type="Control"]
 layout_mode = 3
@@ -11,13 +12,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="scroll_pad_area" type="Control" parent="."]
+layout_mode = 1
+anchor_top = 0.741
+anchor_right = 1.0
+anchor_bottom = 0.985
+offset_top = -0.360046
+offset_right = -1.0
+offset_bottom = 0.399902
+script = ExtResource("1_y7qp4")
+
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 2
 anchor_top = 0.783
 anchor_right = 1.0
 anchor_bottom = 0.928
 offset_top = 0.319946
-offset_bottom = 0.119995
+offset_bottom = 29.5199
 follow_focus = true
 vertical_scroll_mode = 0
 script = ExtResource("1_qf5sk")

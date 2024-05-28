@@ -1,4 +1,5 @@
 extends ScrollContainer
+class_name ScrollHaptics
 
 var clicked : bool = false
 
