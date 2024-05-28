@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7j41getnigox"]
+
+[ext_resource type="PackedScene" uid="uid://bvdr8hqjwftth" path="res://rooms/room_a.tscn" id="1_o6wr0"]
+[ext_resource type="PackedScene" uid="uid://cen2intikceej" path="res://toys/blocks/ui/block_toy_ui.tscn" id="2_37a6h"]
+[ext_resource type="PackedScene" uid="uid://4ypddxy4wwie" path="res://ui/play_ui.tscn" id="3_420as"]
+
+[node name="play" type="Node"]
+
+[node name="room_a" parent="." instance=ExtResource("1_o6wr0")]
+
+[node name="BlockToyUi" parent="." instance=ExtResource("2_37a6h")]
+
+[node name="play_ui" parent="." instance=ExtResource("3_420as")]

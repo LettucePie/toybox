@@ -5,3 +5,4 @@
 [resource]
 background_mode = 2
 sky = ExtResource("1_n14gq")
+sky_custom_fov = 115.0
