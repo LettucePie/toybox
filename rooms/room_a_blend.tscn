@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1ijlf476bsbk"]
+
+[ext_resource type="PackedScene" uid="uid://bhaoj51bdjt82" path="res://rooms/room_a.blend" id="1_gtcdx"]
+[ext_resource type="PackedScene" uid="uid://dkuuxd0nl1yhi" path="res://toys/blocks/L_block_toy.tscn" id="2_pu3yr"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ormuj"]
+data = PackedVector3Array(9.9975, 0.115, -9.9977, -9.9977, 0.115, 9.9977, -9.9977, 0.115, -9.9977, 9.9975, 0.115, -9.9977, 9.9975, 0.115, 9.9977, -9.9977, 0.115, 9.9977, 9.9975, -0.115, 9.9977, -9.9977, 0.115, 9.9977, 9.9975, 0.115, 9.9977, 9.9975, -0.115, 9.9977, -9.9977, -0.115, 9.9977, -9.9977, 0.115, 9.9977, -9.9977, -0.115, 9.9977, -9.9977, 0.115, -9.9977, -9.9977, 0.115, 9.9977, -9.9977, -0.115, 9.9977, -9.9977, -0.115, -9.9977, -9.9977, 0.115, -9.9977, -9.9977, -0.115, -9.9977, 9.9975, -0.115, 9.9977, 9.9975, -0.115, -9.9977, -9.9977, -0.115, -9.9977, -9.9977, -0.115, 9.9977, 9.9975, -0.115, 9.9977, 9.9975, -0.115, -9.9977, 9.9975, 0.115, 9.9977, 9.9975, 0.115, -9.9977, 9.9975, -0.115, -9.9977, 9.9975, -0.115, 9.9977, 9.9975, 0.115, 9.9977, -9.9977, -0.115, -9.9977, 9.9975, 0.115, -9.9977, -9.9977, 0.115, -9.9977, -9.9977, -0.115, -9.9977, 9.9975, -0.115, -9.9977, 9.9975, 0.115, -9.9977)
+
+[node name="room_a" instance=ExtResource("1_gtcdx")]
+
+[node name="floor" parent="." index="0"]
+transform = Transform3D(8.54604, 0, 0, 0, 8.54604, 0, 0, 0, 8.54604, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="floor" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_ormuj")
+
+[node name="Light" parent="." index="1"]
+visible = false
+light_energy = 9.373
+omni_range = 60.057
+
+[node name="Camera" parent="." index="2"]
+transform = Transform3D(0.685921, -0.324013, 0.651558, -1.49012e-08, 0.895396, 0.445271, -0.727676, -0.305421, 0.61417, 60.2168, 41.0811, 56.7506)
+visible = false
+fov = 75.0
+
+[node name="L_block_toy" parent="." index="4" instance=ExtResource("2_pu3yr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.96873, 0)
+
+[node name="Camera3D" type="Camera3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 0.909809, 0.415027, 0, -0.415027, 0.909809, 0, 23.1375, 26.6222)
+current = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="6"]
+transform = Transform3D(0.801217, 0.34573, -0.488387, 0.249571, 0.54873, 0.797878, 0.543843, -0.761161, 0.353367, 0, 0, 0)

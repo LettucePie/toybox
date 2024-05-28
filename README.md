@@ -22,6 +22,8 @@ In the case of this project, a Toy is;
    - Timers
    - Conventional Physics
 	 - Try to explain or frame unconventional physics in some way.
+ - A Toy has its own User Interface options loaded into the universal menu.
+   - It can be stylized
  
  
  ### Feature Ideas

@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkuuxd0nl1yhi"]
+
+[ext_resource type="Script" path="res://components/basic_physics.gd" id="1_hv1n2"]
+[ext_resource type="PackedScene" uid="uid://dawm3yp1k8bih" path="res://toys/blocks/models/l_block.glb" id="2_70bq8"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f65vf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vvkxk"]
+size = Vector3(2.01117, 3.99857, 1.92468)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ta5vb"]
+size = Vector3(3.97433, 1.99228, 1.96332)
+
+[node name="L_block_toy" type="RigidBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_f65vf")
+script = ExtResource("1_hv1n2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0105286, 1.00078, 0.0116577)
+shape = SubResource("BoxShape3D_vvkxk")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.999222, 0.00271034, -0.00765991)
+shape = SubResource("BoxShape3D_ta5vb")
+
+[node name="l_block2" parent="." instance=ExtResource("2_70bq8")]
+
+[editable path="l_block2"]

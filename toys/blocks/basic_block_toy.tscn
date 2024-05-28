@@ -1,19 +1,20 @@
 [gd_scene load_steps=5 format=3 uid="uid://cv88tkyh53efe"]
 
 [ext_resource type="Script" path="res://components/basic_physics.gd" id="1_awhoq"]
+[ext_resource type="PackedScene" uid="uid://dusgg58mu0o5f" path="res://toys/blocks/models/block_x1.glb" id="2_0w8t3"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f65vf"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_bv5l8"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_7hr04"]
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_y2ekb"]
+data = PackedVector3Array(-0.9, -1, -0.9, 0.9, -1, 0.9, 0.9, -1, -0.9, -0.9, -1, -0.9, -0.9, -1, 0.9, 0.9, -1, 0.9, -1, -0.9, 0.9, -1, 0.9, -0.9, -1, 0.9, 0.9, -1, -0.9, 0.9, -1, -0.9, -0.9, -1, 0.9, -0.9, 0.9, -0.9, 1, -0.9, 0.9, 1, 0.9, 0.9, 1, 0.9, -0.9, 1, -0.9, -0.9, 1, -0.9, 0.9, 1, 0.9, 1, -0.9, -0.9, 1, 0.9, -0.9, 1, -0.9, 0.9, 1, -0.9, 0.9, 1, 0.9, -0.9, 1, 0.9, 1, -0.9, -0.9, 1, 0.9, 0.9, 1, 0.9, -0.9, 1, -0.9, -0.9, 1, -0.9, 0.9, 1, 0.9, 0.9, 0.9, 0.9, -1, 1, 0.9, -0.9, 0.9, 1, -0.9, 0.9, -1, -0.9, 1, -0.9, -0.9, 0.9, -0.9, -1, 1, 0.9, 0.9, 0.9, 0.9, 1, 0.9, 1, 0.9, 1, -0.9, 0.9, 0.9, -1, 0.9, 0.9, -0.9, 1, -0.9, 0.9, -1, -0.9, 1, -0.9, -1, 0.9, -0.9, -1, -0.9, -0.9, -0.9, -1, -0.9, -0.9, -0.9, -1, -1, 0.9, 0.9, -0.9, 1, 0.9, -0.9, 0.9, 1, -0.9, -1, 0.9, -1, -0.9, 0.9, -0.9, -0.9, 1, -0.9, -1, -0.9, -1, -0.9, 0.9, -0.9, -1, 0.9, -0.9, -1, -0.9, -1, -0.9, -0.9, -1, -0.9, 0.9, 0.9, -1, -0.9, -0.9, -0.9, -1, -0.9, -1, -0.9, 0.9, -1, -0.9, 0.9, -0.9, -1, -0.9, -0.9, -1, 1, 0.9, -0.9, 0.9, -0.9, -1, 1, -0.9, -0.9, 1, 0.9, -0.9, 0.9, 0.9, -1, 0.9, -0.9, -1, -0.9, -0.9, 1, -1, 0.9, 0.9, -0.9, 0.9, 1, -0.9, -0.9, 1, -1, -0.9, 0.9, -1, 0.9, 0.9, 0.9, 0.9, 1, 1, -0.9, 0.9, 0.9, -0.9, 1, 0.9, 0.9, 1, 1, 0.9, 0.9, 1, -0.9, 0.9, -0.9, 0.9, -1, -1, -0.9, -0.9, -0.9, -0.9, -1, -0.9, 0.9, -1, -1, 0.9, -0.9, -1, -0.9, -0.9, 0.9, 1, 0.9, -0.9, 0.9, 1, -0.9, 1, 0.9, 0.9, 1, 0.9, 0.9, 0.9, 1, -0.9, 0.9, 1, 0.9, 1, -0.9, 1, 0.9, 0.9, 0.9, 1, 0.9, 0.9, 1, -0.9, 1, 0.9, -0.9, 1, 0.9, 0.9, -0.9, -1, 0.9, 0.9, -0.9, 1, 0.9, -1, 0.9, -0.9, -1, 0.9, -0.9, -0.9, 1, 0.9, -0.9, 1, -0.9, 1, 0.9, -1, 0.9, -0.9, -0.9, 1, -0.9, -0.9, 1, 0.9, -1, 0.9, 0.9, -1, 0.9, -0.9, -0.9, 1, -0.9, 0.9, 0.9, -1, 0.9, 1, -0.9, -0.9, 1, -0.9, -0.9, 0.9, -1, 0.9, 0.9, -1, 0.9, -1, 0.9, 1, -0.9, -0.9, 0.9, -1, -0.9, 0.9, -1, 0.9, 1, -0.9, 0.9, 1, -0.9, -0.9, -0.9, -0.9, -1, 0.9, 0.9, -1, -0.9, 0.9, -1, -0.9, -0.9, -1, 0.9, -0.9, -1, 0.9, 0.9, -1)
 
 [node name="basic_block_toy" type="RigidBody3D"]
 physics_material_override = SubResource("PhysicsMaterial_f65vf")
 script = ExtResource("1_awhoq")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_bv5l8")
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+shape = SubResource("ConcavePolygonShape3D_y2ekb")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." groups=["physics", "toy"]]
-mesh = SubResource("BoxMesh_7hr04")
+[node name="block_x1" parent="." instance=ExtResource("2_0w8t3")]
+
+[editable path="block_x1"]
