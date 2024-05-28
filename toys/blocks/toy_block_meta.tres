@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ToyMeta" load_steps=6 format=3 uid="uid://ci74q730gotfw"]
+
+[ext_resource type="PackedScene" uid="uid://cen2intikceej" path="res://toys/blocks/ui/block_toy_ui.tscn" id="1_qctec"]
+[ext_resource type="Script" path="res://toys/toy_meta.gd" id="1_tpbf0"]
+[ext_resource type="PackedScene" uid="uid://cv88tkyh53efe" path="res://toys/blocks/basic_block_toy.tscn" id="2_akjhd"]
+[ext_resource type="PackedScene" uid="uid://cnyctpauobynt" path="res://toys/blocks/half_block_toy.tscn" id="3_r021i"]
+[ext_resource type="PackedScene" uid="uid://dkuuxd0nl1yhi" path="res://toys/blocks/L_block_toy.tscn" id="4_3p7rs"]
+
+[resource]
+script = ExtResource("1_tpbf0")
+name = "Wooden Blocks"
+memory_level = 1
+menu = ExtResource("1_qctec")
+objects = Array[PackedScene]([ExtResource("2_akjhd"), ExtResource("3_r021i"), ExtResource("4_3p7rs")])

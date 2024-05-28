@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://ysodeg11ad6u"]
+
+[ext_resource type="Script" path="res://toybox.gd" id="1_81sd8"]
+[ext_resource type="Resource" uid="uid://ci74q730gotfw" path="res://toys/blocks/toy_block_meta.tres" id="2_goqct"]
+
+[node name="toybox" type="Node" groups=["data", "persist", "toybox"]]
+script = ExtResource("1_81sd8")
+toy_metadatas = Array[Resource("res://toys/toy_meta.gd")]([ExtResource("2_goqct")])

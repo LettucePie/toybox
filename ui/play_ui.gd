@@ -36,7 +36,6 @@ func _ready_position():
 	side_show_hide.text = "Hide"
 	bottom_show_hide.text = "Show"
 	drawer_blend_target = Vector2(0, 1)
-	#tree.set("parameters/drawer_pos/blend_position", drawer_blend_target)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -75,8 +74,6 @@ func _show_hide(drawer : Button):
 	drawer_blend_target = Vector2(
 		int(bottom_drawer_visible), 
 		int(side_drawer_visible))
-	#print(tree["parameters/drawer_pos/blend_position"])
-	#tree.set("parameters/drawer_pos/blend_position", drawer_blend_target)
 
 
 ## Animation Tree Override
