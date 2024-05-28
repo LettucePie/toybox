@@ -4,6 +4,7 @@ class_name PlayUI
 #### the unique menus each toy may require. 
 
 ## ToyBox Stuff
+@export var play : Play
 @export var toybox : Toybox
 @export var toy_listing : PackedScene
 
@@ -31,6 +32,11 @@ func _ready():
 
 
 func _load_toybox():
+	if play == null:
+		print("ERROR: play_ui not connected to Play")
+		if get_parent() is Play:
+			play = get_parent()
+			print("RECOVER: play_ui found Play")
 	if toybox == null:
 		print("ERROR: play_ui not connected to ToyBox")
 		for child in get_parent().get_children():
@@ -39,7 +45,7 @@ func _load_toybox():
 				print("RECOVER: play_ui found ToyBox sibling.")
 		if toybox == null:
 			print("ERROR: play_ui failed to find ToyBox... giving up")
-	if toybox != null:
+	if play != null and toybox != null:
 		print("Fill Toy Listing with entries")
 		for toy in toybox.get_toy_listing():
 			var new_listing : HapticButton = toy_listing.instantiate()

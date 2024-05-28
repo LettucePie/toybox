@@ -1,14 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7j41getnigox"]
+[gd_scene load_steps=5 format=3 uid="uid://b7j41getnigox"]
 
 [ext_resource type="PackedScene" uid="uid://ysodeg11ad6u" path="res://toybox.tscn" id="1_1kbce"]
 [ext_resource type="PackedScene" uid="uid://bvdr8hqjwftth" path="res://rooms/room_a.tscn" id="1_o6wr0"]
+[ext_resource type="Script" path="res://play.gd" id="1_yowul"]
 [ext_resource type="PackedScene" uid="uid://4ypddxy4wwie" path="res://ui/play_ui.tscn" id="3_420as"]
 
 [node name="play" type="Node"]
+script = ExtResource("1_yowul")
 
 [node name="toybox" parent="." instance=ExtResource("1_1kbce")]
 
 [node name="room_a" parent="." instance=ExtResource("1_o6wr0")]
 
-[node name="play_ui" parent="." node_paths=PackedStringArray("toybox") instance=ExtResource("3_420as")]
+[node name="play_ui" parent="." node_paths=PackedStringArray("play", "toybox") instance=ExtResource("3_420as")]
+play = NodePath("..")
 toybox = NodePath("../toybox")
