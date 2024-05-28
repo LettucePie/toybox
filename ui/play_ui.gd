@@ -1,24 +1,56 @@
 extends Control
+class_name PlayUI
+#### This functions as the Main Host of the Toybox MetaData list and \
+#### the unique menus each toy may require. 
 
-@onready var tree : AnimationTree = $AnimationTree
-@onready var playback : AnimationNodeStateMachinePlayback = tree.get("parameters/playback")
-@onready var anim : AnimationPlayer = $AnimationPlayer
+## ToyBox Stuff
+@export var toybox : Toybox
+@export var toy_listing : PackedScene
 
-## Drawer Buttons
+## Animation Stuff
+@onready var side_anim : AnimationPlayer = $side_drawer/AnimationPlayer
+@onready var bottom_anim : AnimationPlayer = $bottom_drawer/AnimationPlayer
+
+## Drawer Elements
 @onready var side_show_hide : Button = $side_drawer/show_hide
 @onready var bottom_show_hide : Button = $bottom_drawer/drawer_controls/show_hide
 @onready var bottom_prev : Button = $bottom_drawer/drawer_controls/previous
 @onready var bottom_next : Button = $bottom_drawer/drawer_controls/next
+@onready var side_toy_list : VBoxContainer = $side_drawer/ScrollPadArea/ScrollHaptics/VBoxContainer
 
 ## Drawer States
 var side_drawer_visible : bool = true
 var bottom_drawer_visible : bool = false
-var drawer_blend_target : Vector2 = Vector2(0, 1)
+#var drawer_blend_target : Vector2 = Vector2(0, 1)
 
 
 func _ready():
+	_load_toybox()
 	_ready_position()
 	_connect_buttons()
+
+
+func _load_toybox():
+	if toybox == null:
+		print("ERROR: play_ui not connected to ToyBox")
+		for child in get_window().get_children():
+			if child is Toybox:
+				toybox = child
+		if toybox == null:
+			print("ERROR: play_ui failed to find ToyBox... giving up")
+	if toybox != null:
+		print("Fill Toy Listing with entries")
+
+
+func _ready_position():
+	side_drawer_visible = true
+	bottom_drawer_visible = false
+	bottom_anim.play("hide")
+	side_anim.play("show")
+	## TODO replace with icons
+	side_show_hide.text = "Hide"
+	bottom_show_hide.text = "Show"
+	#drawer_blend_target = Vector2(0, 1)
 
 
 func _connect_buttons():
@@ -26,25 +58,9 @@ func _connect_buttons():
 	bottom_show_hide.pressed.connect(_show_hide.bind(bottom_show_hide))
 
 
-func _ready_position():
-	side_drawer_visible = true
-	bottom_drawer_visible = false
-	_play_anim("all_hide")
-	_play_anim("side_show")
-	_play_anim("bottom_hide")
-	## TODO replace with icons
-	side_show_hide.text = "Hide"
-	bottom_show_hide.text = "Show"
-	drawer_blend_target = Vector2(0, 1)
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	tree.set("parameters/drawer_pos/blend_position", 
-		tree["parameters/drawer_pos/blend_position"].lerp(
-			drawer_blend_target,
-			delta * 5)
-		)
+	pass
 
 
 func _show_hide(drawer : Button):
@@ -56,27 +72,26 @@ func _show_hide(drawer : Button):
 			## TODO replace text with icons
 			## Maybe put icons in animationplayer
 			bottom_show_hide.text = "Show"
+			bottom_anim.play("hide")
 		else:
 			bottom_drawer_visible = true
 			bottom_show_hide.text = "Hide"
-			side_drawer_visible = false
-			side_show_hide.text = "Show"
+			bottom_anim.play("show")
+			if side_drawer_visible:
+				side_anim.play("hide")
+				side_drawer_visible = false
+				side_show_hide.text = "Show"
 	elif drawer == side_show_hide:
 		print("Side Show Hide")
 		if side_drawer_visible:
 			side_drawer_visible = false
 			side_show_hide.text = "Show"
+			side_anim.play("hide")
 		else:
 			side_drawer_visible = true
 			side_show_hide.text = "Hide"
-			bottom_drawer_visible = false
-			bottom_show_hide.text = "Show"
-	drawer_blend_target = Vector2(
-		int(bottom_drawer_visible), 
-		int(side_drawer_visible))
-
-
-## Animation Tree Override
-func _play_anim(animation : String):
-	if anim.has_animation(animation):
-		anim.play(animation)
+			side_anim.play("show")
+			if bottom_drawer_visible:
+				bottom_anim.play("hide")
+				bottom_drawer_visible = false
+				bottom_show_hide.text = "Show"
