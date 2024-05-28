@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cen2intikceej"]
+[gd_scene load_steps=5 format=3 uid="uid://cen2intikceej"]
 
 [ext_resource type="Script" path="res://ui/tools/scroll_container_haptics.gd" id="1_qf5sk"]
 [ext_resource type="Script" path="res://ui/tools/scroll_pad_area.gd" id="1_y7qp4"]
+[ext_resource type="PackedScene" uid="uid://cmkghrca14c7n" path="res://ui/icon_button.tscn" id="3_3g5pa"]
+[ext_resource type="Texture2D" uid="uid://b3uetoaqhe2ki" path="res://icon.svg" id="4_o8732"]
 
 [node name="block_toy_ui" type="Control"]
 layout_mode = 3
@@ -36,3 +38,21 @@ script = ExtResource("1_qf5sk")
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 5
+
+[node name="cube_button" parent="ScrollContainer/HBoxContainer" instance=ExtResource("3_3g5pa")]
+layout_mode = 2
+manual_assign = true
+manual_icon = ExtResource("4_o8732")
+manual_text = "Cube"
+
+[node name="half_button" parent="ScrollContainer/HBoxContainer" instance=ExtResource("3_3g5pa")]
+layout_mode = 2
+manual_assign = true
+manual_icon = ExtResource("4_o8732")
+manual_text = "Half"
+
+[node name="corner_button" parent="ScrollContainer/HBoxContainer" instance=ExtResource("3_3g5pa")]
+layout_mode = 2
+manual_assign = true
+manual_icon = ExtResource("4_o8732")
+manual_text = "Corner"

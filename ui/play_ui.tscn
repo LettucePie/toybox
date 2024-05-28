@@ -533,8 +533,8 @@ anchors_preset = -1
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 625.0
-offset_bottom = 960.004
+offset_top = -335.0
+offset_bottom = 0.00390625
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -623,39 +623,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 5
-
-[node name="toy_listing" parent="side_drawer/ScrollPadArea/ScrollHaptics/VBoxContainer" instance=ExtResource("2_aus8r")]
-layout_mode = 2
-
-[node name="toy_listing2" parent="side_drawer/ScrollPadArea/ScrollHaptics/VBoxContainer" instance=ExtResource("2_aus8r")]
-layout_mode = 2
-
-[node name="toy_listing3" parent="side_drawer/ScrollPadArea/ScrollHaptics/VBoxContainer" instance=ExtResource("2_aus8r")]
-layout_mode = 2
-
-[node name="toy_listing4" parent="side_drawer/ScrollPadArea/ScrollHaptics/VBoxContainer" instance=ExtResource("2_aus8r")]
-layout_mode = 2
-
-[node name="toy_listing5" parent="side_drawer/ScrollPadArea/ScrollHaptics/VBoxContainer" instance=ExtResource("2_aus8r")]
-layout_mode = 2
-
-[node name="toy_listing6" parent="side_drawer/ScrollPadArea/ScrollHaptics/VBoxContainer" instance=ExtResource("2_aus8r")]
-layout_mode = 2
-
-[node name="toy_listing7" parent="side_drawer/ScrollPadArea/ScrollHaptics/VBoxContainer" instance=ExtResource("2_aus8r")]
-layout_mode = 2
-
-[node name="toy_listing8" parent="side_drawer/ScrollPadArea/ScrollHaptics/VBoxContainer" instance=ExtResource("2_aus8r")]
-layout_mode = 2
-
-[node name="toy_listing9" parent="side_drawer/ScrollPadArea/ScrollHaptics/VBoxContainer" instance=ExtResource("2_aus8r")]
-layout_mode = 2
-
-[node name="toy_listing10" parent="side_drawer/ScrollPadArea/ScrollHaptics/VBoxContainer" instance=ExtResource("2_aus8r")]
-layout_mode = 2
-
-[node name="toy_listing11" parent="side_drawer/ScrollPadArea/ScrollHaptics/VBoxContainer" instance=ExtResource("2_aus8r")]
-layout_mode = 2
 
 [node name="show_hide" type="Button" parent="side_drawer"]
 layout_mode = 1

@@ -41,6 +41,11 @@ func _load_toybox():
 			print("ERROR: play_ui failed to find ToyBox... giving up")
 	if toybox != null:
 		print("Fill Toy Listing with entries")
+		for toy in toybox.get_toy_listing():
+			var new_listing : HapticButton = toy_listing.instantiate()
+			new_listing.set_properties(toy[0], toy[1])
+			new_listing.name = str(toy[0])
+			side_toy_list.add_child(new_listing)
 
 
 func _ready_position():

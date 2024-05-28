@@ -5,6 +5,8 @@
 
 [node name="toy_listing" type="PanelContainer"]
 script = ExtResource("1_5ce1o")
+icon_path = NodePath("hbox/icon")
+label_path = NodePath("hbox/label")
 
 [node name="hbox" type="HBoxContainer" parent="."]
 layout_mode = 2
