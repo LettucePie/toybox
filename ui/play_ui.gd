@@ -22,7 +22,9 @@ class_name PlayUI
 ## Drawer States
 var side_drawer_visible : bool = true
 var bottom_drawer_visible : bool = false
-#var drawer_blend_target : Vector2 = Vector2(0, 1)
+
+## Toy Menus
+var toy_menus : Array[Control] = []
 
 
 func _ready():
@@ -52,6 +54,7 @@ func _load_toybox():
 			new_listing.set_properties(toy[0], toy[1])
 			new_listing.name = str(toy[0])
 			side_toy_list.add_child(new_listing)
+			new_listing.pressed.connect(toy_selected)
 
 
 func _ready_position():
@@ -70,9 +73,24 @@ func _connect_buttons():
 	bottom_show_hide.pressed.connect(_show_hide.bind(bottom_show_hide))
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func toy_selected(toy_name : String):
+	print("Toy Selected: ", toy_name)
+
+
+func add_toy_menu(menu_node : Control):
+	print("Adding MenuNode: ", menu_node)
+	toy_menus.append(menu_node)
+
+
+func focus_toy_menu(menu_node : Control):
+	print("Focus Bottom Drawer to toy menu")
+
+
+func remove_toy_menu(menu_node : Control):
+	print("Removing MenuNode: ", menu_node)
+	toy_menus.erase(menu_node)
+	## Some other stuff then queue_free
+	menu_node.queue_free()
 
 
 func _show_hide(drawer : Button):
