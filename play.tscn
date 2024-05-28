@@ -10,4 +10,5 @@
 
 [node name="room_a" parent="." instance=ExtResource("1_o6wr0")]
 
-[node name="play_ui" parent="." instance=ExtResource("3_420as")]
+[node name="play_ui" parent="." node_paths=PackedStringArray("toybox") instance=ExtResource("3_420as")]
+toybox = NodePath("../toybox")

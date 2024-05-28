@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://ui/tools/scroll_container_haptics.gd" id="1_qf5sk"]
 [ext_resource type="Script" path="res://ui/tools/scroll_pad_area.gd" id="1_y7qp4"]
 
-[node name="BlockToyUi" type="Control"]
+[node name="block_toy_ui" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

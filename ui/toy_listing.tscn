@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://ba0uwf0hm8sfe"]
+
+[ext_resource type="Script" path="res://ui/scroll_button_haptics.gd" id="1_5ce1o"]
+[ext_resource type="Texture2D" uid="uid://b3uetoaqhe2ki" path="res://icon.svg" id="1_adqs3"]
+
+[node name="toy_listing" type="PanelContainer"]
+script = ExtResource("1_5ce1o")
+
+[node name="hbox" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="icon" type="TextureRect" parent="hbox"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("1_adqs3")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="label" type="Label" parent="hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Toy Name"
+horizontal_alignment = 1
+vertical_alignment = 1

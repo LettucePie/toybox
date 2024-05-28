@@ -33,9 +33,10 @@ func _ready():
 func _load_toybox():
 	if toybox == null:
 		print("ERROR: play_ui not connected to ToyBox")
-		for child in get_window().get_children():
+		for child in get_parent().get_children():
 			if child is Toybox:
 				toybox = child
+				print("RECOVER: play_ui found ToyBox sibling.")
 		if toybox == null:
 			print("ERROR: play_ui failed to find ToyBox... giving up")
 	if toybox != null:
