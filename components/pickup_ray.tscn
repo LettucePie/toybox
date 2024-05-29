@@ -9,7 +9,7 @@ albedo_color = Color(6.16074e-06, 0.630365, 0.80855, 1)
 material = SubResource("StandardMaterial3D_b23d7")
 top_radius = 0.2
 bottom_radius = 0.2
-height = 10.0
+height = 40.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_knyfp"]
 albedo_color = Color(0.756293, 0.00284029, 0.987553, 1)
@@ -30,9 +30,10 @@ target_position = Vector3(0, -10, 0)
 [node name="climb" type="RayCast3D" parent="."]
 target_position = Vector3(0, -40, 0)
 
-[node name="testcylinder" type="MeshInstance3D" parent="."]
+[node name="testcylinder" type="MeshInstance3D" parent="climb"]
 mesh = SubResource("CylinderMesh_r527e")
+skeleton = NodePath("../..")
 
-[node name="top" type="MeshInstance3D" parent="testcylinder"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.65419, 0)
+[node name="top" type="MeshInstance3D" parent="climb/testcylinder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.842, 0)
 mesh = SubResource("BoxMesh_5i3ac")

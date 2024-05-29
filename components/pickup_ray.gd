@@ -4,11 +4,12 @@ class_name PickupRay
 ## Setup components
 @export var physics_object : CollisionObject3D = null
 @export var physics_shapes : Array[CollisionShape3D] = []
+@export var hover_height : float = 4.0
 @export var up_distance : float = 10.0
 @export var down_distance : float = -10.0
 @export var climb_height : float = 20.0
 @export var climb_distance : float = -40.0
-@export var climb_reach : float = 4.0
+@export var climb_reach : float = 3.0
 
 var previous_position : Vector3 = Vector3.ZERO
 var relative : Vector3 = Vector3.ZERO
@@ -56,12 +57,16 @@ func _move_climb_ray():
 
 
 func _calculate_hoverpoint():
-	if $up.is_colliding():
-		pass
-		#print("up: ", $up.get_collision_point())
-	if $down.is_colliding():
-		pass
-		#print("down: ", $down.get_collision_point())
+	if $climb.is_colliding():
+		climb_point = $climb.get_collision_point()
+		if $up.is_colliding():
+			up_point = $up.get_collision_point()
+			## shrink by up point to prevent bopping head of object into things
+	
+	## Why do i have down again?
+	#if $down.is_colliding():
+		#down_point = $down.get_collision_point()
+		
 
 
 func _physics_process(delta):

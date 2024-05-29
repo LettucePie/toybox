@@ -66,4 +66,9 @@ func _physics_process(delta):
 		## Check if Mouse Velocity is actually moving
 		if Input.get_last_mouse_velocity().length_squared() > 2:
 			_update_mouse_world()
-			position = position.lerp(mouse_world, 5 * delta)
+			var flattened_target : Vector3 = Vector3(
+				mouse_world.x,
+				position.y,
+				mouse_world.z
+			)
+			position = position.lerp(flattened_target, 5 * delta)
