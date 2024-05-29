@@ -30,6 +30,11 @@ func load_toy(toy_name : String):
 	for scene in new_instance.meta.objects:
 		new_instance.objects.append(scene.instantiate())
 	room.add_toys(new_instance.objects, new_instance.random_id)
+	if new_instance.meta.pass_objects \
+	and new_instance.menu_instance.has_method(new_instance.meta.menu_receiver_function):
+			new_instance.menu_instance.call(
+				new_instance.meta.menu_receiver_function,
+				new_instance.objects)
 
 
 ## This function is meant to be reached from the Play UI.

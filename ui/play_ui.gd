@@ -73,8 +73,8 @@ func _ready_position():
 func _connect_buttons():
 	side_show_hide.pressed.connect(_show_hide.bind(side_show_hide))
 	bottom_show_hide.pressed.connect(_show_hide.bind(bottom_show_hide))
-	bottom_prev.pressed.connect(_shift_current_toy_menu.bind(false))
-	bottom_next.pressed.connect(_shift_current_toy_menu.bind(true))
+	bottom_prev.pressed.connect(_shift_current_toy_menu.bind(-1))
+	bottom_next.pressed.connect(_shift_current_toy_menu.bind(1))
 
 
 func toy_selected(toy_name : String):

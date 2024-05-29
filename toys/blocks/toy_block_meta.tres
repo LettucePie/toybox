@@ -12,3 +12,5 @@ name = "Wooden Blocks"
 memory_level = 1
 menu = ExtResource("1_qctec")
 objects = Array[PackedScene]([ExtResource("2_akjhd"), ExtResource("3_r021i"), ExtResource("4_3p7rs")])
+pass_objects = true
+menu_receiver_function = "receive_blocks"

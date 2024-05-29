@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cen2intikceej"]
+[gd_scene load_steps=6 format=3 uid="uid://cen2intikceej"]
 
+[ext_resource type="Script" path="res://toys/blocks/ui/block_toy_ui.gd" id="1_kc1xc"]
 [ext_resource type="Script" path="res://ui/tools/scroll_container_haptics.gd" id="1_qf5sk"]
 [ext_resource type="Script" path="res://ui/tools/scroll_pad_area.gd" id="1_y7qp4"]
 [ext_resource type="PackedScene" uid="uid://cmkghrca14c7n" path="res://ui/icon_button.tscn" id="3_3g5pa"]
@@ -12,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_kc1xc")
 
 [node name="scroll_pad_area" type="Control" parent="." node_paths=PackedStringArray("scroll_container")]
 layout_mode = 1
