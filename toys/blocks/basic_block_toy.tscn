@@ -21,5 +21,6 @@ shape = SubResource("BoxShape3D_rs56t")
 [node name="pickup_ray" parent="." node_paths=PackedStringArray("physics_object", "physics_shapes") instance=ExtResource("3_s00c6")]
 physics_object = NodePath("..")
 physics_shapes = [NodePath("../CollisionShape")]
+down_radius = 1.0
 
 [editable path="block_x1"]

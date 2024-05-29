@@ -33,3 +33,7 @@ transform = Transform3D(1, 0, 0, 0, 0.831799, 0.555077, 0, -0.555077, 0.831799, 
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("2_kfhf2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.197828, 0.980237, 0, -0.980237, -0.197828, 0, 0, 0)
+shadow_enabled = true

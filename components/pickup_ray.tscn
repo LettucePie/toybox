@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://components/pickup_ray.gd" id="1_p34pj"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_dxcci"]
+resource_local_to_scene = true
 height = 40.0
-radius = 2.0
 
 [node name="pickup_ray" type="Node3D"]
 script = ExtResource("1_p34pj")

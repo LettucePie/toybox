@@ -14,10 +14,10 @@ physics_material_override = SubResource("PhysicsMaterial_f65vf")
 script = ExtResource("1_cff6l")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_yt5l3")
 
 [node name="half_block2" parent="." instance=ExtResource("2_kxx1o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="pickup_ray" parent="." node_paths=PackedStringArray("physics_object", "physics_shapes") instance=ExtResource("3_ib3o2")]
 physics_object = NodePath("..")
