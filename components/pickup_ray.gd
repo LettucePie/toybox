@@ -2,27 +2,19 @@ extends Node3D
 class_name PickupRay
 
 ## Setup components
-@export var physics_object : CollisionObject3D = null
+@export var physics_object : PickupPhysics = null
 @export var physics_shapes : Array[CollisionShape3D] = []
 @export var hover_height : float = 4.0
 @export var up_distance : float = 10.0
-@export var down_distance : float = -10.0
-@export var climb_height : float = 20.0
-@export var climb_distance : float = -40.0
-@export var climb_reach : float = 3.0
+@export var down_distance : float = 20.0
+@export var down_radius : float = 2.0
 
-var previous_position : Vector3 = Vector3.ZERO
-var relative : Vector3 = Vector3.ZERO
-@onready var rays : Array = [$up, $down, $climb]
-var up_point : Vector3 = Vector3.ZERO
-var down_point : Vector3 = Vector3.ZERO
-var climb_point : Vector3 = Vector3.ZERO
+var hover_point : float = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_check_setup()
 	_apply_ray_variables()
-	previous_position = physics_object.position
 
 
 func _check_setup():
@@ -42,37 +34,42 @@ func _check_setup():
 
 func _apply_ray_variables():
 	$up.target_position = Vector3(0, up_distance, 0)
-	$down.target_position = Vector3(0, down_distance, 0)
-	$climb.target_position = Vector3(0, climb_distance, 0)
-
-
-## Shift the ClimbRay in the direction the object is moving so that it can \
-## detect inclines.
-func _move_climb_ray():
-	var direction : Vector3 = Vector3(relative.x, 0, relative.z).normalized()
-	$climb.position = Vector3(
-		direction.x * climb_reach, 
-		climb_height, 
-		direction.z * climb_reach)
+	$down.position.y = down_distance
+	$down.target_position = Vector3(0, -down_distance, 0)
+	$down.shape.height = down_distance * 2
+	$down.shape.radius = down_radius
 
 
 func _calculate_hoverpoint():
-	if $climb.is_colliding():
-		climb_point = $climb.get_collision_point()
+	if $down.is_colliding():
+		var largest_value : float = physics_object.position.y - down_distance
+		var valid : bool = false
+		for col_index in $down.get_collision_count():
+			if $down.get_collision_point(col_index).y > largest_value \
+			and $down.get_collider(col_index) != physics_object:
+				largest_value = $down.get_collision_point(col_index).y
+				valid = true
+		if valid:
+			hover_point = largest_value + hover_height
+		else:
+			hover_point = physics_object.position.y
 		if $up.is_colliding():
-			up_point = $up.get_collision_point()
+			var up_point = $up.get_collision_point()
 			## shrink by up point to prevent bopping head of object into things
-	
-	## Why do i have down again?
-	#if $down.is_colliding():
-		#down_point = $down.get_collision_point()
-		
+			if hover_point > (up_point.y - hover_height):
+				hover_point = up_point.y - hover_height
+	else:
+		hover_point = physics_object.position.y
 
 
 func _physics_process(delta):
-	relative = physics_object.position - previous_position
-	previous_position = physics_object.position
 	## Fix the Orientation
 	global_rotation = Vector3.ZERO
-	_move_climb_ray()
-	_calculate_hoverpoint()
+	$up.enabled = physics_object.grabbed
+	$down.enabled = physics_object.grabbed
+	if physics_object.grabbed:
+		_calculate_hoverpoint()
+		physics_object.position.y = lerp(
+			physics_object.position.y, hover_point, 0.33
+		)
+		print(hover_point)

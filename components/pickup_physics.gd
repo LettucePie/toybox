@@ -44,6 +44,7 @@ func _input(event):
 		if grabbed:
 			grabbed = false
 			emit_signal("object_released", self)
+			#gravity_scale = 1.0
 
 
 func _update_mouse_world():
@@ -55,13 +56,13 @@ func _update_mouse_world():
 	var result = get_world_3d().direct_space_state.intersect_ray(query)
 	if !result.is_empty():
 		mouse_world = result["position"]
-		print(mouse_world)
 
 
 func _physics_process(delta):
 	if (grabbing and !grabbed) and Time.get_ticks_msec() - grab_time > 100:
 		grabbed = true
 		emit_signal("object_grabbed", self)
+		#gravity_scale = 0.0
 	if grabbed:
 		## Check if Mouse Velocity is actually moving
 		if Input.get_last_mouse_velocity().length_squared() > 2:

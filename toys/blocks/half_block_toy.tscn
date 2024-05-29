@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cnyctpauobynt"]
+[gd_scene load_steps=6 format=3 uid="uid://cnyctpauobynt"]
 
-[ext_resource type="Script" path="res://components/pickup_physics.gd" id="1_dvgpb"]
+[ext_resource type="Script" path="res://components/pickup_physics.gd" id="1_cff6l"]
 [ext_resource type="PackedScene" uid="uid://cu3xcpce3h13e" path="res://toys/blocks/models/half_block.glb" id="2_kxx1o"]
+[ext_resource type="PackedScene" uid="uid://bujev5ndkh6pg" path="res://components/pickup_ray.tscn" id="3_ib3o2"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f65vf"]
 
@@ -10,12 +11,16 @@ size = Vector3(2, 1, 2)
 
 [node name="half_block_toy" type="RigidBody3D"]
 physics_material_override = SubResource("PhysicsMaterial_f65vf")
-script = ExtResource("1_dvgpb")
+script = ExtResource("1_cff6l")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_yt5l3")
 
 [node name="half_block2" parent="." instance=ExtResource("2_kxx1o")]
+
+[node name="pickup_ray" parent="." node_paths=PackedStringArray("physics_object", "physics_shapes") instance=ExtResource("3_ib3o2")]
+physics_object = NodePath("..")
+physics_shapes = [NodePath("../CollisionShape3D")]
 
 [editable path="half_block2"]

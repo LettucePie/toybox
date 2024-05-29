@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dkuuxd0nl1yhi"]
+[gd_scene load_steps=7 format=3 uid="uid://dkuuxd0nl1yhi"]
 
-[ext_resource type="Script" path="res://components/pickup_physics.gd" id="1_hv1n2"]
+[ext_resource type="Script" path="res://components/pickup_physics.gd" id="1_ennbn"]
 [ext_resource type="PackedScene" uid="uid://dawm3yp1k8bih" path="res://toys/blocks/models/l_block.glb" id="2_70bq8"]
+[ext_resource type="PackedScene" uid="uid://bujev5ndkh6pg" path="res://components/pickup_ray.tscn" id="3_m43s5"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f65vf"]
 
@@ -13,16 +14,22 @@ size = Vector3(3.97433, 1.99228, 1.96332)
 
 [node name="L_block_toy" type="RigidBody3D"]
 physics_material_override = SubResource("PhysicsMaterial_f65vf")
-script = ExtResource("1_hv1n2")
+script = ExtResource("1_ennbn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0105286, 1.00078, 0.0116577)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.989471, 1.00078, 0.0116577)
 shape = SubResource("BoxShape3D_vvkxk")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.999222, 0.00271034, -0.00765991)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000778019, 0.00271034, -0.00765991)
 shape = SubResource("BoxShape3D_ta5vb")
 
 [node name="l_block2" parent="." instance=ExtResource("2_70bq8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="pickup_ray" parent="." node_paths=PackedStringArray("physics_object", "physics_shapes") instance=ExtResource("3_m43s5")]
+physics_object = NodePath("..")
+physics_shapes = [NodePath("../CollisionShape3D"), NodePath("../CollisionShape3D2")]
+down_radius = 3.0
 
 [editable path="l_block2"]
