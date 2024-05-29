@@ -9,6 +9,7 @@ var grabbing : bool = false
 var grab_time : int = 0
 var grabbed : bool = false
 var screen_relative : Vector2 = Vector2.ZERO
+var mouse_world : Vector3 = Vector3.ZERO
 
 
 func _ready():
@@ -27,7 +28,6 @@ func _on_input_event(camera, event, position, normal, shape_idx):
 	if event is InputEventMouseButton:
 		if event.button_index == 1 and event.pressed:
 			if !grabbing and !grabbed:
-				print(self, " Grabbing...")
 				grabbing = true
 				grab_time = Time.get_ticks_msec()
 
@@ -44,27 +44,26 @@ func _input(event):
 		if grabbed:
 			grabbed = false
 			emit_signal("object_released", self)
-	if event is InputEventMouseMotion and grabbed:
-		screen_relative = event.relative
+
+
+func _update_mouse_world():
+	var mouse_pos := get_viewport().get_mouse_position()
+	var cam := get_viewport().get_camera_3d()
+	var origin := cam.project_ray_origin(mouse_pos)
+	var end := origin + cam.project_ray_normal(mouse_pos) * cam.far
+	var query := PhysicsRayQueryParameters3D.create(origin, end, 16)
+	var result = get_world_3d().direct_space_state.intersect_ray(query)
+	if !result.is_empty():
+		mouse_world = result["position"]
+		print(mouse_world)
 
 
 func _physics_process(delta):
 	if (grabbing and !grabbed) and Time.get_ticks_msec() - grab_time > 100:
-		print(self, " Grabbed!")
 		grabbed = true
 		emit_signal("object_grabbed", self)
 	if grabbed:
 		## Check if Mouse Velocity is actually moving
 		if Input.get_last_mouse_velocity().length_squared() > 2:
-			## Calculate World Relative by rotating against camera.y
-			var world_relative : Vector3 = Vector3(
-				screen_relative.x,
-				0,
-				screen_relative.y
-			).rotated(
-				Vector3.UP, 
-				get_viewport().get_camera_3d().global_rotation.y)
-			## Wow trying to keep lines within the brace is getting kinda crazy
-			
-			## TODO replace with proper add_force calls and stuff
-			position += world_relative * delta
+			_update_mouse_world()
+			position = position.lerp(mouse_world, 5 * delta)

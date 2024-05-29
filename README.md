@@ -24,6 +24,8 @@ In the case of this project, a Toy is;
 	 - Try to explain or frame unconventional physics in some way.
  - A Toy has its own User Interface options loaded into the universal menu.
    - It can be stylized
+ - A Toy can be "focused" into view with it's own camera
+   - Camera focus must be escapable
  
  
  ### Feature Ideas

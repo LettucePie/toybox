@@ -1,31 +1,35 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvdr8hqjwftth"]
+[gd_scene load_steps=6 format=3 uid="uid://bvdr8hqjwftth"]
 
 [ext_resource type="Script" path="res://rooms/room.gd" id="1_5rwtt"]
 [ext_resource type="Script" path="res://rooms/camera_doll.gd" id="1_c2bd5"]
 [ext_resource type="Environment" uid="uid://dvkctexm75m4g" path="res://rooms/materials/environment_room_a.tres" id="2_kfhf2"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_rqan4"]
+size = Vector3(25, 1, 25)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_yh6jf"]
-size = Vector3(22.5302, 0.950684, 23.5834)
+size = Vector3(25, 1, 25)
 
 [node name="room_a" type="Node3D"]
 script = ExtResource("1_5rwtt")
 
 [node name="floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.74082, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+mesh = SubResource("BoxMesh_rqan4")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="floor" groups=["floor"]]
+collision_layer = 17
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="floor/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.60489, -1.33423, 0.0665894)
 shape = SubResource("BoxShape3D_yh6jf")
 
 [node name="camera_doll" type="Node3D" parent="."]
-transform = Transform3D(-0.991812, 0, -0.127705, 0, 1, 0, 0.127705, 0, -0.991812, 0, 0, 0)
+transform = Transform3D(-0.399277, 0, -0.91683, 0, 1, 0, 0.91683, 0, -0.399277, 0, 0, 0)
 script = ExtResource("1_c2bd5")
 active = false
 
 [node name="camera_room" type="Camera3D" parent="camera_doll"]
-transform = Transform3D(0.707107, -0.353553, 0.612373, 0, 0.866026, 0.5, -0.707107, -0.353553, 0.612373, 5.08074, 4.69892, 5.08074)
+transform = Transform3D(1, 0, 0, 0, 0.831799, 0.555077, 0, -0.555077, 0.831799, 0, 7.08802, 9.25752)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("2_kfhf2")
