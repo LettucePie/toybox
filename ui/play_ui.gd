@@ -26,6 +26,7 @@ var bottom_drawer_visible : bool = false
 
 ## Toy Menus
 var toy_menus : Array[Control] = []
+var current_toy_menu : int = 0
 
 
 func _ready():
@@ -72,21 +73,36 @@ func _ready_position():
 func _connect_buttons():
 	side_show_hide.pressed.connect(_show_hide.bind(side_show_hide))
 	bottom_show_hide.pressed.connect(_show_hide.bind(bottom_show_hide))
+	bottom_prev.pressed.connect(_shift_current_toy_menu.bind(false))
+	bottom_next.pressed.connect(_shift_current_toy_menu.bind(true))
 
 
 func toy_selected(toy_name : String):
 	print("Toy Selected: ", toy_name)
-	
+	play.load_toy(toy_name)
+	_show_hide(side_show_hide)
 
 
 func add_toy_menu(menu_node : Control):
 	print("Adding MenuNode: ", menu_node)
 	toymenu_frame.add_child(menu_node)
 	toy_menus.append(menu_node)
+	if toy_menus.size() <= 1:
+		bottom_prev.hide()
+		bottom_next.hide()
+	else:
+		bottom_prev.show()
+		bottom_next.show()
+	set_current_toy_menu(toy_menus.size() - 1)
 
 
 func focus_toy_menu(menu_node : Control):
 	print("Focus Bottom Drawer to toy menu")
+	var target_index : int = toy_menus.find(menu_node)
+	if target_index >= 0:
+		set_current_toy_menu(target_index)
+	else:
+		print("ERROR: Cannot Focus to Toy Menu not in Toy Menu List")
 
 
 func remove_toy_menu(menu_node : Control):
@@ -94,6 +110,30 @@ func remove_toy_menu(menu_node : Control):
 	toy_menus.erase(menu_node)
 	## Some other stuff then queue_free
 	menu_node.queue_free()
+	if toy_menus.size() <= 1:
+		bottom_prev.hide()
+		bottom_next.hide()
+	else:
+		bottom_prev.show()
+		bottom_next.show()
+
+
+func _shift_current_toy_menu(dir : int):
+	print("Shifting to next Toy Menu: ", dir)
+	current_toy_menu += dir
+	if current_toy_menu >= toy_menus.size():
+		current_toy_menu = 0
+	if current_toy_menu < 0:
+		current_toy_menu = toy_menus.size() - 1
+	set_current_toy_menu(current_toy_menu)
+
+
+func set_current_toy_menu(index : int):
+	print("Setting Current Toy Menu: ", index)
+	for menu in toy_menus:
+		menu.visible = false
+	toy_menus[index].visible = true
+	current_toy_menu = index
 
 
 func _show_hide(drawer : Button):
