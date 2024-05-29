@@ -2,6 +2,7 @@ extends Control
 
 var blocks_parent : Node3D = null
 var blocks : Array = []
+var current_block : Node3D = null
 
 ## Receiver Function
 ## Should be called from Play during Toy Instantiation
@@ -14,8 +15,12 @@ func receive_blocks(new_blocks : Array):
 
 ## Connects the blocks selected state to this ui, so that options can be loaded
 func _indoctrinate_blocks():
-	pass
+	for block in blocks:
+		if block.has_signal("object_grabbed"):
+			if !block.object_grabbed.is_connected(self.block_selected):
+				block.object_grabbed.connect(self.block_selected)
 
 
 func block_selected(block : Node3D):
-	pass
+	print("BlockToyUI Received Block selection: ", block)
+	current_block = block

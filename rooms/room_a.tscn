@@ -13,7 +13,7 @@ script = ExtResource("1_5rwtt")
 [node name="floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.74082, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="floor"]
+[node name="StaticBody3D" type="StaticBody3D" parent="floor" groups=["floor"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="floor/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.60489, -1.33423, 0.0665894)

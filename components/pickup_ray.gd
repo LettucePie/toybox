@@ -29,14 +29,14 @@ func _check_setup():
 		print("ERROR: Pickup Ray not configured... attempting to fix")
 		if get_parent() is CollisionObject3D:
 			physics_object = get_parent()
-			for child in physics_object.children():
+			for child in physics_object.get_children():
 				if child is CollisionShape3D:
 					physics_shapes.append(child)
-	if physics_object == null or physics_shapes.is_empty():
-		print("ERROR: Failed to configure PickupRay. killing")
-		self.queue_free()
-	else:
-		print("RECOVERY: Found parent physics object and physics shapes")
+		if physics_object == null or physics_shapes.is_empty():
+			print("ERROR: Failed to configure PickupRay. killing")
+			self.queue_free()
+		else:
+			print("RECOVERY: Found parent physics object and physics shapes")
 
 
 func _apply_ray_variables():

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dkuuxd0nl1yhi"]
 
-[ext_resource type="Script" path="res://components/basic_physics.gd" id="1_hv1n2"]
+[ext_resource type="Script" path="res://components/pickup_physics.gd" id="1_hv1n2"]
 [ext_resource type="PackedScene" uid="uid://dawm3yp1k8bih" path="res://toys/blocks/models/l_block.glb" id="2_70bq8"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f65vf"]
