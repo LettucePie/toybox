@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://bujev5ndkh6pg"]
+
+[ext_resource type="Script" path="res://components/pickup_ray.gd" id="1_p34pj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b23d7"]
+albedo_color = Color(6.16074e-06, 0.630365, 0.80855, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_r527e"]
+material = SubResource("StandardMaterial3D_b23d7")
+top_radius = 0.2
+bottom_radius = 0.2
+height = 10.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_knyfp"]
+albedo_color = Color(0.756293, 0.00284029, 0.987553, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5i3ac"]
+material = SubResource("StandardMaterial3D_knyfp")
+size = Vector3(0.5, 1, 0.5)
+
+[node name="pickup_ray" type="Node3D" node_paths=PackedStringArray("physics_object", "physics_shapes")]
+script = ExtResource("1_p34pj")
+physics_object = NodePath("")
+physics_shapes = [NodePath("")]
+
+[node name="up" type="RayCast3D" parent="."]
+target_position = Vector3(0, 10, 0)
+
+[node name="down" type="RayCast3D" parent="."]
+target_position = Vector3(0, -10, 0)
+
+[node name="climb" type="RayCast3D" parent="."]
+target_position = Vector3(0, -40, 0)
+
+[node name="testcylinder" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_r527e")
+
+[node name="top" type="MeshInstance3D" parent="testcylinder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.65419, 0)
+mesh = SubResource("BoxMesh_5i3ac")
