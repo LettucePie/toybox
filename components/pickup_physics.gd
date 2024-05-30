@@ -20,6 +20,11 @@ var grabbed_fast : bool = false
 var grabbed_long : bool = false
 var screen_relative : Vector2 = Vector2.ZERO
 var mouse_world : Vector3 = Vector3.ZERO
+## Control Input -> Process variables
+var menu_mode : bool = false
+var translate_only : bool = false
+var vertical_only : bool = false
+var rotate_only : bool = false
 
 
 func _ready():
@@ -32,6 +37,7 @@ func _connect_signals():
 
 
 func grab_object(tf : bool):
+	print("Grab Object: ", tf)
 	if tf:
 		grabbed_fast = true
 		emit_signal("object_grabbed", self, false)
@@ -39,6 +45,10 @@ func grab_object(tf : bool):
 		grabbing = false
 		grabbed_fast = false
 		grabbed_long = false
+		menu_mode = false
+		translate_only = false
+		vertical_only = false
+		rotate_only = false
 		emit_signal("object_released", self)
 
 
@@ -46,13 +56,22 @@ func hold_object(tf : bool):
 	print("Hold Object: ", tf)
 	if tf:
 		grabbed_long = true
+		menu_mode = true
 		grabbed_fast = false
 		emit_signal("object_grabbed", self, true)
 	else:
 		grabbing = false
 		grabbed_long = false
+		menu_mode = false
+		translate_only = false
+		vertical_only = false
+		rotate_only = false
 		grabbed_fast = false
 		emit_signal("object_released", self)
+
+
+func translate_control():
+	translate_only = true
 
 
 ## Handles Direct input against the physics object.
@@ -74,10 +93,17 @@ func _input(event):
 	if event is InputEventMouseButton \
 	and event.button_index == 1 \
 	and !event.pressed:
+		if grabbing:
+			grabbing = false
 		if grabbed_fast:
 			grab_object(false)
 		if grabbed_long:
-			hold_object(false)
+			## Call Hold_object(false) when done with menu.
+			## until then only emit the release signal.
+			emit_signal("object_released", self)
+			translate_only = false
+			vertical_only = false
+			rotate_only = false
 
 
 func _update_mouse_world():
@@ -106,7 +132,6 @@ func _physics_process(delta):
 		var hold_time : int = Time.get_ticks_msec() - grab_time
 		var drag_distance : float = get_viewport().get_mouse_position()\
 		.distance_squared_to(grab_mouse_pos)
-		print("drag distance: ", drag_distance)
 		if drag_distance >= quick_drag_sensitivity and hold_time > 60:
 			grab_object(true)
 		elif drag_distance < quick_drag_sensitivity and hold_time > 120:
@@ -121,4 +146,6 @@ func _physics_process(delta):
 				mouse_world.z
 			)
 			position = position.lerp(flattened_target, 5 * delta)
-		## Reset Gravity Velocity
+	elif grabbed_long:
+		## Suspend location, only affecting if translate, vertical, or rotate
+		pass

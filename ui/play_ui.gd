@@ -26,6 +26,12 @@ var bottom_drawer_visible : bool = false
 
 ## Control Menus
 @onready var physics_popup : Control = $popup_controls
+@onready var translate_button : TextureButton = $popup_controls/translate_button
+@onready var vertical_button : TextureButton = $popup_controls/vertical_button
+@onready var rotate_button : TextureButton = $popup_controls/rotate_button
+@onready var confirm_button : TextureButton = $popup_controls/confirm_button
+var physics_toy : PickupPhysics
+var current_control : String = ""
 
 ## Toy Menus
 var toy_menus : Array[Control] = []
@@ -126,28 +132,53 @@ func set_current_toy_menu(index : int):
 
 
 func physics_toy_grabbed(toy : PickupPhysics, held : bool):
-	print("playui received toy: ", toy, " long_hold: ", held)
-	physics_popup.show()
-	var mouse_pos : Vector2i = get_local_mouse_position()
-	var win_size : Vector2i = get_window().size
-	var popup_dim : Vector2i = physics_popup.size
-	if mouse_pos.x < win_size.x / 2 and mouse_pos.y < win_size.y / 2:
-		physics_popup.set_position(mouse_pos)
-	elif mouse_pos.x < win_size.x / 2 and mouse_pos.y >= win_size.y / 2:
-		physics_popup.set_position(Vector2i(
-			mouse_pos.x, 
-			mouse_pos.y - popup_dim.y))
-	elif mouse_pos.x >= win_size.x / 2 and mouse_pos.y < win_size.y / 2:
-		physics_popup.set_position(Vector2i(
-			mouse_pos.x - popup_dim.x,
-			mouse_pos.y))
-	elif mouse_pos >= win_size / 2:
-		physics_popup.set_position(mouse_pos - popup_dim)
+	if physics_toy != toy and physics_toy != null:
+		physics_toy.hold_object(false)
+	physics_toy = toy
+	current_control = ""
+	if held:
+		physics_popup.show()
+		var mouse_pos : Vector2i = get_local_mouse_position()
+		var win_size : Vector2i = get_window().size
+		var popup_dim : Vector2i = physics_popup.size
+		if mouse_pos.x < win_size.x / 2 and mouse_pos.y < win_size.y / 2:
+			physics_popup.set_position(mouse_pos)
+		elif mouse_pos.x < win_size.x / 2 and mouse_pos.y >= win_size.y / 2:
+			physics_popup.set_position(Vector2i(
+				mouse_pos.x, 
+				mouse_pos.y - popup_dim.y))
+		elif mouse_pos.x >= win_size.x / 2 and mouse_pos.y < win_size.y / 2:
+			physics_popup.set_position(Vector2i(
+				mouse_pos.x - popup_dim.x,
+				mouse_pos.y))
+		elif mouse_pos >= win_size / 2:
+			physics_popup.set_position(mouse_pos - popup_dim)
+	else:
+		physics_popup.hide()
+		current_control = "quick-drag"
 
 
 func physics_toy_released(toy: PickupPhysics):
-	print("playui releasing toy: ", toy)
-	physics_popup.hide()
+	print(toy, " released | current_control: ", current_control)
+	if physics_toy == toy and current_control != "quick-drag":
+		if current_control == "confirm":
+			current_control = ""
+			physics_toy = null
+			physics_popup.hide()
+			toy.hold_object(false)
+		print("Show the menu again?")
+		
+
+
+func _forward_control_to_physics_toy(control : String):
+	print("Forward Control: ", control)
+	if control != "":
+		current_control = control
+		physics_popup.hide()
+		if control == "translate":
+			physics_toy.translate_control()
+		if control == "confirm":
+			physics_toy.hold_object(false)
 
 
 ####
@@ -170,6 +201,14 @@ func _connect_buttons():
 	bottom_show_hide.pressed.connect(_show_hide.bind(bottom_show_hide))
 	bottom_prev.pressed.connect(_shift_current_toy_menu.bind(-1))
 	bottom_next.pressed.connect(_shift_current_toy_menu.bind(1))
+	translate_button.button_down.connect(
+		_forward_control_to_physics_toy.bind("translate"))
+	vertical_button.button_down.connect(
+		_forward_control_to_physics_toy.bind("vertical"))
+	rotate_button.button_down.connect(
+		_forward_control_to_physics_toy.bind("rotate"))
+	confirm_button.button_down.connect(
+		_forward_control_to_physics_toy.bind("confirm"))
 
 
 func _show_hide(drawer : Button):
