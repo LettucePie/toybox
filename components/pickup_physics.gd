@@ -46,9 +46,7 @@ func grab_object(tf : bool):
 		grabbed_fast = false
 		grabbed_long = false
 		menu_mode = false
-		translate_only = false
-		vertical_only = false
-		rotate_only = false
+		set_control_mode("clear")
 		emit_signal("object_released", self)
 
 
@@ -63,15 +61,28 @@ func hold_object(tf : bool):
 		grabbing = false
 		grabbed_long = false
 		menu_mode = false
-		translate_only = false
-		vertical_only = false
-		rotate_only = false
+		set_control_mode("clear")
 		grabbed_fast = false
 		emit_signal("object_released", self)
 
 
-func translate_control():
-	translate_only = true
+func set_control_mode(mode : String):
+	if mode == "translate":
+		translate_only = true
+		vertical_only = false
+		rotate_only = false
+	elif mode == "vertical":
+		translate_only = false
+		vertical_only = true
+		rotate_only = false
+	elif mode == "rotate":
+		translate_only = false
+		vertical_only = false
+		rotate_only = true
+	elif mode == "clear" or mode == "":
+		translate_only = false
+		vertical_only = false
+		rotate_only = false
 
 
 ## Handles Direct input against the physics object.
@@ -127,6 +138,18 @@ func _integrate_forces(state):
 		state.set_linear_velocity(Vector3(linear_vel.x, 0.0, linear_vel.z))
 
 
+func _translate_movement(delta):
+	## Check if Mouse Velocity is actually moving
+	if Input.get_last_mouse_velocity().length_squared() > 2:
+		_update_mouse_world()
+		var flattened_target : Vector3 = Vector3(
+			mouse_world.x,
+			position.y,
+			mouse_world.z
+		)
+		position = position.lerp(flattened_target, 5 * delta)
+
+
 func _physics_process(delta):
 	if grabbing and (!grabbed_fast and !grabbed_long):
 		var hold_time : int = Time.get_ticks_msec() - grab_time
@@ -137,15 +160,8 @@ func _physics_process(delta):
 		elif drag_distance < quick_drag_sensitivity and hold_time > 120:
 			hold_object(true)
 	if grabbed_fast:
-		## Check if Mouse Velocity is actually moving
-		if Input.get_last_mouse_velocity().length_squared() > 2:
-			_update_mouse_world()
-			var flattened_target : Vector3 = Vector3(
-				mouse_world.x,
-				position.y,
-				mouse_world.z
-			)
-			position = position.lerp(flattened_target, 5 * delta)
+		_translate_movement(delta)
 	elif grabbed_long:
 		## Suspend location, only affecting if translate, vertical, or rotate
-		pass
+		if translate_only:
+			_translate_movement(delta)

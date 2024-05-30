@@ -131,6 +131,24 @@ func set_current_toy_menu(index : int):
 	current_toy_menu = index
 
 
+func _position_physics_popup():
+	var mouse_pos : Vector2i = get_local_mouse_position()
+	var win_size : Vector2i = get_window().size
+	var popup_dim : Vector2i = physics_popup.size
+	if mouse_pos.x < win_size.x / 2 and mouse_pos.y < win_size.y / 2:
+		physics_popup.set_position(mouse_pos)
+	elif mouse_pos.x < win_size.x / 2 and mouse_pos.y >= win_size.y / 2:
+		physics_popup.set_position(Vector2i(
+			mouse_pos.x, 
+			mouse_pos.y - popup_dim.y))
+	elif mouse_pos.x >= win_size.x / 2 and mouse_pos.y < win_size.y / 2:
+		physics_popup.set_position(Vector2i(
+			mouse_pos.x - popup_dim.x,
+			mouse_pos.y))
+	elif mouse_pos >= win_size / 2:
+		physics_popup.set_position(mouse_pos - popup_dim)
+
+
 func physics_toy_grabbed(toy : PickupPhysics, held : bool):
 	if physics_toy != toy and physics_toy != null:
 		physics_toy.hold_object(false)
@@ -138,21 +156,7 @@ func physics_toy_grabbed(toy : PickupPhysics, held : bool):
 	current_control = ""
 	if held:
 		physics_popup.show()
-		var mouse_pos : Vector2i = get_local_mouse_position()
-		var win_size : Vector2i = get_window().size
-		var popup_dim : Vector2i = physics_popup.size
-		if mouse_pos.x < win_size.x / 2 and mouse_pos.y < win_size.y / 2:
-			physics_popup.set_position(mouse_pos)
-		elif mouse_pos.x < win_size.x / 2 and mouse_pos.y >= win_size.y / 2:
-			physics_popup.set_position(Vector2i(
-				mouse_pos.x, 
-				mouse_pos.y - popup_dim.y))
-		elif mouse_pos.x >= win_size.x / 2 and mouse_pos.y < win_size.y / 2:
-			physics_popup.set_position(Vector2i(
-				mouse_pos.x - popup_dim.x,
-				mouse_pos.y))
-		elif mouse_pos >= win_size / 2:
-			physics_popup.set_position(mouse_pos - popup_dim)
+		_position_physics_popup()
 	else:
 		physics_popup.hide()
 		current_control = "quick-drag"
@@ -161,13 +165,19 @@ func physics_toy_grabbed(toy : PickupPhysics, held : bool):
 func physics_toy_released(toy: PickupPhysics):
 	print(toy, " released | current_control: ", current_control)
 	if physics_toy == toy and current_control != "quick-drag":
+		print("Show the menu again?")
+		physics_toy.set_control_mode("clear")
+		if current_control == "translate" \
+		or current_control == "vertical" \
+		or current_control == "rotate":
+			physics_popup.show()
+			_position_physics_popup()
+			current_control = ""
 		if current_control == "confirm":
 			current_control = ""
 			physics_toy = null
 			physics_popup.hide()
 			toy.hold_object(false)
-		print("Show the menu again?")
-		
 
 
 func _forward_control_to_physics_toy(control : String):
@@ -175,8 +185,7 @@ func _forward_control_to_physics_toy(control : String):
 	if control != "":
 		current_control = control
 		physics_popup.hide()
-		if control == "translate":
-			physics_toy.translate_control()
+		physics_toy.set_control_mode(control)
 		if control == "confirm":
 			physics_toy.hold_object(false)
 
