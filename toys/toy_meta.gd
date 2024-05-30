@@ -6,5 +6,6 @@ class_name ToyMeta
 @export var memory_level : int = 1
 @export var menu : PackedScene
 @export var objects : Array[PackedScene] = []
+@export var objects_have_pickup_physics : bool = true
 @export var pass_objects : bool = false
 @export var menu_receiver_function : String = "receiver"

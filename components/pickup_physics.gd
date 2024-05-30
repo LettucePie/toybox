@@ -1,7 +1,7 @@
 extends RigidBody3D
 class_name PickupPhysics
 
-signal object_grabbed(object)
+signal object_grabbed(object, hold)
 signal object_released(object)
 
 ## Usersetting variables
@@ -34,7 +34,7 @@ func _connect_signals():
 func grab_object(tf : bool):
 	if tf:
 		grabbed_fast = true
-		emit_signal("object_grabbed", self)
+		emit_signal("object_grabbed", self, false)
 	else:
 		grabbing = false
 		grabbed_fast = false
@@ -47,7 +47,7 @@ func hold_object(tf : bool):
 	if tf:
 		grabbed_long = true
 		grabbed_fast = false
-		emit_signal("object_grabbed", self)
+		emit_signal("object_grabbed", self, true)
 	else:
 		grabbing = false
 		grabbed_long = false

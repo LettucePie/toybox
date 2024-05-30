@@ -19,17 +19,29 @@ var loaded_toys : Array[ToyInstance] = []
 var selected_toy_instance : int = -1
 
 func load_toy(toy_name : String):
+	## Create ToyInstance Classobject
 	var new_instance : ToyInstance = ToyInstance.new()
+	## Retrieve metadata from toybox
 	new_instance.meta = toybox.get_toymeta(toy_name)
-	new_instance.random_id = new_instance.meta.name + str(randi_range(1000, 9999))
-	print("instantiate, associate, then send the menu to playui")
+	## Build random id
+	new_instance.random_id = new_instance.meta.name \
+	+ "_" \
+	+ str(randi_range(1000, 9999))
+	## Instantiate and associate toy menu then send to playui
 	new_instance.menu_instance = new_instance.meta.menu.instantiate()
 	ui.add_toy_menu(new_instance.menu_instance)
-	print("instantiate, associate, then send objects to room")
+	## Instantiate and associate toy objects / pieces then send to room
 	new_instance.objects.clear()
 	for scene in new_instance.meta.objects:
 		new_instance.objects.append(scene.instantiate())
 	room.add_toys(new_instance.objects, new_instance.random_id)
+	## connect grab signals to playui, if applicable
+	if new_instance.meta.objects_have_pickup_physics:
+		for toy_object in new_instance.objects:
+			if toy_object is PickupPhysics:
+				toy_object.object_grabbed.connect(ui.physics_toy_grabbed)
+				toy_object.object_released.connect(ui.physics_toy_released)
+	## pass array of objects to toy menu, if applicable
 	if new_instance.meta.pass_objects \
 	and new_instance.menu_instance.has_method(new_instance.meta.menu_receiver_function):
 			new_instance.menu_instance.call(

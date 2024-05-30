@@ -35,6 +35,10 @@ func _ready():
 	_connect_buttons()
 
 
+####
+#### Toybox and Play Loader integration functions
+####
+
 func _load_toybox():
 	if play == null:
 		print("ERROR: play_ui not connected to Play")
@@ -57,24 +61,6 @@ func _load_toybox():
 			new_listing.name = str(toy[0])
 			side_toy_list.add_child(new_listing)
 			new_listing.pressed.connect(toy_selected)
-
-
-func _ready_position():
-	side_drawer_visible = true
-	bottom_drawer_visible = false
-	bottom_anim.play("hide")
-	side_anim.play("show")
-	## TODO replace with icons
-	side_show_hide.text = "Hide"
-	bottom_show_hide.text = "Show"
-	#drawer_blend_target = Vector2(0, 1)
-
-
-func _connect_buttons():
-	side_show_hide.pressed.connect(_show_hide.bind(side_show_hide))
-	bottom_show_hide.pressed.connect(_show_hide.bind(bottom_show_hide))
-	bottom_prev.pressed.connect(_shift_current_toy_menu.bind(-1))
-	bottom_next.pressed.connect(_shift_current_toy_menu.bind(1))
 
 
 func toy_selected(toy_name : String):
@@ -134,6 +120,36 @@ func set_current_toy_menu(index : int):
 		menu.visible = false
 	toy_menus[index].visible = true
 	current_toy_menu = index
+
+
+func physics_toy_grabbed(toy : PickupPhysics, held : bool):
+	print("playui received toy: ", toy, " long_hold: ", held)
+
+
+func physics_toy_released(toy: PickupPhysics):
+	print("playui releasing toy: ", toy)
+
+
+####
+#### Actual UI Control functions
+####
+
+func _ready_position():
+	side_drawer_visible = true
+	bottom_drawer_visible = false
+	bottom_anim.play("hide")
+	side_anim.play("show")
+	## TODO replace with icons
+	side_show_hide.text = "Hide"
+	bottom_show_hide.text = "Show"
+	#drawer_blend_target = Vector2(0, 1)
+
+
+func _connect_buttons():
+	side_show_hide.pressed.connect(_show_hide.bind(side_show_hide))
+	bottom_show_hide.pressed.connect(_show_hide.bind(bottom_show_hide))
+	bottom_prev.pressed.connect(_shift_current_toy_menu.bind(-1))
+	bottom_next.pressed.connect(_shift_current_toy_menu.bind(1))
 
 
 func _show_hide(drawer : Button):
