@@ -51,14 +51,12 @@ func _calculate_hoverpoint():
 				valid = true
 		if valid:
 			hover_point = largest_value + hover_height
-			print("Highest HoverPoint: ", hover_point)
 		else:
 			hover_point = physics_object.position.y
 		if $up.is_colliding() and $up.get_collider() != physics_object:
 			var up_point = $up.get_collision_point()
 			## shrink by up point to prevent bopping head of object into things
 			if hover_point > (up_point.y - hover_height):
-				print("Ceiling Capped")
 				#hover_point = up_point.y - hover_height
 				hover_point = physics_object.position.y
 	else:
@@ -68,11 +66,10 @@ func _calculate_hoverpoint():
 func _physics_process(delta):
 	## Fix the Orientation
 	global_rotation = Vector3.ZERO
-	$up.enabled = physics_object.grabbed
-	$down.enabled = physics_object.grabbed
-	if physics_object.grabbed:
+	$up.enabled = physics_object.grabbed_fast
+	$down.enabled = physics_object.grabbed_fast
+	if physics_object.grabbed_fast:
 		_calculate_hoverpoint()
-		print("Target HoverPoint: ", hover_point)
 		physics_object.position.y = lerp(
 			physics_object.position.y, hover_point, 0.33
 		)
