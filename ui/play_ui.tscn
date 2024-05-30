@@ -1,9 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://4ypddxy4wwie"]
+[gd_scene load_steps=16 format=3 uid="uid://4ypddxy4wwie"]
 
 [ext_resource type="Script" path="res://ui/tools/scroll_pad_area.gd" id="1_fk7r4"]
 [ext_resource type="Script" path="res://ui/play_ui.gd" id="1_ucswn"]
 [ext_resource type="Script" path="res://ui/tools/scroll_container_haptics.gd" id="2_8rjpd"]
 [ext_resource type="PackedScene" uid="uid://ba0uwf0hm8sfe" path="res://ui/toy_listing.tscn" id="2_aus8r"]
+[ext_resource type="Texture2D" uid="uid://d2d8n0y0fstws" path="res://ui/art/floating_control_icon_translate.png" id="5_66nua"]
+[ext_resource type="Texture2D" uid="uid://6bnxetp3nafy" path="res://ui/art/floating_control_icon_vertical.png" id="6_aqkge"]
+[ext_resource type="Texture2D" uid="uid://bqc4ywvj6vnfj" path="res://ui/art/floating_control_icon_rotate.png" id="7_ol2gs"]
+[ext_resource type="Texture2D" uid="uid://dkoxl60rnqiaw" path="res://ui/art/floating_control_icon_confirm.png" id="8_gswdj"]
 
 [sub_resource type="Animation" id="Animation_hdxmb"]
 length = 0.001
@@ -534,8 +538,8 @@ anchors_preset = -1
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 625.0
-offset_bottom = 960.004
+offset_top = -335.0
+offset_bottom = 0.00402832
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -644,3 +648,67 @@ offset_right = 52.0
 offset_bottom = 49.0
 grow_horizontal = 0
 text = "S/H"
+
+[node name="popup_controls" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.454
+anchor_top = 0.39
+anchor_right = 0.546
+anchor_bottom = 0.61
+offset_left = -0.160019
+offset_top = -0.400024
+offset_right = 0.160004
+offset_bottom = 0.399963
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="translate_button" type="TextureButton" parent="popup_controls"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("5_66nua")
+texture_pressed = ExtResource("5_66nua")
+texture_hover = ExtResource("5_66nua")
+texture_disabled = ExtResource("5_66nua")
+texture_focused = ExtResource("5_66nua")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="vertical_button" type="TextureButton" parent="popup_controls"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("6_aqkge")
+texture_pressed = ExtResource("6_aqkge")
+texture_hover = ExtResource("6_aqkge")
+texture_disabled = ExtResource("6_aqkge")
+texture_focused = ExtResource("6_aqkge")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="rotate_button" type="TextureButton" parent="popup_controls"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("7_ol2gs")
+texture_pressed = ExtResource("7_ol2gs")
+texture_hover = ExtResource("7_ol2gs")
+texture_disabled = ExtResource("7_ol2gs")
+texture_focused = ExtResource("7_ol2gs")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="confirm_button" type="TextureButton" parent="popup_controls"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("8_gswdj")
+texture_pressed = ExtResource("8_gswdj")
+texture_hover = ExtResource("8_gswdj")
+texture_disabled = ExtResource("8_gswdj")
+texture_focused = ExtResource("8_gswdj")
+ignore_texture_size = true
+stretch_mode = 5

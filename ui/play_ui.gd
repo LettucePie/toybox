@@ -24,6 +24,9 @@ class_name PlayUI
 var side_drawer_visible : bool = true
 var bottom_drawer_visible : bool = false
 
+## Control Menus
+@onready var physics_popup : Control = $popup_controls
+
 ## Toy Menus
 var toy_menus : Array[Control] = []
 var current_toy_menu : int = 0
@@ -124,10 +127,27 @@ func set_current_toy_menu(index : int):
 
 func physics_toy_grabbed(toy : PickupPhysics, held : bool):
 	print("playui received toy: ", toy, " long_hold: ", held)
+	physics_popup.show()
+	var mouse_pos : Vector2i = get_local_mouse_position()
+	var win_size : Vector2i = get_window().size
+	var popup_dim : Vector2i = physics_popup.size
+	if mouse_pos.x < win_size.x / 2 and mouse_pos.y < win_size.y / 2:
+		physics_popup.set_position(mouse_pos)
+	elif mouse_pos.x < win_size.x / 2 and mouse_pos.y >= win_size.y / 2:
+		physics_popup.set_position(Vector2i(
+			mouse_pos.x, 
+			mouse_pos.y - popup_dim.y))
+	elif mouse_pos.x >= win_size.x / 2 and mouse_pos.y < win_size.y / 2:
+		physics_popup.set_position(Vector2i(
+			mouse_pos.x - popup_dim.x,
+			mouse_pos.y))
+	elif mouse_pos >= win_size / 2:
+		physics_popup.set_position(mouse_pos - popup_dim)
 
 
 func physics_toy_released(toy: PickupPhysics):
 	print("playui releasing toy: ", toy)
+	physics_popup.hide()
 
 
 ####
