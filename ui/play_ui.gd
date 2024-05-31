@@ -129,22 +129,23 @@ func set_current_toy_menu(index : int):
 	current_toy_menu = index
 
 
-func _position_physics_popup(offset : Vector2):
-	var mouse_pos : Vector2i = get_local_mouse_position() - offset
+func _position_physics_popup():
+	var toy_pos : Vector2i = get_viewport().get_camera_3d().unproject_position(
+		physics_toy.global_position)
 	var win_size : Vector2i = get_window().size
 	var popup_dim : Vector2i = physics_popup.size
-	if mouse_pos.x < win_size.x / 2 and mouse_pos.y < win_size.y / 2:
-		physics_popup.set_position(mouse_pos)
-	elif mouse_pos.x < win_size.x / 2 and mouse_pos.y >= win_size.y / 2:
+	if toy_pos.x < win_size.x / 2 and toy_pos.y < win_size.y / 2:
+		physics_popup.set_position(toy_pos)
+	elif toy_pos.x < win_size.x / 2 and toy_pos.y >= win_size.y / 2:
 		physics_popup.set_position(Vector2i(
-			mouse_pos.x, 
-			mouse_pos.y - popup_dim.y))
-	elif mouse_pos.x >= win_size.x / 2 and mouse_pos.y < win_size.y / 2:
+			toy_pos.x, 
+			toy_pos.y - popup_dim.y))
+	elif toy_pos.x >= win_size.x / 2 and toy_pos.y < win_size.y / 2:
 		physics_popup.set_position(Vector2i(
-			mouse_pos.x - popup_dim.x,
-			mouse_pos.y))
-	elif mouse_pos >= win_size / 2:
-		physics_popup.set_position(mouse_pos - popup_dim)
+			toy_pos.x - popup_dim.x,
+			toy_pos.y))
+	elif toy_pos >= win_size / 2:
+		physics_popup.set_position(toy_pos - popup_dim)
 
 
 func physics_toy_grabbed(toy : PickupPhysics, held : bool):
@@ -154,7 +155,7 @@ func physics_toy_grabbed(toy : PickupPhysics, held : bool):
 	current_control = ""
 	if held:
 		physics_popup.show()
-		_position_physics_popup(Vector2.ZERO)
+		_position_physics_popup()
 	else:
 		physics_popup.hide()
 		current_control = "quick-drag"
@@ -167,7 +168,7 @@ func physics_toy_released(toy: PickupPhysics):
 		or current_control == "vertical" \
 		or current_control == "rotate":
 			physics_popup.show()
-			_position_physics_popup(toy.mouse_offset)
+			_position_physics_popup()
 			toy.mouse_offset = Vector2.ZERO
 			#toy.grab_mouse_pos = get_local_mouse_position()
 			current_control = ""

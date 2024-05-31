@@ -18,7 +18,6 @@ var grab_time : int = 0
 var grab_mouse_pos : Vector2 = Vector2.ZERO
 var grabbed_fast : bool = false
 var grabbed_long : bool = false
-var mouse_relative : Vector2 = Vector2.ZERO
 var target_y : float = 0.0
 ## Control Input -> Process variables
 var menu_mode : bool = false
@@ -152,8 +151,6 @@ func _input(event):
 			translate_only = false
 			vertical_only = false
 			rotate_only = false
-	if event is InputEventMouseMotion and vertical_only:
-		mouse_relative = event.relative
 
 
 ####
@@ -187,7 +184,11 @@ func _translate_movement(delta, offset):
 
 
 func _vertical_movement(delta):
-	target_y -= mouse_relative.y * delta
+	var mouse_pos = get_viewport().get_mouse_position() - mouse_offset
+	var z_depth = get_viewport().get_camera_3d().position.distance_to(
+		self.position)
+	var target_y = get_viewport().get_camera_3d().project_position(
+		mouse_pos, z_depth).y
 	var speed : float = 5.0 * delta
 	if grabbed_long and control_mode_dampener > 0:
 		speed = 2.5 * delta
