@@ -63,7 +63,7 @@ func _load_toybox():
 		if toybox == null:
 			print("ERROR: play_ui failed to find ToyBox... giving up")
 	if play != null and toybox != null:
-		print("Fill Toy Listing with entries")
+		## Fill Toy Listing with Entries
 		for toy in toybox.get_toy_listing():
 			var new_listing : HapticButton = toy_listing.instantiate()
 			new_listing.set_properties(toy[0], toy[1])
@@ -73,13 +73,11 @@ func _load_toybox():
 
 
 func toy_selected(toy_name : String):
-	print("Toy Selected: ", toy_name)
 	play.load_toy(toy_name)
 	_show_hide(side_show_hide)
 
 
 func add_toy_menu(menu_node : Control):
-	print("Adding MenuNode: ", menu_node)
 	toymenu_frame.add_child(menu_node)
 	toy_menus.append(menu_node)
 	if toy_menus.size() <= 1:
@@ -163,9 +161,7 @@ func physics_toy_grabbed(toy : PickupPhysics, held : bool):
 
 
 func physics_toy_released(toy: PickupPhysics):
-	print(toy, " released | current_control: ", current_control)
 	if physics_toy == toy and current_control != "quick-drag":
-		print("Show the menu again?")
 		physics_toy.set_control_mode("clear")
 		if current_control == "translate" \
 		or current_control == "vertical" \

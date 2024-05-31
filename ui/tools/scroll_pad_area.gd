@@ -5,7 +5,6 @@ class_name ScrollPadArea
 
 func _ready():
 	if scroll_container == null:
-		print("Scroll Pad Area searching for Scroll Container Haptics")
 		scroll_container = _find_scroll_container()
 	if scroll_container != null:
 		self.connect("gui_input", scroll_container._on_gui_input)
@@ -22,7 +21,7 @@ func _find_scroll_container() -> ScrollHaptics:
 			if child is ScrollHaptics:
 				target = child
 	if target == null:
-		print("Failed to find Sibling or Child Scroll Container Haptics!")
+		print("ERROR: Failed to find Sibling or Child Scroll Container Haptics!")
 	return target
 
 

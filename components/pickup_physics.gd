@@ -19,9 +19,9 @@ var grab_mouse_pos : Vector2 = Vector2.ZERO
 var grabbed_fast : bool = false
 var grabbed_long : bool = false
 var screen_relative : Vector2 = Vector2.ZERO
-var mouse_world : Vector3 = Vector3.ZERO
 ## Control Input -> Process variables
 var menu_mode : bool = false
+var mouse_offset : Vector2 = Vector2.ZERO
 var translate_only : bool = false
 var vertical_only : bool = false
 var rotate_only : bool = false
@@ -36,8 +36,10 @@ func _connect_signals():
 		input_event.connect(self._on_input_event)
 
 
+####
+#### States
+####
 func grab_object(tf : bool):
-	print("Grab Object: ", tf)
 	if tf:
 		grabbed_fast = true
 		emit_signal("object_grabbed", self, false)
@@ -51,7 +53,6 @@ func grab_object(tf : bool):
 
 
 func hold_object(tf : bool):
-	print("Hold Object: ", tf)
 	if tf:
 		grabbed_long = true
 		menu_mode = true
@@ -67,6 +68,7 @@ func hold_object(tf : bool):
 
 
 func set_control_mode(mode : String):
+	mouse_offset = grab_mouse_pos - get_viewport().get_mouse_position()
 	if mode == "translate":
 		translate_only = true
 		vertical_only = false
@@ -84,6 +86,29 @@ func set_control_mode(mode : String):
 		vertical_only = false
 		rotate_only = false
 
+
+####
+#### Calculations
+####
+
+## Gets the Mouse Position on screen and converts to "floor" position \
+## using intersect_ray
+func _get_mouse_world(offset : Vector2) -> Vector3:
+	var world_pos : Vector3 = position
+	var mouse_pos := get_viewport().get_mouse_position() + offset
+	var cam := get_viewport().get_camera_3d()
+	var origin := cam.project_ray_origin(mouse_pos)
+	var end := origin + cam.project_ray_normal(mouse_pos) * cam.far
+	var query := PhysicsRayQueryParameters3D.create(origin, end, 16)
+	var result = get_world_3d().direct_space_state.intersect_ray(query)
+	if !result.is_empty():
+		world_pos = result["position"]
+	return world_pos
+
+
+####
+#### Input
+####
 
 ## Handles Direct input against the physics object.
 ## Use only for object targeting
@@ -117,16 +142,9 @@ func _input(event):
 			rotate_only = false
 
 
-func _update_mouse_world():
-	var mouse_pos := get_viewport().get_mouse_position()
-	var cam := get_viewport().get_camera_3d()
-	var origin := cam.project_ray_origin(mouse_pos)
-	var end := origin + cam.project_ray_normal(mouse_pos) * cam.far
-	var query := PhysicsRayQueryParameters3D.create(origin, end, 16)
-	var result = get_world_3d().direct_space_state.intersect_ray(query)
-	if !result.is_empty():
-		mouse_world = result["position"]
-
+####
+#### Physics Applications
+####
 
 ## integrate forces overrides default physics thread behaviours.
 ## We don't want to touch this too much, currently I'm only negating \
@@ -138,10 +156,11 @@ func _integrate_forces(state):
 		state.set_linear_velocity(Vector3(linear_vel.x, 0.0, linear_vel.z))
 
 
+## Used just to horizontally move an object. X and Z axis.
 func _translate_movement(delta):
 	## Check if Mouse Velocity is actually moving
 	if Input.get_last_mouse_velocity().length_squared() > 2:
-		_update_mouse_world()
+		var mouse_world : Vector3 = _get_mouse_world(mouse_offset)
 		var flattened_target : Vector3 = Vector3(
 			mouse_world.x,
 			position.y,
@@ -151,7 +170,10 @@ func _translate_movement(delta):
 
 
 func _physics_process(delta):
+	## Checking to see if mouse is being held down on object, and neither \
+	## the quick drag or hold and control thresholds have been reached.
 	if grabbing and (!grabbed_fast and !grabbed_long):
+		## Building hold_time and drag_distance variables
 		var hold_time : int = Time.get_ticks_msec() - grab_time
 		var drag_distance : float = get_viewport().get_mouse_position()\
 		.distance_squared_to(grab_mouse_pos)
@@ -159,8 +181,10 @@ func _physics_process(delta):
 			grab_object(true)
 		elif drag_distance < quick_drag_sensitivity and hold_time > 120:
 			hold_object(true)
+	## Apply quick-drag logic if true
 	if grabbed_fast:
 		_translate_movement(delta)
+	## Apply hold and control logic otherwise.
 	elif grabbed_long:
 		## Suspend location, only affecting if translate, vertical, or rotate
 		if translate_only:
