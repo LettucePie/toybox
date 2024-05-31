@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://hk0l5ytcokl4"
 path.s3tc="res://.godot/imported/room_a_render_01.png-b0f890e7c504b2fd021ca0caf189928f.s3tc.ctex"
+path.etc2="res://.godot/imported/room_a_render_01.png-b0f890e7c504b2fd021ca0caf189928f.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://rooms/models/renders/room_a_render_01.png"
-dest_files=["res://.godot/imported/room_a_render_01.png-b0f890e7c504b2fd021ca0caf189928f.s3tc.ctex"]
+dest_files=["res://.godot/imported/room_a_render_01.png-b0f890e7c504b2fd021ca0caf189928f.s3tc.ctex", "res://.godot/imported/room_a_render_01.png-b0f890e7c504b2fd021ca0caf189928f.etc2.ctex"]
 
 [params]
 

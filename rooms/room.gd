@@ -7,6 +7,7 @@ var toy_objects : Array = []
 ## Camera Stuff
 @onready var cam_dolly : Node3D = $camera_doll
 var floor_clicked : bool = false
+var click_index : int = 0
 
 
 func add_toys(objects : Array, toyname : String):
@@ -21,16 +22,30 @@ func add_toys(objects : Array, toyname : String):
 
 func _on_static_body_3d_input_event(camera, event, position, normal, shape_idx):
 	if event is InputEventMouseButton \
-	and event.button_index == 1 \
 	and event.pressed:
+		click_index = event.button_index
+		floor_clicked = true
+	if event is InputEventScreenTouch:
+		click_index = clamp(event.index + 1, 1, 2)
 		floor_clicked = true
 
 
 func _input(event):
 	if event is InputEventMouseButton \
-	and event.button_index == 1 \
+	and event.button_index == click_index \
 	and !event.pressed \
 	and floor_clicked:
+		click_index = 0
+		floor_clicked = false
+	if event is InputEventScreenTouch \
+	and event.index == click_index \
+	and !event.pressed \
+	and floor_clicked:
+		click_index = 0
 		floor_clicked = false
 	if event is InputEventMouseMotion and floor_clicked:
-		cam_dolly.rotate(Vector3.UP, event.relative.x * 0.01)
+		if click_index == 1:
+			print("Pan")
+		elif click_index == 2:
+			print("Rotate")
+			cam_dolly.rotate(Vector3.UP, event.relative.x * 0.01)
