@@ -22,6 +22,7 @@ var screen_relative : Vector2 = Vector2.ZERO
 ## Control Input -> Process variables
 var menu_mode : bool = false
 var mouse_offset : Vector2 = Vector2.ZERO
+var control_mode_dampener : int = 0
 var translate_only : bool = false
 var vertical_only : bool = false
 var rotate_only : bool = false
@@ -74,6 +75,7 @@ func hold_object(tf : bool):
 func set_control_mode(mode : String, get_offset : bool):
 	if get_offset:
 		mouse_offset = get_viewport().get_mouse_position() - grab_mouse_pos
+	control_mode_dampener = 30
 	if mode == "translate":
 		translate_only = true
 		vertical_only = false
@@ -174,7 +176,10 @@ func _translate_movement(delta, offset):
 			position.y,
 			mouse_world.z
 		)
-		position = position.lerp(flattened_target, 5 * delta)
+		var speed : float = 5.0 * delta
+		if grabbed_long and control_mode_dampener > 0:
+			speed = 2.5 * delta
+		position = position.lerp(flattened_target, speed)
 
 
 func _physics_process(delta):
@@ -197,3 +202,6 @@ func _physics_process(delta):
 		## Suspend location, only affecting if translate, vertical, or rotate
 		if translate_only:
 			_translate_movement(delta, mouse_offset)
+	## End-Frame Maintenance
+	if control_mode_dampener > 0:
+		control_mode_dampener -= 1
