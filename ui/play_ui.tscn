@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://4ypddxy4wwie"]
+[gd_scene load_steps=17 format=3 uid="uid://4ypddxy4wwie"]
 
 [ext_resource type="Script" path="res://ui/tools/scroll_pad_area.gd" id="1_fk7r4"]
 [ext_resource type="Script" path="res://ui/play_ui.gd" id="1_ucswn"]
 [ext_resource type="Script" path="res://ui/tools/scroll_container_haptics.gd" id="2_8rjpd"]
 [ext_resource type="PackedScene" uid="uid://ba0uwf0hm8sfe" path="res://ui/toy_listing.tscn" id="2_aus8r"]
 [ext_resource type="Texture2D" uid="uid://d2d8n0y0fstws" path="res://ui/art/floating_control_icon_translate.png" id="5_66nua"]
+[ext_resource type="Script" path="res://ui/tools/rescale.gd" id="5_volr0"]
 [ext_resource type="Texture2D" uid="uid://6bnxetp3nafy" path="res://ui/art/floating_control_icon_vertical.png" id="6_aqkge"]
 [ext_resource type="Texture2D" uid="uid://bqc4ywvj6vnfj" path="res://ui/art/floating_control_icon_rotate.png" id="7_ol2gs"]
 [ext_resource type="Texture2D" uid="uid://dkoxl60rnqiaw" path="res://ui/art/floating_control_icon_confirm.png" id="8_gswdj"]
@@ -538,8 +539,8 @@ anchors_preset = -1
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 625.0
-offset_bottom = 960.004
+offset_top = -335.0
+offset_bottom = 0.00402832
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -652,18 +653,19 @@ text = "S/H"
 [node name="popup_controls" type="VBoxContainer" parent="."]
 visible = false
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.454
-anchor_top = 0.39
-anchor_right = 0.546
-anchor_bottom = 0.61
-offset_left = -0.160019
-offset_top = -0.400024
-offset_right = 0.160004
-offset_bottom = 0.399963
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -106.0
+offset_right = 25.0
+offset_bottom = 106.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("5_volr0")
 
 [node name="translate_button" type="TextureButton" parent="popup_controls"]
 custom_minimum_size = Vector2(50, 50)
