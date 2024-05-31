@@ -189,11 +189,6 @@ func _forward_control_to_physics_toy(control : String):
 			physics_toy.hold_object(false)
 
 
-func _process(delta):
-	if physics_toy != null:
-		$test_rod.position = physics_toy._get_mouse_world(physics_toy.mouse_offset)
-
-
 ####
 #### Actual UI Control functions
 ####

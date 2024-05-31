@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://4ypddxy4wwie"]
+[gd_scene load_steps=16 format=3 uid="uid://4ypddxy4wwie"]
 
 [ext_resource type="Script" path="res://ui/tools/scroll_pad_area.gd" id="1_fk7r4"]
 [ext_resource type="Script" path="res://ui/play_ui.gd" id="1_ucswn"]
@@ -521,15 +521,6 @@ _data = {
 "show": SubResource("Animation_t26h2")
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hyl3k"]
-albedo_color = Color(1, 0.219608, 1, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_q7658"]
-material = SubResource("StandardMaterial3D_hyl3k")
-top_radius = 0.1
-bottom_radius = 0.1
-height = 10.0
-
 [node name="play_ui" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -721,6 +712,3 @@ texture_disabled = ExtResource("8_gswdj")
 texture_focused = ExtResource("8_gswdj")
 ignore_texture_size = true
 stretch_mode = 5
-
-[node name="test_rod" type="MeshInstance3D" parent="."]
-mesh = SubResource("CylinderMesh_q7658")

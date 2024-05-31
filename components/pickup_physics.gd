@@ -44,6 +44,7 @@ func grab_object(tf : bool):
 	if tf:
 		grabbed_fast = true
 		emit_signal("object_grabbed", self, false)
+		freeze = true
 	else:
 		grabbing = false
 		grabbed_fast = false
@@ -53,6 +54,7 @@ func grab_object(tf : bool):
 		emit_signal("object_released", self)
 		mouse_offset = Vector2.ZERO
 		grab_mouse_pos = Vector2.ZERO
+		freeze = false
 
 
 func hold_object(tf : bool):
@@ -61,6 +63,7 @@ func hold_object(tf : bool):
 		menu_mode = true
 		grabbed_fast = false
 		emit_signal("object_grabbed", self, true)
+		freeze = true
 	else:
 		grabbing = false
 		grabbed_long = false
@@ -70,6 +73,7 @@ func hold_object(tf : bool):
 		emit_signal("object_released", self)
 		mouse_offset = Vector2.ZERO
 		grab_mouse_pos = Vector2.ZERO
+		freeze = false
 
 
 func set_control_mode(mode : String, get_offset : bool):
@@ -156,16 +160,6 @@ func _input(event):
 ####
 #### Physics Applications
 ####
-
-## integrate forces overrides default physics thread behaviours.
-## We don't want to touch this too much, currently I'm only negating \
-## gravitational buildup to prevent slamming
-func _integrate_forces(state):
-	if grabbed_fast or grabbed_long:
-		var linear_vel : Vector3 = state.get_linear_velocity()
-		linear_vel = linear_vel.lerp(Vector3.ZERO, 0.5)
-		state.set_linear_velocity(Vector3(linear_vel.x, 0.0, linear_vel.z))
-
 
 ## Used just to horizontally move an object. X and Z axis.
 func _translate_movement(delta, offset):
