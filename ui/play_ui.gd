@@ -129,8 +129,8 @@ func set_current_toy_menu(index : int):
 	current_toy_menu = index
 
 
-func _position_physics_popup():
-	var mouse_pos : Vector2i = get_local_mouse_position()
+func _position_physics_popup(offset : Vector2):
+	var mouse_pos : Vector2i = get_local_mouse_position() - offset
 	var win_size : Vector2i = get_window().size
 	var popup_dim : Vector2i = physics_popup.size
 	if mouse_pos.x < win_size.x / 2 and mouse_pos.y < win_size.y / 2:
@@ -154,7 +154,7 @@ func physics_toy_grabbed(toy : PickupPhysics, held : bool):
 	current_control = ""
 	if held:
 		physics_popup.show()
-		_position_physics_popup()
+		_position_physics_popup(Vector2.ZERO)
 	else:
 		physics_popup.hide()
 		current_control = "quick-drag"
@@ -162,12 +162,14 @@ func physics_toy_grabbed(toy : PickupPhysics, held : bool):
 
 func physics_toy_released(toy: PickupPhysics):
 	if physics_toy == toy and current_control != "quick-drag":
-		physics_toy.set_control_mode("clear")
+		physics_toy.set_control_mode("clear", false)
 		if current_control == "translate" \
 		or current_control == "vertical" \
 		or current_control == "rotate":
 			physics_popup.show()
-			_position_physics_popup()
+			_position_physics_popup(toy.mouse_offset)
+			toy.mouse_offset = Vector2.ZERO
+			#toy.grab_mouse_pos = get_local_mouse_position()
 			current_control = ""
 		if current_control == "confirm":
 			current_control = ""
@@ -181,9 +183,14 @@ func _forward_control_to_physics_toy(control : String):
 	if control != "":
 		current_control = control
 		physics_popup.hide()
-		physics_toy.set_control_mode(control)
+		physics_toy.set_control_mode(control, true)
 		if control == "confirm":
 			physics_toy.hold_object(false)
+
+
+func _process(delta):
+	if physics_toy != null:
+		$test_rod.position = physics_toy._get_mouse_world(physics_toy.mouse_offset)
 
 
 ####
@@ -198,7 +205,6 @@ func _ready_position():
 	## TODO replace with icons
 	side_show_hide.text = "Hide"
 	bottom_show_hide.text = "Show"
-	#drawer_blend_target = Vector2(0, 1)
 
 
 func _connect_buttons():

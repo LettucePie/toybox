@@ -48,8 +48,10 @@ func grab_object(tf : bool):
 		grabbed_fast = false
 		grabbed_long = false
 		menu_mode = false
-		set_control_mode("clear")
+		set_control_mode("clear", false)
 		emit_signal("object_released", self)
+		mouse_offset = Vector2.ZERO
+		grab_mouse_pos = Vector2.ZERO
 
 
 func hold_object(tf : bool):
@@ -62,13 +64,16 @@ func hold_object(tf : bool):
 		grabbing = false
 		grabbed_long = false
 		menu_mode = false
-		set_control_mode("clear")
+		set_control_mode("clear", false)
 		grabbed_fast = false
 		emit_signal("object_released", self)
+		mouse_offset = Vector2.ZERO
+		grab_mouse_pos = Vector2.ZERO
 
 
-func set_control_mode(mode : String):
-	mouse_offset = grab_mouse_pos - get_viewport().get_mouse_position()
+func set_control_mode(mode : String, get_offset : bool):
+	if get_offset:
+		mouse_offset = get_viewport().get_mouse_position() - grab_mouse_pos
 	if mode == "translate":
 		translate_only = true
 		vertical_only = false
@@ -95,7 +100,7 @@ func set_control_mode(mode : String):
 ## using intersect_ray
 func _get_mouse_world(offset : Vector2) -> Vector3:
 	var world_pos : Vector3 = position
-	var mouse_pos := get_viewport().get_mouse_position() + offset
+	var mouse_pos := get_viewport().get_mouse_position() - offset
 	var cam := get_viewport().get_camera_3d()
 	var origin := cam.project_ray_origin(mouse_pos)
 	var end := origin + cam.project_ray_normal(mouse_pos) * cam.far
@@ -134,6 +139,9 @@ func _input(event):
 		if grabbed_fast:
 			grab_object(false)
 		if grabbed_long:
+			## Reset grab_mouse_pos to new mouse position post control
+			if translate_only or vertical_only or rotate_only:
+				grab_mouse_pos = event.position - mouse_offset
 			## Call Hold_object(false) when done with menu.
 			## until then only emit the release signal.
 			emit_signal("object_released", self)
@@ -157,10 +165,10 @@ func _integrate_forces(state):
 
 
 ## Used just to horizontally move an object. X and Z axis.
-func _translate_movement(delta):
+func _translate_movement(delta, offset):
 	## Check if Mouse Velocity is actually moving
 	if Input.get_last_mouse_velocity().length_squared() > 2:
-		var mouse_world : Vector3 = _get_mouse_world(mouse_offset)
+		var mouse_world : Vector3 = _get_mouse_world(offset)
 		var flattened_target : Vector3 = Vector3(
 			mouse_world.x,
 			position.y,
@@ -183,9 +191,9 @@ func _physics_process(delta):
 			hold_object(true)
 	## Apply quick-drag logic if true
 	if grabbed_fast:
-		_translate_movement(delta)
+		_translate_movement(delta, Vector2.ZERO)
 	## Apply hold and control logic otherwise.
 	elif grabbed_long:
 		## Suspend location, only affecting if translate, vertical, or rotate
 		if translate_only:
-			_translate_movement(delta)
+			_translate_movement(delta, mouse_offset)
