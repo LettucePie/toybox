@@ -19,6 +19,7 @@ var grab_mouse_pos : Vector2 = Vector2.ZERO
 var grabbed_fast : bool = false
 var grabbed_long : bool = false
 var target_y : float = 0.0
+var mouse_relative : Vector2 = Vector2.ZERO
 ## Control Input -> Process variables
 var menu_mode : bool = false
 var mouse_offset : Vector2 = Vector2.ZERO
@@ -80,6 +81,7 @@ func set_control_mode(mode : String, get_offset : bool):
 	if get_offset:
 		mouse_offset = get_viewport().get_mouse_position() - grab_mouse_pos
 	control_mode_dampener = 30
+	mouse_relative = Vector2.ZERO
 	if mode == "translate":
 		translate_only = true
 		vertical_only = false
@@ -155,6 +157,8 @@ func _input(event):
 			translate_only = false
 			vertical_only = false
 			rotate_only = false
+	if event is InputEventMouseMotion and rotate_only:
+		mouse_relative = event.relative
 
 
 ####
@@ -189,6 +193,14 @@ func _vertical_movement(delta):
 	position.y = lerp(position.y, target_y, speed)
 
 
+func _rotate_movement(delta):
+	var axis_roll := get_viewport().get_camera_3d().basis * Vector3.UP
+	var axis_tumble := get_viewport().get_camera_3d().basis * Vector3.RIGHT
+	rotate(axis_roll, mouse_relative.x * delta)
+	rotate(axis_tumble, mouse_relative.y * delta)
+	mouse_relative = mouse_relative.lerp(Vector2.ZERO, 0.33)
+
+
 func _physics_process(delta):
 	## Checking to see if mouse is being held down on object, and neither \
 	## the quick drag or hold and control thresholds have been reached.
@@ -211,6 +223,8 @@ func _physics_process(delta):
 			_translate_movement(delta, mouse_offset)
 		if vertical_only:
 			_vertical_movement(delta)
+		if rotate_only:
+			_rotate_movement(delta)
 	## End-Frame Maintenance
 	if control_mode_dampener > 0:
 		control_mode_dampener -= 1
