@@ -194,10 +194,25 @@ func _vertical_movement(delta):
 
 
 func _rotate_movement(delta):
-	var axis_roll := get_viewport().get_camera_3d().basis * Vector3.UP
-	var axis_tumble := get_viewport().get_camera_3d().basis * Vector3.RIGHT
-	rotate(axis_roll, mouse_relative.x * delta)
-	rotate(axis_tumble, mouse_relative.y * delta)
+	## Dial around the Camera Forward by the mouse relative...
+	## uhh... like start with the camera's right direction, and use the \
+	## cameras forward direction as an imaginary pin. rotate the cam right \
+	## to the same angle that mouse relative is, to match the 2d position \
+	## of the mouse cursor to an interpreted "mouse relative forward" axis.
+	## Then rotate that "mouse relative forward" -90 degrees by that \
+	## imaginary pin to get the sort of north and south pole of the mouse \
+	## relative input.
+	var cam_forward := get_viewport().get_camera_3d() \
+		.global_basis * Vector3.FORWARD
+	var cam_right := get_viewport().get_camera_3d() \
+		.global_basis * Vector3.RIGHT
+	var cam_dialed : Vector3 = cam_right.rotated(
+		cam_forward,
+		mouse_relative.angle()
+	)
+	var mouse_relative_axis := cam_dialed.rotated(cam_forward, PI / -2)
+	## Gather strength by getting mouse_relative length()
+	rotate(mouse_relative_axis, mouse_relative.length() * delta)
 	mouse_relative = mouse_relative.lerp(Vector2.ZERO, 0.33)
 
 
