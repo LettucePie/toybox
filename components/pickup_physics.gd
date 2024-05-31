@@ -18,7 +18,8 @@ var grab_time : int = 0
 var grab_mouse_pos : Vector2 = Vector2.ZERO
 var grabbed_fast : bool = false
 var grabbed_long : bool = false
-var screen_relative : Vector2 = Vector2.ZERO
+var mouse_relative : Vector2 = Vector2.ZERO
+var target_y : float = 0.0
 ## Control Input -> Process variables
 var menu_mode : bool = false
 var mouse_offset : Vector2 = Vector2.ZERO
@@ -81,6 +82,7 @@ func set_control_mode(mode : String, get_offset : bool):
 		vertical_only = false
 		rotate_only = false
 	elif mode == "vertical":
+		target_y = position.y
 		translate_only = false
 		vertical_only = true
 		rotate_only = false
@@ -150,6 +152,8 @@ func _input(event):
 			translate_only = false
 			vertical_only = false
 			rotate_only = false
+	if event is InputEventMouseMotion and vertical_only:
+		mouse_relative = event.relative
 
 
 ####
@@ -182,6 +186,14 @@ func _translate_movement(delta, offset):
 		position = position.lerp(flattened_target, speed)
 
 
+func _vertical_movement(delta):
+	target_y -= mouse_relative.y * delta
+	var speed : float = 5.0 * delta
+	if grabbed_long and control_mode_dampener > 0:
+		speed = 2.5 * delta
+	position.y = lerp(position.y, target_y, speed)
+
+
 func _physics_process(delta):
 	## Checking to see if mouse is being held down on object, and neither \
 	## the quick drag or hold and control thresholds have been reached.
@@ -202,6 +214,8 @@ func _physics_process(delta):
 		## Suspend location, only affecting if translate, vertical, or rotate
 		if translate_only:
 			_translate_movement(delta, mouse_offset)
+		if vertical_only:
+			_vertical_movement(delta)
 	## End-Frame Maintenance
 	if control_mode_dampener > 0:
 		control_mode_dampener -= 1
