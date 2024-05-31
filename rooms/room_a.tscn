@@ -5,10 +5,10 @@
 [ext_resource type="Environment" uid="uid://dvkctexm75m4g" path="res://rooms/materials/environment_room_a.tres" id="2_kfhf2"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_rqan4"]
-size = Vector3(25, 1, 25)
+size = Vector3(50, 1, 50)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yh6jf"]
-size = Vector3(25, 1, 25)
+size = Vector3(200, 1, 200)
 
 [node name="room_a" type="Node3D"]
 script = ExtResource("1_5rwtt")
@@ -37,3 +37,5 @@ environment = ExtResource("2_kfhf2")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.197828, 0.980237, 0, -0.980237, -0.197828, 0, 0, 0)
 shadow_enabled = true
+
+[connection signal="input_event" from="floor/StaticBody3D" to="." method="_on_static_body_3d_input_event"]
