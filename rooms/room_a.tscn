@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvdr8hqjwftth"]
+[gd_scene load_steps=7 format=3 uid="uid://bvdr8hqjwftth"]
 
 [ext_resource type="Script" path="res://rooms/room.gd" id="1_5rwtt"]
 [ext_resource type="Script" path="res://rooms/camera_doll.gd" id="1_c2bd5"]
@@ -9,6 +9,13 @@ size = Vector3(50, 1, 50)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yh6jf"]
 size = Vector3(200, 1, 200)
+
+[sub_resource type="Curve3D" id="Curve3D_mndng"]
+_data = {
+"points": PackedVector3Array(0.305254, 2.37928, 1.78386, 0, -2.379, -1.784, 0, 15, 15, 0, 2.106, 2.521, 0, -2.106, -2.521, 0, 3.003, 9, 0, 0, 0, 0, 0, 0, 0, 0.768, 2.216),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
 
 [node name="room_a" type="Node3D"]
 script = ExtResource("1_5rwtt")
@@ -27,8 +34,14 @@ shape = SubResource("BoxShape3D_yh6jf")
 script = ExtResource("1_c2bd5")
 active = false
 
-[node name="camera_room" type="Camera3D" parent="camera_doll"]
-transform = Transform3D(1, 0, 0, 0, 0.831799, 0.555077, 0, -0.555077, 0.831799, 0, 7.08802, 9.25752)
+[node name="cam_path" type="Path3D" parent="camera_doll"]
+curve = SubResource("Curve3D_mndng")
+
+[node name="cam_follow" type="PathFollow3D" parent="camera_doll/cam_path"]
+transform = Transform3D(1, 0, 0, 0, 0.599935, 0.800025, 0, -0.800025, 0.599935, 0, 11.382, 12.476)
+
+[node name="camera_room" type="Camera3D" parent="camera_doll/cam_path/cam_follow"]
+transform = Transform3D(1, 0, 0, 0, 0.945115, -0.326738, 0, 0.326738, 0.945115, 0, 0, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("2_kfhf2")
