@@ -1,173 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://4ypddxy4wwie"]
+[gd_scene load_steps=12 format=3 uid="uid://4ypddxy4wwie"]
 
 [ext_resource type="Script" path="res://ui/tools/scroll_pad_area.gd" id="1_fk7r4"]
 [ext_resource type="Script" path="res://ui/play_ui.gd" id="1_ucswn"]
 [ext_resource type="Script" path="res://ui/tools/scroll_container_haptics.gd" id="2_8rjpd"]
 [ext_resource type="PackedScene" uid="uid://ba0uwf0hm8sfe" path="res://ui/toy_listing.tscn" id="2_aus8r"]
 [ext_resource type="Script" path="res://ui/bottom_drawer.gd" id="3_asq1p"]
+[ext_resource type="Script" path="res://ui/side_drawer.gd" id="4_i30pv"]
 [ext_resource type="Texture2D" uid="uid://d2d8n0y0fstws" path="res://ui/art/floating_control_icon_translate.png" id="5_66nua"]
 [ext_resource type="Script" path="res://ui/tools/rescale.gd" id="5_volr0"]
 [ext_resource type="Texture2D" uid="uid://6bnxetp3nafy" path="res://ui/art/floating_control_icon_vertical.png" id="6_aqkge"]
 [ext_resource type="Texture2D" uid="uid://bqc4ywvj6vnfj" path="res://ui/art/floating_control_icon_rotate.png" id="7_ol2gs"]
 [ext_resource type="Texture2D" uid="uid://dkoxl60rnqiaw" path="res://ui/art/floating_control_icon_confirm.png" id="8_gswdj"]
-
-[sub_resource type="Animation" id="Animation_yl70x"]
-resource_name = "hide"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("side_drawer:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(-328, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("side_drawer:offset_bottom")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0.0, 0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("side_drawer:offset_right")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [328.0, 0.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("side_drawer:offset_left")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0.0, -328.0]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("side_drawer:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_t26h2"]
-resource_name = "show"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("side_drawer:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-328, 0), Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("side_drawer:offset_bottom")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0.0, 0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("side_drawer:offset_right")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0.0, 328.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("side_drawer:offset_top")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0.0, 0.0]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("side_drawer:offset_left")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [-328.0, 0.0]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("side_drawer:anchor_bottom")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.902, 0.902]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("side_drawer:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_c3bcw"]
-_data = {
-"hide": SubResource("Animation_yl70x"),
-"show": SubResource("Animation_t26h2")
-}
 
 [node name="play_ui" type="Control"]
 layout_mode = 3
@@ -225,14 +68,10 @@ grow_vertical = 2
 [node name="side_drawer" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
+anchor_right = 0.607
 anchor_bottom = 0.902
-offset_right = 328.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="side_drawer"]
-root_node = NodePath("../..")
-libraries = {
-"": SubResource("AnimationLibrary_c3bcw")
-}
+offset_bottom = 0.0800171
+script = ExtResource("4_i30pv")
 
 [node name="Label" type="Label" parent="side_drawer"]
 layout_mode = 1
@@ -278,15 +117,20 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 5
 
-[node name="show_hide" type="Button" parent="side_drawer"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="side_drawer"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
-anchor_right = 1.159
-anchor_bottom = 0.057
-offset_right = -0.152008
-offset_bottom = -0.357441
-grow_horizontal = 0
+anchor_right = 1.378
+anchor_bottom = 0.142
+offset_left = 1.0
+offset_right = 0.0159912
+offset_bottom = 0.03936
+alignment_horizontal = 0
+alignment_vertical = 0
+
+[node name="show_hide" type="Button" parent="side_drawer/AspectRatioContainer"]
+layout_mode = 2
 text = "S/H"
 
 [node name="popup_controls" type="VBoxContainer" parent="."]

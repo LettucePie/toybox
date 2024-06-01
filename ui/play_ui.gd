@@ -9,11 +9,11 @@ class_name PlayUI
 @export var toy_listing : PackedScene
 
 ## Animation Stuff
-@onready var side_anim : AnimationPlayer = $side_drawer/AnimationPlayer
+#@onready var side_anim : AnimationPlayer = $side_drawer/AnimationPlayer
 #@onready var bottom_anim : AnimationPlayer = $bottom_drawer/AnimationPlayer
 
 ## Drawer Elements
-@onready var side_show_hide : Button = $side_drawer/show_hide
+@onready var side_show_hide : Button = $side_drawer/AspectRatioContainer/show_hide
 @onready var bottom_show_hide : Button = $bottom_drawer/drawer_controls/show_hide
 @onready var bottom_prev : Button = $bottom_drawer/drawer_controls/previous
 @onready var bottom_next : Button = $bottom_drawer/drawer_controls/next
@@ -198,7 +198,7 @@ func _ready_position():
 	bottom_drawer_visible = false
 	#bottom_anim.play("hide")
 	$bottom_drawer.show_hide(bottom_drawer_visible)
-	side_anim.play("show")
+	$side_drawer.show_hide(side_drawer_visible)
 	## TODO replace with icons
 	side_show_hide.text = "Hide"
 	bottom_show_hide.text = "Show"
@@ -234,19 +234,19 @@ func _show_hide(drawer : Button):
 			bottom_show_hide.text = "Hide"
 			$bottom_drawer.show_hide(bottom_drawer_visible)
 			if side_drawer_visible:
-				side_anim.play("hide")
 				side_drawer_visible = false
 				side_show_hide.text = "Show"
+				$side_drawer.show_hide(side_drawer_visible)
 	elif drawer == side_show_hide:
 		print("Side Show Hide")
 		if side_drawer_visible:
 			side_drawer_visible = false
 			side_show_hide.text = "Show"
-			side_anim.play("hide")
+			$side_drawer.show_hide(side_drawer_visible)
 		else:
 			side_drawer_visible = true
 			side_show_hide.text = "Hide"
-			side_anim.play("show")
+			$side_drawer.show_hide(side_drawer_visible)
 			if bottom_drawer_visible:
 				bottom_drawer_visible = false
 				$bottom_drawer.show_hide(bottom_drawer_visible)
