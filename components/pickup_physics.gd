@@ -211,6 +211,11 @@ func _rotate_movement(delta):
 		mouse_relative.angle()
 	)
 	var mouse_relative_axis := cam_dialed.rotated(cam_forward, PI / -2)
+	## Horizontal == spin override
+	if abs(mouse_relative.x) > 0 and abs(mouse_relative.y) < 2:
+		mouse_relative_axis = Vector3.UP
+		if mouse_relative.x < 0:
+			mouse_relative_axis = Vector3.DOWN
 	## Gather strength by getting mouse_relative length()
 	rotate(mouse_relative_axis, mouse_relative.length() * delta)
 	mouse_relative = mouse_relative.lerp(Vector2.ZERO, 0.33)
