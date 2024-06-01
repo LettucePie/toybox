@@ -10,7 +10,7 @@ class_name PlayUI
 
 ## Animation Stuff
 @onready var side_anim : AnimationPlayer = $side_drawer/AnimationPlayer
-@onready var bottom_anim : AnimationPlayer = $bottom_drawer/AnimationPlayer
+#@onready var bottom_anim : AnimationPlayer = $bottom_drawer/AnimationPlayer
 
 ## Drawer Elements
 @onready var side_show_hide : Button = $side_drawer/show_hide
@@ -196,7 +196,8 @@ func _forward_control_to_physics_toy(control : String):
 func _ready_position():
 	side_drawer_visible = true
 	bottom_drawer_visible = false
-	bottom_anim.play("hide")
+	#bottom_anim.play("hide")
+	$bottom_drawer.show_hide(bottom_drawer_visible)
 	side_anim.play("show")
 	## TODO replace with icons
 	side_show_hide.text = "Hide"
@@ -227,11 +228,11 @@ func _show_hide(drawer : Button):
 			## TODO replace text with icons
 			## Maybe put icons in animationplayer
 			bottom_show_hide.text = "Show"
-			bottom_anim.play("hide")
+			$bottom_drawer.show_hide(bottom_drawer_visible)
 		else:
 			bottom_drawer_visible = true
 			bottom_show_hide.text = "Hide"
-			bottom_anim.play("show")
+			$bottom_drawer.show_hide(bottom_drawer_visible)
 			if side_drawer_visible:
 				side_anim.play("hide")
 				side_drawer_visible = false
@@ -247,6 +248,6 @@ func _show_hide(drawer : Button):
 			side_show_hide.text = "Hide"
 			side_anim.play("show")
 			if bottom_drawer_visible:
-				bottom_anim.play("hide")
 				bottom_drawer_visible = false
+				$bottom_drawer.show_hide(bottom_drawer_visible)
 				bottom_show_hide.text = "Show"

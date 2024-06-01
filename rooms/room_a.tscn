@@ -24,7 +24,6 @@ collision_layer = 17
 shape = SubResource("BoxShape3D_yh6jf")
 
 [node name="camera_doll" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1_c2bd5")
 active = false
 
