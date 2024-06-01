@@ -29,9 +29,11 @@ func _on_static_body_3d_input_event(camera, event, position, normal, shape_idx):
 	and event.pressed:
 		click_index = event.button_index
 		floor_clicked = true
-	if event is InputEventScreenTouch:
-		click_index = clamp(event.index + 1, 1, 2)
+	if event is InputEventScreenTouch \
+	and event.pressed:
+		click_index = clamp(event.index + 1, 0, 2)
 		floor_clicked = true
+		print("Screen Touched")
 
 
 func _input(event):
@@ -42,11 +44,11 @@ func _input(event):
 		click_index = 0
 		floor_clicked = false
 	if event is InputEventScreenTouch \
-	and event.index == click_index \
 	and !event.pressed \
 	and floor_clicked:
-		click_index = 0
+		click_index = clamp(click_index - 1, 0, 2)
 		floor_clicked = false
+		print("Sreen Released")
 	if event is InputEventMouseMotion and floor_clicked:
 		if click_index == 1:
 			var orientated_dir = Vector3(event.relative.x, 0, event.relative.y) * -1.0

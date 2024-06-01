@@ -185,6 +185,7 @@ func _forward_control_to_physics_toy(control : String):
 		current_control = control
 		physics_popup.hide()
 		physics_toy.set_control_mode(control, true)
+		get_viewport().set_input_as_handled()
 		if control == "confirm":
 			physics_toy.hold_object(false)
 
