@@ -18,6 +18,10 @@ var grab_time : int = 0
 var grab_mouse_pos : Vector2 = Vector2.ZERO
 var grabbed_fast : bool = false
 var grabbed_long : bool = false
+var z_depth : float = 0.0
+var min_y : float = 0.0
+var max_y : float = 0.0
+var start_y : float = 0.0
 var target_y : float = 0.0
 var mouse_relative : Vector2 = Vector2.ZERO
 ## Control Input -> Process variables
@@ -87,7 +91,7 @@ func set_control_mode(mode : String, get_offset : bool):
 		vertical_only = false
 		rotate_only = false
 	elif mode == "vertical":
-		target_y = position.y
+		_find_min_max_y()
 		translate_only = false
 		vertical_only = true
 		rotate_only = false
@@ -118,6 +122,48 @@ func _get_mouse_world(offset : Vector2) -> Vector3:
 	if !result.is_empty():
 		world_pos = result["position"]
 	return world_pos
+
+
+func _get_position_2d() -> Vector2:
+	var result = get_viewport().get_mouse_position()
+	result = get_viewport().get_camera_3d().unproject_position(global_position)
+	return result
+
+
+func _find_min_max_y():
+	target_y = position.y
+	var camera = get_viewport().get_camera_3d()
+	z_depth = camera.global_position.distance_to(self.global_position) + 2
+	var min_target : Vector2 = Vector2(
+		mouse_offset.x,
+		get_window().size.y)
+	var max_target : Vector2 = Vector2(
+		mouse_offset.x,
+		0)
+	print("Min Target: ", min_target, " | Max Target: ", max_target, " | Zdepth: ", z_depth)
+	min_y = camera.project_position(
+		Vector2(mouse_offset.x, get_window().size.y),
+		z_depth).y
+	max_y = camera.project_position(
+		Vector2(mouse_offset.x, 0),
+		z_depth).y
+	print("Min Y: ", min_y, " Max Y: ", max_y)
+	target_y = _get_y_percent(min_y, max_y)
+
+
+func _get_y_percent(min : float, max : float) -> float:
+	var result = lerp(min_y, max_y, 0.5)
+	result = inverse_lerp(
+		min,
+		max,
+		get_viewport().get_camera_3d().project_position(
+			clamp(
+				get_viewport().get_mouse_position() - mouse_offset,
+				Vector2.ZERO,
+				Vector2(get_window().size)
+				), z_depth).y
+	)
+	return result
 
 
 ####
@@ -181,12 +227,9 @@ func _translate_movement(delta, offset):
 		position = position.lerp(flattened_target, speed)
 
 
-func _vertical_movement(delta):
-	var mouse_pos = get_viewport().get_mouse_position() - mouse_offset
-	var z_depth = get_viewport().get_camera_3d().position.distance_to(
-		self.position)
-	var target_y = get_viewport().get_camera_3d().project_position(
-		mouse_pos, z_depth).y
+func _vertical_movement(delta, offset):
+	target_y = lerp(min_y, max_y, _get_y_percent(min_y, max_y))
+	print("target_y: ", target_y)
 	var speed : float = 5.0 * delta
 	if grabbed_long and control_mode_dampener > 0:
 		speed = 2.5 * delta
@@ -242,7 +285,7 @@ func _physics_process(delta):
 		if translate_only:
 			_translate_movement(delta, mouse_offset)
 		if vertical_only:
-			_vertical_movement(delta)
+			_vertical_movement(delta, mouse_offset)
 		if rotate_only:
 			_rotate_movement(delta)
 	## End-Frame Maintenance
