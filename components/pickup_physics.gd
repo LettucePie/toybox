@@ -140,14 +140,12 @@ func _find_min_max_y():
 	var max_target : Vector2 = Vector2(
 		mouse_offset.x,
 		0)
-	print("Min Target: ", min_target, " | Max Target: ", max_target, " | Zdepth: ", z_depth)
 	min_y = camera.project_position(
 		Vector2(mouse_offset.x, get_window().size.y),
 		z_depth).y
 	max_y = camera.project_position(
 		Vector2(mouse_offset.x, 0),
 		z_depth).y
-	print("Min Y: ", min_y, " Max Y: ", max_y)
 	target_y = _get_y_percent(min_y, max_y)
 
 
@@ -194,9 +192,10 @@ func _input(event):
 		if grabbed_fast:
 			grab_object(false)
 		if grabbed_long:
-			## Reset grab_mouse_pos to new mouse position post control
+			## Reset grab_mouse_pos to potential new object position on screen.
 			if translate_only or vertical_only or rotate_only:
-				grab_mouse_pos = event.position - mouse_offset
+				grab_mouse_pos = _get_position_2d()
+				mouse_offset = event.position - grab_mouse_pos
 			## Call Hold_object(false) when done with menu.
 			## until then only emit the release signal.
 			emit_signal("object_released", self)
@@ -229,7 +228,6 @@ func _translate_movement(delta, offset):
 
 func _vertical_movement(delta, offset):
 	target_y = lerp(min_y, max_y, _get_y_percent(min_y, max_y))
-	print("target_y: ", target_y)
 	var speed : float = 5.0 * delta
 	if grabbed_long and control_mode_dampener > 0:
 		speed = 2.5 * delta
