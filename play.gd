@@ -32,9 +32,12 @@ func load_toy(toy_name : String):
 	ui.add_toy_menu(new_instance.menu_instance)
 	## Instantiate and associate toy objects / pieces then send to room
 	new_instance.objects.clear()
+	var target_position : Vector3 = new_instance.meta.spawn_at_position
+	if new_instance.meta.spawn_at_camera:
+		target_position = room.cam_dolly.position
 	for scene in new_instance.meta.objects:
 		new_instance.objects.append(scene.instantiate())
-	room.add_toys(new_instance.objects, new_instance.random_id)
+	room.add_toys(new_instance.objects, new_instance.random_id, target_position)
 	## connect grab signals to playui, if applicable
 	if new_instance.meta.objects_have_pickup_physics:
 		for toy_object in new_instance.objects:

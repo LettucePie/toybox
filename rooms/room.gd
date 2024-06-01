@@ -12,11 +12,13 @@ var floor_clicked : bool = false
 var click_index : int = 0
 
 
-func add_toys(objects : Array, toyname : String):
+func add_toys(objects : Array, toyname : String, spawn_point : Vector3):
 	var new_toy : Node3D = Node3D.new()
 	new_toy.name = toyname
+	#new_toy.position = spawn_point
 	for piece in objects:
 		new_toy.add_child(piece)
+		piece.position += spawn_point
 	add_child(new_toy)
 	toy_objects.append(new_toy)
 
