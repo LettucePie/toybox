@@ -15,3 +15,5 @@ objects = Array[PackedScene]([ExtResource("2_akjhd"), ExtResource("3_r021i"), Ex
 objects_have_pickup_physics = true
 pass_objects = true
 menu_receiver_function = "receive_blocks"
+spawn_at_camera = true
+spawn_at_position = Vector3(0, 3, 0)
