@@ -46,6 +46,12 @@ func _input(event):
 	if event is InputEventMouseMotion and floor_clicked:
 		if click_index == 1:
 			print("Pan")
+			var orientated_dir = Vector3(event.relative.x, 0, event.relative.y)
+			print("before rotated: ", orientated_dir)
+			var angle = (cam_dolly.global_basis * Vector3.RIGHT).angle_to(Vector3.FORWARD)
+			orientated_dir = orientated_dir.rotated(Vector3.UP, angle)
+			print("after rotate: ", orientated_dir)
+			cam_dolly.translate(orientated_dir * 0.01)
 		elif click_index == 2:
 			print("Rotate")
 			cam_dolly.rotate(Vector3.UP, event.relative.x * 0.01)
