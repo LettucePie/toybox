@@ -39,6 +39,7 @@ func load_toy(toy_name : String):
 	for scene in new_instance.meta.objects:
 		new_instance.objects.append(scene.instantiate())
 	room.add_toys(new_instance.objects, new_instance.random_id, target_position)
+	loaded_toys.append(new_instance)
 	## connect grab signals to playui, if applicable
 	if new_instance.meta.objects_have_pickup_physics:
 		for toy_object in new_instance.objects:
@@ -49,8 +50,19 @@ func load_toy(toy_name : String):
 	new_instance.menu_instance.set_toy_objects(new_instance.objects)
 
 
-func add_toy(toy : PackedScene, from : ToyUI):
-	print("Adding Toy: ", toy, " from ")
+func add_toy_object(toy_object : PackedScene, from : ToyUI):
+	print("Adding Toy: ", toy_object, " from: ", from)
+	var instance : ToyInstance = find_instance_by_menu(from)
+	if instance != null:
+		var new_toy_object = toy_object.instantiate()
+		var target_position : Vector3 = instance.meta.spawn_at_position
+		if instance.meta.spawn_at_camera:
+			target_position = room.cam_dolly.global_position
+		instance.objects.append(new_toy_object)
+		room.add_toy_object(new_toy_object, instance.random_id, target_position)
+		instance.menu_instance.add_toy_object(new_toy_object)
+	else:
+		print("ERROR: Cannot add ToyObject to null ToyInstance")
 
 
 ## This function is meant to be reached from the Play UI.
@@ -59,3 +71,11 @@ func add_toy(toy : PackedScene, from : ToyUI):
 ## of the toy.
 func toy_menu_focused(toy_menu : ToyUI):
 	print("Find toy instance and highlight pieces")
+
+
+func find_instance_by_menu(menu : ToyUI) -> ToyInstance:
+	var result = loaded_toys.front()
+	for instance in loaded_toys:
+		if instance.menu_instance == menu:
+			result = instance
+	return result

@@ -28,6 +28,8 @@ func _ready():
 		connect("forward_gui_input", scroll_haptics.dragging)
 		#self.forward_gui_input.connect(scroll_haptics._on_gui_input)
 	self.gui_input.connect(_on_gui_input)
+	if manual_assign:
+		set_properties(manual_text, manual_icon)
 
 
 func _find_scroll_haptics() -> bool:
@@ -44,11 +46,8 @@ func _find_scroll_haptics() -> bool:
 
 
 func set_properties(text : String, icon : Texture2D):
-	if !manual_assign:
-		get_node(icon_path).texture = icon
-		get_node(label_path).text = text
-	else:
-		print("ERROR: Trying to assign icon and text to manual-buttons.")
+	get_node(icon_path).texture = icon
+	get_node(label_path).text = text
 
 
 func _on_gui_input(event : InputEvent):

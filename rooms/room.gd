@@ -21,6 +21,25 @@ func add_toys(objects : Array, toyname : String, spawn_point : Vector3):
 	add_child(new_toy)
 	toy_objects.append(new_toy)
 
+
+func add_toy_object(object : Node3D, root_name : String, spawn_point : Vector3):
+	var root_node : Node3D = get_toy(root_name)
+	if self.has_node(root_node.get_path()) \
+	or toy_objects.has(root_node):
+		root_node.add_child(object)
+		object.position = spawn_point
+	else:
+		print("ERROR: Room cannot add toy object onto null Root Node")
+
+
+func get_toy(root_name : String) -> Node3D:
+	var result = null
+	for toy_root in toy_objects:
+		if toy_root.name == root_name:
+			result = toy_root
+	return result
+
+
 #### Camera Stuff
 
 func _on_static_body_3d_input_event(camera, event, position, normal, shape_idx):
