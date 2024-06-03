@@ -15,7 +15,6 @@ var click_index : int = 0
 func add_toys(objects : Array, toyname : String, spawn_point : Vector3):
 	var new_toy : Node3D = Node3D.new()
 	new_toy.name = toyname
-	#new_toy.position = spawn_point
 	for piece in objects:
 		new_toy.add_child(piece)
 		piece.position += spawn_point
@@ -29,13 +28,11 @@ func _on_static_body_3d_input_event(camera, event, position, normal, shape_idx):
 	and event.pressed:
 		click_index = event.button_index
 		floor_clicked = true
-		print("Mouse Touched")
 	if event is InputEventScreenTouch \
 	and event.pressed\
 	and event.index > 0:
 		click_index = clamp(event.index + 1, 0, 2)
 		floor_clicked = true
-		print("Screen Touched")
 
 
 func _input(event):
@@ -45,20 +42,16 @@ func _input(event):
 	and floor_clicked:
 		click_index = 0
 		floor_clicked = false
-		print("Mouse Released")
 	if event is InputEventScreenTouch \
 	and !event.pressed \
 	and floor_clicked:
 		click_index = clamp(click_index - 1, 0, 2)
 		floor_clicked = false
-		print("Sreen Released")
 	if event is InputEventMouseMotion and floor_clicked:
 		if click_index == 1:
-			print("Pan")
 			var orientated_dir = Vector3(event.relative.x, 0, event.relative.y) * -1.0
 			cam_dolly.translate(orientated_dir * 0.01)
 		elif click_index == 2:
-			print("Rotate")
 			cam_dolly.rotate(Vector3.UP, event.relative.x * 0.01)
 			cam_track.progress_ratio = clamp(
 				cam_track.progress_ratio + event.relative.y * -0.001,

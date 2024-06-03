@@ -12,7 +12,7 @@ class_name Play
 class ToyInstance:
 	var meta : ToyMeta
 	var random_id : String
-	var menu_instance : Control
+	var menu_instance : ToyUI
 	var objects : Array
 
 var loaded_toys : Array[ToyInstance] = []
@@ -29,6 +29,7 @@ func load_toy(toy_name : String):
 	+ str(randi_range(1000, 9999))
 	## Instantiate and associate toy menu then send to playui
 	new_instance.menu_instance = new_instance.meta.menu.instantiate()
+	new_instance.menu_instance.set_play_node(self)
 	ui.add_toy_menu(new_instance.menu_instance)
 	## Instantiate and associate toy objects / pieces then send to room
 	new_instance.objects.clear()
@@ -44,17 +45,17 @@ func load_toy(toy_name : String):
 			if toy_object is PickupPhysics:
 				toy_object.object_grabbed.connect(ui.physics_toy_grabbed)
 				toy_object.object_released.connect(ui.physics_toy_released)
-	## pass array of objects to toy menu, if applicable
-	if new_instance.meta.pass_objects \
-	and new_instance.menu_instance.has_method(new_instance.meta.menu_receiver_function):
-			new_instance.menu_instance.call(
-				new_instance.meta.menu_receiver_function,
-				new_instance.objects)
+	## pass array of objects to ToyUI
+	new_instance.menu_instance.set_toy_objects(new_instance.objects)
+
+
+func add_toy(toy : PackedScene, from : ToyUI):
+	print("Adding Toy: ", toy, " from ")
 
 
 ## This function is meant to be reached from the Play UI.
 ## When player toggles through the different toymenus in the bottom \
 ## drawer, we want the game to highlight and "fit in screen" all the pieces \
 ## of the toy.
-func toy_menu_focused(toy_menu : Control):
+func toy_menu_focused(toy_menu : ToyUI):
 	print("Find toy instance and highlight pieces")

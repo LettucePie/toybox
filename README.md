@@ -27,7 +27,10 @@ In the case of this project, a Toy is;
  - A Toy can be "focused" into view with it's own camera
    - Camera focus must be escapable
  
- 
+## How to make a Toy
+This app will be using a standardization system for each toy. To briefly understand what is required, read through the "load_toy" function on `play.gd` and the variables of `toys/toy_meta.gd`.
+
+
  ### Feature Ideas
  
  Just jotting some brainstorm stuff down here don't mind me.

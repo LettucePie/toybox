@@ -34,7 +34,7 @@ var physics_toy : PickupPhysics
 var current_control : String = ""
 
 ## Toy Menus
-var toy_menus : Array[Control] = []
+var toy_menus : Array[ToyUI] = []
 var current_toy_menu : int = 0
 
 
@@ -77,7 +77,7 @@ func toy_selected(toy_name : String):
 	_show_hide(side_show_hide)
 
 
-func add_toy_menu(menu_node : Control):
+func add_toy_menu(menu_node : ToyUI):
 	toymenu_frame.add_child(menu_node)
 	toy_menus.append(menu_node)
 	if toy_menus.size() <= 1:
@@ -89,7 +89,7 @@ func add_toy_menu(menu_node : Control):
 	set_current_toy_menu(toy_menus.size() - 1)
 
 
-func focus_toy_menu(menu_node : Control):
+func focus_toy_menu(menu_node : ToyUI):
 	print("Focus Bottom Drawer to toy menu")
 	var target_index : int = toy_menus.find(menu_node)
 	if target_index >= 0:
@@ -98,7 +98,7 @@ func focus_toy_menu(menu_node : Control):
 		print("ERROR: Cannot Focus to Toy Menu not in Toy Menu List")
 
 
-func remove_toy_menu(menu_node : Control):
+func remove_toy_menu(menu_node : ToyUI):
 	print("Removing MenuNode: ", menu_node)
 	toy_menus.erase(menu_node)
 	## Some other stuff then queue_free
