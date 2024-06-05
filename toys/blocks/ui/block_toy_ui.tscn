@@ -124,27 +124,34 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "X: "
 
-[node name="pos_x_input" type="TextEdit" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_container"]
+[node name="pos_x_input" type="LineEdit" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_container"]
+custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 size_flags_horizontal = 3
+max_length = 4
+context_menu_enabled = false
 
 [node name="y_label" type="Label" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_container"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Y: "
 
-[node name="pos_y_input" type="TextEdit" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_container"]
+[node name="pos_y_input" type="LineEdit" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_container"]
+custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 size_flags_horizontal = 3
+max_length = 4
 
 [node name="z_label" type="Label" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_container"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Z: "
 
-[node name="pos_z_input" type="TextEdit" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_container"]
+[node name="pos_z_input" type="LineEdit" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_container"]
+custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 size_flags_horizontal = 3
+max_length = 4
 
 [node name="credits" type="Label" parent="scroll_pad_area/options_v/VBoxContainer"]
 layout_mode = 2
