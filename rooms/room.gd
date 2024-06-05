@@ -45,6 +45,15 @@ func get_toy(root_name : String) -> Node3D:
 
 #### Camera Stuff
 
+
+func set_camera_position(target : Vector3):
+	cam_dolly.position = target
+
+
+func set_camera_zoom(percent : float):
+	cam_track.progress_ratio = percent
+
+
 func _on_static_body_3d_input_event(camera, event, position, normal, shape_idx):
 	if event is InputEventMouseButton \
 	and event.pressed:

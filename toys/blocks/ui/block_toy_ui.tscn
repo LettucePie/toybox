@@ -111,9 +111,28 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="position" type="Label" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container"]
+custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 text = "Position:"
 vertical_alignment = 1
+
+[node name="position_add" type="HBoxContainer" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container"]
+layout_mode = 2
+
+[node name="x_add" type="Button" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_add"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+"
+
+[node name="y_add" type="Button" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_add"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+"
+
+[node name="z_add" type="Button" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_add"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+"
 
 [node name="position_container" type="HBoxContainer" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container"]
 layout_mode = 2
@@ -152,6 +171,50 @@ custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 size_flags_horizontal = 3
 max_length = 4
+
+[node name="position_sub" type="HBoxContainer" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container"]
+layout_mode = 2
+
+[node name="x_sub" type="Button" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_sub"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "-"
+
+[node name="y_sub" type="Button" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_sub"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "-"
+
+[node name="z_sub" type="Button" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_sub"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "-"
+
+[node name="scale" type="Label" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "Scale:"
+vertical_alignment = 1
+
+[node name="scale_container" type="HBoxContainer" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container"]
+layout_mode = 2
+
+[node name="scale_slider" type="HSlider" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/scale_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.5
+max_value = 4.0
+step = 0.1
+value = 1.0
+
+[node name="scale_label" type="Label" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/scale_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.15
+text = "1.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
 
 [node name="credits" type="Label" parent="scroll_pad_area/options_v/VBoxContainer"]
 layout_mode = 2
