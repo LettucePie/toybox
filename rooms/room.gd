@@ -1,6 +1,9 @@
 extends Node3D
 class_name Room
 
+## Settings
+@export var room_dimensions : Vector3 = Vector3(50, 50, 50)
+
 ## Toy Management
 var toy_objects : Array = []
 

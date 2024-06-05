@@ -8,7 +8,9 @@ extends ToyUI
 ]
 @export var block_button_container : Container
 
-var current_block : Node3D = null
+## Block Selection
+var current_block : PickupPhysics = null
+@onready var current_block_section : Container = $scroll_pad_area/options_v/VBoxContainer/current_block_container
 
 ## Refers to signals and variables in the ToyUI Extension.
 func _ready():
@@ -16,6 +18,8 @@ func _ready():
 	objects_changed.connect(_indoctrinate_blocks)
 	if block_button_container != null:
 		_connect_buttons()
+	if current_block_section != null:
+		current_block_section.hide()
 
 
 func _connect_buttons():
@@ -31,11 +35,22 @@ func _indoctrinate_blocks(blocks : Array):
 		if block.has_signal("object_grabbed"):
 			if !block.object_grabbed.is_connected(self.block_selected):
 				block.object_grabbed.connect(self.block_selected)
+			if !block.object_released.is_connected(self.block_deselected):
+				block.object_released.connect(self.block_deselected)
 
 
-func block_selected(block : Node3D, held : bool):
+func block_selected(block : PickupPhysics, held : bool):
 	print("BlockToyUI Received Block selection: ", block)
 	current_block = block
+	current_block_section.show()
+
+
+func block_deselected(block : PickupPhysics):
+	print("BlockToyUI Received Block release: ", block)
+	if block == current_block \
+	and !block.menu_mode:
+		current_block = null
+		current_block_section.hide()
 
 
 func spawn_block_button(id : String):

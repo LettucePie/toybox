@@ -21,7 +21,6 @@ point_count = 3
 script = ExtResource("1_5rwtt")
 
 [node name="floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
 mesh = SubResource("BoxMesh_rqan4")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="floor" groups=["floor"]]

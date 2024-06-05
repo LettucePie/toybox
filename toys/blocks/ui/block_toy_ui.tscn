@@ -48,6 +48,12 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 
+[node name="add_blocks" type="Label" parent="scroll_pad_area/options_v/VBoxContainer"]
+layout_mode = 2
+text = "Add Blocks"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="scroll_pad_area_blocks" type="Control" parent="scroll_pad_area/options_v/VBoxContainer" node_paths=PackedStringArray("scroll_container")]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
@@ -90,3 +96,60 @@ layout_mode = 2
 manual_assign = true
 manual_icon = ExtResource("4_o8732")
 manual_text = "Corner"
+
+[node name="random_colors" type="CheckButton" parent="scroll_pad_area/options_v/VBoxContainer"]
+layout_mode = 2
+text = "Random Colors"
+
+[node name="current_block_container" type="VBoxContainer" parent="scroll_pad_area/options_v/VBoxContainer"]
+layout_mode = 2
+
+[node name="current_block" type="Label" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container"]
+layout_mode = 2
+text = "Current Block Selected: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="position" type="Label" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container"]
+layout_mode = 2
+text = "Position:"
+vertical_alignment = 1
+
+[node name="position_container" type="HBoxContainer" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container"]
+layout_mode = 2
+alignment = 1
+
+[node name="x_label" type="Label" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_container"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "X: "
+
+[node name="pos_x_input" type="TextEdit" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="y_label" type="Label" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_container"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Y: "
+
+[node name="pos_y_input" type="TextEdit" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="z_label" type="Label" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_container"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Z: "
+
+[node name="pos_z_input" type="TextEdit" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="credits" type="Label" parent="scroll_pad_area/options_v/VBoxContainer"]
+layout_mode = 2
+text = "Wooden Blocks
+version: 0.1
+by LettucePie"
+horizontal_alignment = 1
+vertical_alignment = 1
