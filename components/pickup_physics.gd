@@ -31,10 +31,6 @@ var control_mode_dampener : int = 0
 var translate_only : bool = false
 var vertical_only : bool = false
 var rotate_only : bool = false
-## _integrate_forces variables
-var integrate_pos_offset : Vector3 = Vector3.ZERO
-var integrate_rot_axis : Vector3 = Vector3.ZERO
-var integrate_rot_angle : float = 0.0
 
 
 func _ready():
@@ -227,11 +223,7 @@ func _translate_movement(delta, offset):
 		var speed : float = 5.0 * delta
 		if grabbed_long and control_mode_dampener > 0:
 			speed = 2.5 * delta
-		#position = position.lerp(flattened_target, speed)
-		print("current pos: ", position, " target: ", flattened_target)
-		apply_impulse(Vector3.UP * 0.01)
-		integrate_pos_offset = position - position.lerp(flattened_target, speed)
-		integrate_pos_offset *= -1.0
+		position = position.lerp(flattened_target, speed)
 
 
 func _vertical_movement(delta, offset):
@@ -239,8 +231,7 @@ func _vertical_movement(delta, offset):
 	var speed : float = 5.0 * delta
 	if grabbed_long and control_mode_dampener > 0:
 		speed = 2.5 * delta
-	#position.y = lerp(position.y, target_y, speed)
-	integrate_pos_offset = Vector3(0, lerp(position.y, target_y, speed), 0)
+	position.y = lerp(position.y, target_y, speed)
 
 
 func _rotate_movement(delta):
@@ -272,10 +263,6 @@ func _rotate_movement(delta):
 
 
 func _physics_process(delta):
-	## Initial Reset of integrate values
-	integrate_pos_offset = Vector3.ZERO
-	integrate_rot_axis = Vector3.ZERO
-	integrate_rot_angle = 0.0
 	## Checking to see if mouse is being held down on object, and neither \
 	## the quick drag or hold and control thresholds have been reached.
 	if grabbing and (!grabbed_fast and !grabbed_long):
@@ -304,12 +291,14 @@ func _physics_process(delta):
 		control_mode_dampener -= 1
 
 
+## Integrate forces to prevent sinking down or accumulating gravity while
+## manipulating transform.
+## Freeze = true is also an option, however it completely shuts down all forces.
 func _integrate_forces(state : PhysicsDirectBodyState3D):
-	var t3d : Transform3D = state.get_transform()
-	print("RUNNING")
-	if integrate_pos_offset != Vector3.ZERO:
-		print("pos before: ", t3d.origin, " offset: ", integrate_pos_offset)
-		state.set_transform(t3d.translated(integrate_pos_offset))
-		print("pos after: ", state.get_transform().origin)
-	if integrate_rot_angle != 0.0:
-		state.set_transform(t3d.rotated(integrate_rot_axis, integrate_rot_angle))
+	if grabbed_fast or grabbed_long:
+		var linear = state.get_linear_velocity()
+		state.set_linear_velocity(Vector3(
+			linear.x,
+			lerp(linear.y, 0.0, 0.223),
+			linear.z
+		))
