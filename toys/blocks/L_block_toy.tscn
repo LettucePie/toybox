@@ -13,6 +13,8 @@ size = Vector3(2.01117, 3.99857, 1.92468)
 size = Vector3(3.97433, 1.99228, 1.96332)
 
 [node name="L_block_toy" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+mass = 0.6
 physics_material_override = SubResource("PhysicsMaterial_f65vf")
 script = ExtResource("1_ennbn")
 
