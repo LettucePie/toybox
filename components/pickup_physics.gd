@@ -223,6 +223,7 @@ func _translate_movement(delta, offset):
 		var speed : float = 5.0 * delta
 		if grabbed_long and control_mode_dampener > 0:
 			speed = 2.5 * delta
+		## TODO Somehow replace position manipulation with proper force/impulse
 		position = position.lerp(flattened_target, speed)
 
 
@@ -295,10 +296,6 @@ func _physics_process(delta):
 ## manipulating transform.
 ## Freeze = true is also an option, however it completely shuts down all forces.
 func _integrate_forces(state : PhysicsDirectBodyState3D):
-	if grabbed_fast or grabbed_long:
-		var linear = state.get_linear_velocity()
-		state.set_linear_velocity(Vector3(
-			linear.x,
-			lerp(linear.y, 0.0, 0.223),
-			linear.z
-		))
+	if grabbed_fast or grabbed_long or menu_mode:
+		state.set_linear_velocity(Vector3.ZERO)
+		state.set_angular_velocity(Vector3.ZERO)
