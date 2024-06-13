@@ -50,7 +50,11 @@ func load_toy(toy_name : String):
 	new_instance.menu_instance.set_toy_objects(new_instance.objects)
 
 
-func add_toy_object(toy_object : PackedScene, from : ToyUI):
+## Instantiates the toy object and connects it to the room and toy menu.
+## Returns the newly instanced variable for shortcut purposes.
+## Returns null if it failed to add the toy object, so debug help i guess.
+func add_toy_object(toy_object : PackedScene, from : ToyUI) -> Node:
+	var result = null
 	print("Adding Toy: ", toy_object, " from: ", from)
 	var instance : ToyInstance = find_instance_by_menu(from)
 	if instance != null:
@@ -61,8 +65,10 @@ func add_toy_object(toy_object : PackedScene, from : ToyUI):
 		instance.objects.append(new_toy_object)
 		room.add_toy_object(new_toy_object, instance.random_id, target_position)
 		instance.menu_instance.add_toy_object(new_toy_object)
+		result = new_toy_object
 	else:
 		print("ERROR: Cannot add ToyObject to null ToyInstance")
+	return result
 
 
 ## This function is meant to be reached from the Play UI.

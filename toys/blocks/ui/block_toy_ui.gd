@@ -2,14 +2,12 @@ extends ToyUI
 
 ## UI Setup
 @export var block_scenes : Array[PackedScene]
-@export var block_names : PackedStringArray = [
-	"Cube",
-	"Half",
-	"Corner"
-]
+@export var block_names : PackedStringArray
 @export var block_button_container : Container
 
 ## Dynamic Settings
+@export var block_material : BaseMaterial3D
+@export var block_color_pallete : Array[Color]
 var random_colors : bool = false
 
 ## Block Selection
@@ -91,7 +89,15 @@ func block_deselected(block : PickupPhysics):
 func spawn_block_button(id : String):
 	print("Block_Toy_UI spawning block: ", id)
 	if is_play_connected() and block_names.has(id):
-		play_node.add_toy_object(block_scenes[block_names.find(id)], self)
+		var new_block = play_node.add_toy_object(
+			block_scenes[block_names.find(id)], self)
+		print(new_block)
+		if new_block != null \
+		and new_block is PickupPhysics \
+		and random_colors:
+			print("Recoloring on entry")
+			block_color_pallete.shuffle()
+			set_block_material(new_block, block_color_pallete[0])
 
 
 func display_block_stats():
@@ -137,4 +143,32 @@ func set_block_scale(value : float):
 	print("BlockToyUI Setting block scale: ", value)
 	current_block.set_scale(Vector3(value, value, value))
 	display_block_stats()
+
+
+func set_block_material(block : PickupPhysics, color : Color):
+	var new_mat : BaseMaterial3D = block_material.duplicate()
+	new_mat.albedo_color = color
+	for child in block.get_children():
+		if child is MeshInstance3D:
+			child.set_surface_override_material(0, new_mat)
+		else:
+			if child.get_child_count() > 0:
+				for sub_child in child.get_children():
+					if sub_child is MeshInstance3D:
+						sub_child.set_surface_override_material(0, new_mat)
+
+
+func _on_random_colors_toggled(toggled_on):
+	random_colors = toggled_on
+	var blocks = null
+	if has_toy_objects():
+		blocks = get_toy_objects()
+	if toggled_on and blocks != null:
+		randomize()
+		for block in blocks:
+			block_color_pallete.shuffle()
+			set_block_material(block, block_color_pallete[0])
+	elif !toggled_on and blocks != null:
+		for block in blocks:
+			set_block_material(block, Color.WHITE)
 
