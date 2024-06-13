@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://bvdr8hqjwftth"]
+[gd_scene load_steps=8 format=3 uid="uid://bvdr8hqjwftth"]
 
 [ext_resource type="Script" path="res://rooms/room.gd" id="1_5rwtt"]
 [ext_resource type="Script" path="res://rooms/camera_doll.gd" id="1_c2bd5"]
+[ext_resource type="Material" uid="uid://poqdvy8mrw6s" path="res://rooms/materials/play_floor_mat.tres" id="2_erlew"]
 [ext_resource type="Environment" uid="uid://dvkctexm75m4g" path="res://rooms/materials/environment_room_a.tres" id="2_kfhf2"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_rqan4"]
+material = ExtResource("2_erlew")
 size = Vector3(50, 1, 50)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yh6jf"]
