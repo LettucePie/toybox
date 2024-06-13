@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cen2intikceej"]
+[gd_scene load_steps=11 format=3 uid="uid://cen2intikceej"]
 
 [ext_resource type="Script" path="res://toys/blocks/ui/block_toy_ui.gd" id="1_kc1xc"]
 [ext_resource type="Script" path="res://ui/tools/scroll_container_haptics.gd" id="1_qf5sk"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://cnyctpauobynt" path="res://toys/blocks/half_block_toy.tscn" id="3_on3jn"]
 [ext_resource type="PackedScene" uid="uid://dkuuxd0nl1yhi" path="res://toys/blocks/L_block_toy.tscn" id="4_mf3j8"]
 [ext_resource type="Texture2D" uid="uid://b3uetoaqhe2ki" path="res://icon.svg" id="4_o8732"]
+[ext_resource type="PackedScene" uid="uid://dk4clvg0gxl55" path="res://toys/blocks/plank_1x_block_toy.tscn" id="5_te8pl"]
+[ext_resource type="PackedScene" uid="uid://bmsv0phaxelml" path="res://toys/blocks/plank_2x_block_toy.tscn" id="6_pr1vd"]
 
 [node name="block_toy_ui" type="Control" node_paths=PackedStringArray("block_button_container")]
 layout_mode = 3
@@ -17,7 +19,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_kc1xc")
-block_scenes = Array[PackedScene]([ExtResource("2_n6kri"), ExtResource("3_on3jn"), ExtResource("4_mf3j8")])
+block_scenes = Array[PackedScene]([ExtResource("2_n6kri"), ExtResource("3_on3jn"), ExtResource("4_mf3j8"), ExtResource("5_te8pl"), ExtResource("6_pr1vd")])
+block_names = ["Cube", "Half", "Corner", "Plank", "Plank x2"]
 block_button_container = NodePath("scroll_pad_area/options_v/VBoxContainer/scroll_pad_area_blocks/block_lists/HBoxContainer")
 
 [node name="scroll_pad_area" type="Control" parent="." node_paths=PackedStringArray("scroll_container")]
@@ -96,6 +99,18 @@ layout_mode = 2
 manual_assign = true
 manual_icon = ExtResource("4_o8732")
 manual_text = "Corner"
+
+[node name="plank_button" parent="scroll_pad_area/options_v/VBoxContainer/scroll_pad_area_blocks/block_lists/HBoxContainer" instance=ExtResource("3_3g5pa")]
+layout_mode = 2
+manual_assign = true
+manual_icon = ExtResource("4_o8732")
+manual_text = "Plank"
+
+[node name="plank_x2_button" parent="scroll_pad_area/options_v/VBoxContainer/scroll_pad_area_blocks/block_lists/HBoxContainer" instance=ExtResource("3_3g5pa")]
+layout_mode = 2
+manual_assign = true
+manual_icon = ExtResource("4_o8732")
+manual_text = "Plank x2"
 
 [node name="random_colors" type="CheckButton" parent="scroll_pad_area/options_v/VBoxContainer"]
 layout_mode = 2
