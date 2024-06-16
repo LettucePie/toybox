@@ -63,6 +63,7 @@ func grab_object(tf : bool):
 
 
 func hold_object(tf : bool):
+	print("Hold Object: ", tf)
 	if tf:
 		grabbed_long = true
 		menu_mode = true

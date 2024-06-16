@@ -65,6 +65,9 @@ func add_toy_object(toy_object : PackedScene, from : ToyUI) -> Node:
 		instance.objects.append(new_toy_object)
 		room.add_toy_object(new_toy_object, instance.random_id, target_position)
 		instance.menu_instance.add_toy_object(new_toy_object)
+		if new_toy_object is PickupPhysics:
+			new_toy_object.object_grabbed.connect(ui.physics_toy_grabbed)
+			new_toy_object.object_released.connect(ui.physics_toy_released)
 		result = new_toy_object
 	else:
 		print("ERROR: Cannot add ToyObject to null ToyInstance")
