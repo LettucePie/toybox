@@ -33,5 +33,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 physics_object = NodePath("..")
 physics_shapes = [NodePath("../CollisionShape3D"), NodePath("../CollisionShape3D2")]
 down_radius = 3.0
+debugging = true
 
 [editable path="l_block2"]

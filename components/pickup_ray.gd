@@ -9,12 +9,21 @@ class_name PickupRay
 @export var down_distance : float = 20.0
 @export var down_radius : float = 2.0
 
+@export var debugging : bool = false
+var debug_dots : Array = []
+
 var hover_point : float = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_check_setup()
 	_apply_ray_variables()
+	if debugging:
+		for i in $down.max_results:
+			var new_dot = MeshInstance3D.new()
+			new_dot.mesh = SphereMesh.new()
+			self.add_child(new_dot)
+			debug_dots.append(new_dot)
 
 
 func _check_setup():
@@ -44,11 +53,19 @@ func _calculate_hoverpoint():
 	if $down.is_colliding():
 		var largest_value : float = physics_object.position.y - down_distance
 		var valid : bool = false
+		if debugging:
+			for dot in debug_dots:
+				dot.visible = false
 		for col_index in $down.get_collision_count():
 			if $down.get_collision_point(col_index).y > largest_value \
-			and $down.get_collider(col_index) != physics_object:
+			and $down.get_collider(col_index) != physics_object \
+			and !physics_shapes.has($down.get_collider_shape(col_index)):
 				largest_value = $down.get_collision_point(col_index).y
 				valid = true
+			## Debug Tool
+			if debugging:
+				debug_dots[col_index].visible = true
+				debug_dots[col_index].global_position = $down.get_collision_point(col_index)
 		if valid:
 			hover_point = largest_value + hover_height
 		else:

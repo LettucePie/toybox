@@ -10,7 +10,7 @@
 size = Vector3(2, 1, 2)
 
 [node name="arch_block_toy" type="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.61767, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.35356, 0)
 mass = 0.2
 physics_material_override = SubResource("PhysicsMaterial_f65vf")
 script = ExtResource("1_j5hm8")
@@ -83,9 +83,11 @@ shape = SubResource("BoxShape3D_ttaby")
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -2.41519, 0)
 
 [node name="pickup_ray" parent="." node_paths=PackedStringArray("physics_object", "physics_shapes") instance=ExtResource("3_837wc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.20213, 0)
 physics_object = NodePath("..")
 physics_shapes = [NodePath("../Shape"), NodePath("../Shape2"), NodePath("../Shape3"), NodePath("../Shape4"), NodePath("../Shape5"), NodePath("../Shape6"), NodePath("../Shape7"), NodePath("../Shape8"), NodePath("../Shape9"), NodePath("../Shape10"), NodePath("../Shape11"), NodePath("../Shape12"), NodePath("../Shape13"), NodePath("../Shape14"), NodePath("../Shape15"), NodePath("../Shape16")]
-hover_height = 2.5
-down_radius = 5.5
+down_distance = 24.625
+down_radius = 3.275
+debugging = true
 
 [editable path="arch"]
