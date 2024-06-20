@@ -1,4 +1,9 @@
 extends Node3D
+####
+#### Click and Drag mouse to move camera.
+#### Spacebar to save image into screenshot_destination
+#### screenshot_destination must be set manually
+#### Load models/subjects as a child of Stage for stage controls.
 
 @export_global_dir var screenshot_destination = null
 @export var screenshot_name_override : String = ""

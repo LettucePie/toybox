@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cen2intikceej"]
+[gd_scene load_steps=30 format=3 uid="uid://cen2intikceej"]
 
 [ext_resource type="Script" path="res://toys/blocks/ui/block_toy_ui.gd" id="1_kc1xc"]
 [ext_resource type="Script" path="res://ui/tools/scroll_container_haptics.gd" id="1_qf5sk"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://cmkghrca14c7n" path="res://ui/icon_button.tscn" id="3_3g5pa"]
 [ext_resource type="PackedScene" uid="uid://cnyctpauobynt" path="res://toys/blocks/half_block_toy.tscn" id="3_on3jn"]
 [ext_resource type="PackedScene" uid="uid://dkuuxd0nl1yhi" path="res://toys/blocks/L_block_toy.tscn" id="4_mf3j8"]
-[ext_resource type="Texture2D" uid="uid://b3uetoaqhe2ki" path="res://icon.svg" id="4_o8732"]
 [ext_resource type="PackedScene" uid="uid://dk4clvg0gxl55" path="res://toys/blocks/plank_1x_block_toy.tscn" id="5_te8pl"]
 [ext_resource type="PackedScene" uid="uid://bmsv0phaxelml" path="res://toys/blocks/plank_2x_block_toy.tscn" id="6_pr1vd"]
 [ext_resource type="Material" uid="uid://bn3bappcivk57" path="res://toys/blocks/models/materials/wood_block_mat_a.tres" id="7_mge1o"]
@@ -18,6 +17,18 @@
 [ext_resource type="PackedScene" uid="uid://dnuob6ukttok5" path="res://toys/blocks/column_block_toy.tscn" id="11_usb0d"]
 [ext_resource type="PackedScene" uid="uid://b0tms0nypxo7t" path="res://toys/blocks/cylinder_block_toy.tscn" id="12_w7cct"]
 [ext_resource type="PackedScene" uid="uid://cea7i7j78h13h" path="res://toys/blocks/pole_block_toy.tscn" id="13_qnbc3"]
+[ext_resource type="Texture2D" uid="uid://cxgb0ipehnaht" path="res://toys/blocks/ui/basic_block_toy.jpg" id="18_v6ri1"]
+[ext_resource type="Texture2D" uid="uid://dtia7iyilf8q3" path="res://toys/blocks/ui/half_block_toy.jpg" id="19_eoqx0"]
+[ext_resource type="Texture2D" uid="uid://c4hwarv3mk0bb" path="res://toys/blocks/ui/l_block_toy.jpg" id="20_3hnmx"]
+[ext_resource type="Texture2D" uid="uid://dpxxilbbk35xl" path="res://toys/blocks/ui/plank_x1_block_toy_icon.jpg" id="21_trhm5"]
+[ext_resource type="Texture2D" uid="uid://5vd6wikfr1w0" path="res://toys/blocks/ui/plank_x2_block_toy_icon.jpg" id="22_0ddwf"]
+[ext_resource type="Texture2D" uid="uid://d227w7aco8whp" path="res://toys/blocks/ui/arch_block_toy.jpg" id="23_mf740"]
+[ext_resource type="Texture2D" uid="uid://cawm3f2yiao40" path="res://toys/blocks/ui/sheet_block_toy.jpg" id="24_f2yd3"]
+[ext_resource type="Texture2D" uid="uid://bik13y4ni1ma7" path="res://toys/blocks/ui/angle_block_toy.jpg" id="25_0o2by"]
+[ext_resource type="Texture2D" uid="uid://sxg0e8pxwajl" path="res://toys/blocks/ui/ramp_block_toy.jpg" id="26_d4vpx"]
+[ext_resource type="Texture2D" uid="uid://byier80o1vtk7" path="res://toys/blocks/ui/column_block_toy.jpg" id="27_lisst"]
+[ext_resource type="Texture2D" uid="uid://celthdw1henuu" path="res://toys/blocks/ui/cylinder_block_toy_icon.jpg" id="28_fv10w"]
+[ext_resource type="Texture2D" uid="uid://bo6yvmoqxhgs2" path="res://toys/blocks/ui/pole_block_toy.jpg" id="29_16yub"]
 
 [node name="block_toy_ui" type="Control" node_paths=PackedStringArray("block_button_container")]
 layout_mode = 3
@@ -95,73 +106,73 @@ theme_override_constants/separation = 5
 [node name="cube_button" parent="scroll_pad_area/options_v/VBoxContainer/scroll_pad_area_blocks/block_lists/HBoxContainer" instance=ExtResource("3_3g5pa")]
 layout_mode = 2
 manual_assign = true
-manual_icon = ExtResource("4_o8732")
+manual_icon = ExtResource("18_v6ri1")
 manual_text = "Cube"
 
 [node name="half_button" parent="scroll_pad_area/options_v/VBoxContainer/scroll_pad_area_blocks/block_lists/HBoxContainer" instance=ExtResource("3_3g5pa")]
 layout_mode = 2
 manual_assign = true
-manual_icon = ExtResource("4_o8732")
+manual_icon = ExtResource("19_eoqx0")
 manual_text = "Half"
 
 [node name="corner_button" parent="scroll_pad_area/options_v/VBoxContainer/scroll_pad_area_blocks/block_lists/HBoxContainer" instance=ExtResource("3_3g5pa")]
 layout_mode = 2
 manual_assign = true
-manual_icon = ExtResource("4_o8732")
+manual_icon = ExtResource("20_3hnmx")
 manual_text = "Corner"
 
 [node name="plank_button" parent="scroll_pad_area/options_v/VBoxContainer/scroll_pad_area_blocks/block_lists/HBoxContainer" instance=ExtResource("3_3g5pa")]
 layout_mode = 2
 manual_assign = true
-manual_icon = ExtResource("4_o8732")
+manual_icon = ExtResource("21_trhm5")
 manual_text = "Plank"
 
 [node name="plank_x2_button" parent="scroll_pad_area/options_v/VBoxContainer/scroll_pad_area_blocks/block_lists/HBoxContainer" instance=ExtResource("3_3g5pa")]
 layout_mode = 2
 manual_assign = true
-manual_icon = ExtResource("4_o8732")
+manual_icon = ExtResource("22_0ddwf")
 manual_text = "Plank x2"
 
 [node name="arch_button" parent="scroll_pad_area/options_v/VBoxContainer/scroll_pad_area_blocks/block_lists/HBoxContainer" instance=ExtResource("3_3g5pa")]
 layout_mode = 2
 manual_assign = true
-manual_icon = ExtResource("4_o8732")
+manual_icon = ExtResource("23_mf740")
 manual_text = "Arch"
 
 [node name="sheet_button" parent="scroll_pad_area/options_v/VBoxContainer/scroll_pad_area_blocks/block_lists/HBoxContainer" instance=ExtResource("3_3g5pa")]
 layout_mode = 2
 manual_assign = true
-manual_icon = ExtResource("4_o8732")
+manual_icon = ExtResource("24_f2yd3")
 manual_text = "Sheet"
 
 [node name="angle_button" parent="scroll_pad_area/options_v/VBoxContainer/scroll_pad_area_blocks/block_lists/HBoxContainer" instance=ExtResource("3_3g5pa")]
 layout_mode = 2
 manual_assign = true
-manual_icon = ExtResource("4_o8732")
+manual_icon = ExtResource("25_0o2by")
 manual_text = "Angle"
 
 [node name="ramp_button" parent="scroll_pad_area/options_v/VBoxContainer/scroll_pad_area_blocks/block_lists/HBoxContainer" instance=ExtResource("3_3g5pa")]
 layout_mode = 2
 manual_assign = true
-manual_icon = ExtResource("4_o8732")
+manual_icon = ExtResource("26_d4vpx")
 manual_text = "Ramp"
 
 [node name="column_button" parent="scroll_pad_area/options_v/VBoxContainer/scroll_pad_area_blocks/block_lists/HBoxContainer" instance=ExtResource("3_3g5pa")]
 layout_mode = 2
 manual_assign = true
-manual_icon = ExtResource("4_o8732")
+manual_icon = ExtResource("27_lisst")
 manual_text = "Column"
 
 [node name="cylinder_button" parent="scroll_pad_area/options_v/VBoxContainer/scroll_pad_area_blocks/block_lists/HBoxContainer" instance=ExtResource("3_3g5pa")]
 layout_mode = 2
 manual_assign = true
-manual_icon = ExtResource("4_o8732")
+manual_icon = ExtResource("28_fv10w")
 manual_text = "Cylinder"
 
 [node name="pole_button" parent="scroll_pad_area/options_v/VBoxContainer/scroll_pad_area_blocks/block_lists/HBoxContainer" instance=ExtResource("3_3g5pa")]
 layout_mode = 2
 manual_assign = true
-manual_icon = ExtResource("4_o8732")
+manual_icon = ExtResource("29_16yub")
 manual_text = "Pole"
 
 [node name="random_colors" type="CheckButton" parent="scroll_pad_area/options_v/VBoxContainer"]

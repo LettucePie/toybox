@@ -88,6 +88,5 @@ physics_object = NodePath("..")
 physics_shapes = [NodePath("../Shape"), NodePath("../Shape2"), NodePath("../Shape3"), NodePath("../Shape4"), NodePath("../Shape5"), NodePath("../Shape6"), NodePath("../Shape7"), NodePath("../Shape8"), NodePath("../Shape9"), NodePath("../Shape10"), NodePath("../Shape11"), NodePath("../Shape12"), NodePath("../Shape13"), NodePath("../Shape14"), NodePath("../Shape15"), NodePath("../Shape16")]
 down_distance = 24.625
 down_radius = 3.275
-debugging = true
 
 [editable path="arch"]

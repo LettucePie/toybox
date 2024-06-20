@@ -1,9 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://hg34auie84ci"]
+[gd_scene load_steps=18 format=3 uid="uid://hg34auie84ci"]
 
 [ext_resource type="Script" path="res://rooms/photobooth.gd" id="1_8vj5u"]
 [ext_resource type="Material" uid="uid://poqdvy8mrw6s" path="res://rooms/materials/play_floor_mat.tres" id="3_h126t"]
 [ext_resource type="Environment" uid="uid://dvkctexm75m4g" path="res://rooms/materials/environment_room_a.tres" id="4_85l82"]
+[ext_resource type="PackedScene" uid="uid://dkuuxd0nl1yhi" path="res://toys/blocks/L_block_toy.tscn" id="5_2loiu"]
+[ext_resource type="PackedScene" uid="uid://wu1tnr2rtjys" path="res://toys/blocks/arch_block_toy.tscn" id="5_bq2pe"]
 [ext_resource type="PackedScene" uid="uid://cv88tkyh53efe" path="res://toys/blocks/basic_block_toy.tscn" id="5_vq3g7"]
+[ext_resource type="PackedScene" uid="uid://d1s7ca2dpij1e" path="res://toys/blocks/ramp_block_toy.tscn" id="6_p1ul7"]
+[ext_resource type="PackedScene" uid="uid://cea7i7j78h13h" path="res://toys/blocks/pole_block_toy.tscn" id="7_3oge8"]
+[ext_resource type="PackedScene" uid="uid://cnyctpauobynt" path="res://toys/blocks/half_block_toy.tscn" id="7_nh62g"]
+[ext_resource type="PackedScene" uid="uid://f70evfcqu67v" path="res://toys/blocks/angle_block_toy.tscn" id="9_b3uj7"]
+[ext_resource type="PackedScene" uid="uid://byn3qw3jtktoi" path="res://toys/blocks/sheet_block_toy.tscn" id="11_sb8kq"]
+[ext_resource type="PackedScene" uid="uid://dnuob6ukttok5" path="res://toys/blocks/column_block_toy.tscn" id="12_w0x6u"]
+[ext_resource type="PackedScene" uid="uid://b0tms0nypxo7t" path="res://toys/blocks/cylinder_block_toy.tscn" id="13_vl0f1"]
+[ext_resource type="PackedScene" uid="uid://dk4clvg0gxl55" path="res://toys/blocks/plank_1x_block_toy.tscn" id="14_7a6jw"]
+[ext_resource type="PackedScene" uid="uid://bmsv0phaxelml" path="res://toys/blocks/plank_2x_block_toy.tscn" id="15_j51rb"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_rqan4"]
 material = ExtResource("3_h126t")
@@ -15,6 +26,8 @@ size = Vector3(200, 1, 200)
 [node name="photobooth" type="Node3D"]
 script = ExtResource("1_8vj5u")
 screenshot_destination = "/home/matthew/Projects/Godot4/toybox_screenshots"
+screenshot_name_override = "toyblocks"
+spin_stage = false
 
 [node name="room_a" type="Node3D" parent="."]
 
@@ -45,8 +58,64 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 21.446)
 
 [node name="Stage" type="Node3D" parent="."]
 
+[node name="L_block_toy" parent="Stage" instance=ExtResource("5_2loiu")]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50941, 0)
+visible = false
+
+[node name="arch_block_toy" parent="Stage" instance=ExtResource("5_bq2pe")]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0458, 0)
+visible = false
+
+[node name="half_block_toy" parent="Stage" instance=ExtResource("7_nh62g")]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27256, 0)
+visible = false
+
+[node name="pole_block_toy" parent="Stage" instance=ExtResource("7_3oge8")]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6487, 0)
+visible = false
+
+[node name="ramp_block_toy" parent="Stage" instance=ExtResource("6_p1ul7")]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.64441, 0)
+visible = false
+
+[node name="angle_block_toy" parent="Stage" instance=ExtResource("9_b3uj7")]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.70609, 0)
+visible = false
+
 [node name="basic_block_toy" parent="Stage" instance=ExtResource("5_vq3g7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5535, 0)
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6836, 0)
+visible = false
+
+[node name="sheet_block_toy" parent="Stage" instance=ExtResource("11_sb8kq")]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.994011, 0)
+visible = false
+
+[node name="column_block_toy" parent="Stage" instance=ExtResource("12_w0x6u")]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.71424, 0)
+visible = false
+
+[node name="cylinder_block_toy" parent="Stage" instance=ExtResource("13_vl0f1")]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.70807, 0)
+visible = false
+
+[node name="plank_1x_block_toy" parent="Stage" instance=ExtResource("14_7a6jw")]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12289, 0)
+
+[node name="plank_2x_block_toy" parent="Stage" instance=ExtResource("15_j51rb")]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2022, 0)
+visible = false
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = -1
