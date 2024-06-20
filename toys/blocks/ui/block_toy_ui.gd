@@ -92,12 +92,12 @@ func spawn_block_button(id : String):
 		var new_block = play_node.add_toy_object(
 			block_scenes[block_names.find(id)], self)
 		print(new_block)
-		if new_block != null \
-		and new_block is PickupPhysics \
-		and random_colors:
-			print("Recoloring on entry")
-			block_color_pallete.shuffle()
-			set_block_material(new_block, block_color_pallete[0])
+		if new_block != null and new_block is PickupPhysics:
+			_indoctrinate_blocks([new_block])
+			if random_colors:
+				print("Recoloring on entry")
+				block_color_pallete.shuffle()
+				set_block_material(new_block, block_color_pallete[0])
 
 
 func display_block_stats():
