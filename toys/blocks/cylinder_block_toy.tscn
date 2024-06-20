@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0tms0nypxo7t"]
+
+[ext_resource type="Script" path="res://components/pickup_physics.gd" id="1_8m2o7"]
+[ext_resource type="PackedScene" uid="uid://bujev5ndkh6pg" path="res://components/pickup_ray.tscn" id="2_mkf8f"]
+[ext_resource type="PackedScene" uid="uid://dhym10h4g57iv" path="res://toys/blocks/models/cylinder.glb" id="3_xmpqf"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f65vf"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_e2ebx"]
+height = 4.0
+radius = 1.0
+
+[node name="cylinder_block_toy" type="RigidBody3D"]
+mass = 0.4
+physics_material_override = SubResource("PhysicsMaterial_f65vf")
+script = ExtResource("1_8m2o7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_e2ebx")
+
+[node name="pickup_ray" parent="." node_paths=PackedStringArray("physics_object", "physics_shapes") instance=ExtResource("2_mkf8f")]
+physics_object = NodePath("..")
+physics_shapes = [NodePath("../CollisionShape3D")]
+hover_height = 2.5
+down_radius = 3.5
+
+[node name="cylinder" parent="." instance=ExtResource("3_xmpqf")]

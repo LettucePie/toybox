@@ -6,16 +6,16 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f65vf"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_rch6e"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_l7sl0"]
 points = PackedVector3Array(-1, -1, -1, 1, -1, -1, 1, -1, 1, -1, -1, 1, 1, 1, 1, 1, 1, -1)
 
 [node name="angle_block_toy" type="RigidBody3D"]
-mass = 0.2
+mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_f65vf")
 script = ExtResource("1_os8ay")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("ConvexPolygonShape3D_rch6e")
+shape = SubResource("ConvexPolygonShape3D_l7sl0")
 
 [node name="angle" parent="." instance=ExtResource("2_3jtq8")]
 

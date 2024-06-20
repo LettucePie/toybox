@@ -11,7 +11,7 @@ size = Vector3(2, 1, 2)
 
 [node name="arch_block_toy" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.35356, 0)
-mass = 0.2
+mass = 0.5
 physics_material_override = SubResource("PhysicsMaterial_f65vf")
 script = ExtResource("1_j5hm8")
 

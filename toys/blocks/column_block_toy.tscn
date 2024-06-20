@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://dnuob6ukttok5"]
+
+[ext_resource type="Script" path="res://components/pickup_physics.gd" id="1_pgggr"]
+[ext_resource type="PackedScene" uid="uid://bujev5ndkh6pg" path="res://components/pickup_ray.tscn" id="3_4bdwx"]
+[ext_resource type="PackedScene" uid="uid://rruap2pnvii7" path="res://toys/blocks/models/column.glb" id="3_asv5t"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f65vf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_imuhp"]
+size = Vector3(2, 8, 2)
+
+[node name="column_block_toy" type="RigidBody3D"]
+mass = 0.6
+physics_material_override = SubResource("PhysicsMaterial_f65vf")
+script = ExtResource("1_pgggr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_imuhp")
+
+[node name="pickup_ray" parent="." node_paths=PackedStringArray("physics_object", "physics_shapes") instance=ExtResource("3_4bdwx")]
+physics_object = NodePath("..")
+physics_shapes = [NodePath("../CollisionShape3D")]
+hover_height = 2.5
+down_radius = 4.0
+
+[node name="column" parent="." instance=ExtResource("3_asv5t")]

@@ -11,7 +11,7 @@
 size = Vector3(6, 0.5, 8)
 
 [node name="sheet_block_toy" type="RigidBody3D"]
-mass = 0.2
+mass = 0.3
 physics_material_override = SubResource("PhysicsMaterial_f65vf")
 script = ExtResource("1_lcdb4")
 

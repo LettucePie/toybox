@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://cea7i7j78h13h"]
+
+[ext_resource type="Script" path="res://components/pickup_physics.gd" id="1_gmp7p"]
+[ext_resource type="PackedScene" uid="uid://bujev5ndkh6pg" path="res://components/pickup_ray.tscn" id="2_0nsey"]
+[ext_resource type="PackedScene" uid="uid://bfd52nw87uxvo" path="res://toys/blocks/models/pole.glb" id="3_ce5lk"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f65vf"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_guy3m"]
+height = 8.0
+radius = 1.0
+
+[node name="pole_block_toy" type="RigidBody3D"]
+mass = 0.5
+physics_material_override = SubResource("PhysicsMaterial_f65vf")
+script = ExtResource("1_gmp7p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_guy3m")
+
+[node name="pickup_ray" parent="." node_paths=PackedStringArray("physics_object", "physics_shapes") instance=ExtResource("2_0nsey")]
+physics_object = NodePath("..")
+physics_shapes = [NodePath("../CollisionShape3D")]
+hover_height = 2.5
+down_radius = 6.0
+
+[node name="pole" parent="." instance=ExtResource("3_ce5lk")]

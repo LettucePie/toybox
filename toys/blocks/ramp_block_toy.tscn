@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://d1s7ca2dpij1e"]
+
+[ext_resource type="Script" path="res://components/pickup_physics.gd" id="1_7lgu2"]
+[ext_resource type="PackedScene" uid="uid://c0ltlygfwxecl" path="res://toys/blocks/models/ramp.glb" id="2_odup2"]
+[ext_resource type="PackedScene" uid="uid://bujev5ndkh6pg" path="res://components/pickup_ray.tscn" id="3_yt0c3"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f65vf"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5bel7"]
+points = PackedVector3Array(-2, -1, -1, 2, -1, -1, 2, -1, 1, -2, -1, 1, 2, 1, 1, 2, 1, -1)
+
+[node name="ramp_block_toy" type="RigidBody3D"]
+mass = 0.3
+physics_material_override = SubResource("PhysicsMaterial_f65vf")
+script = ExtResource("1_7lgu2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_5bel7")
+
+[node name="ramp" parent="." instance=ExtResource("2_odup2")]
+
+[node name="pickup_ray" parent="." node_paths=PackedStringArray("physics_object", "physics_shapes") instance=ExtResource("3_yt0c3")]
+physics_object = NodePath("..")
+physics_shapes = [NodePath("../CollisionShape3D")]
+hover_height = 2.5
+down_radius = 4.0
