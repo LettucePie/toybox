@@ -7,10 +7,11 @@ signal object_released(object)
 ## Usersetting variables
 ## Quick Drag is the function to pickup and immediately move something.
 ## It will also use the PickupRay component if one is attached.
-var quick_drag : bool = true
+@export var quick_drag : bool = true
 ## How far you have to drag within the grab_fast timeframe to activate \
 ## Quick Drag.
-var quick_drag_sensitivity : int = 112
+@export var quick_drag_sensitivity : int = 112
+@export var acknowledge_floor : bool = true
 
 ## Input -> Process variables
 var grabbing : bool = false
@@ -35,11 +36,16 @@ var rotate_only : bool = false
 
 func _ready():
 	_connect_signals()
+	if acknowledge_floor:
+		contact_monitor = true
+		max_contacts_reported = 6
 
 
 func _connect_signals():
 	if !input_event.is_connected(self._on_input_event):
 		input_event.connect(self._on_input_event)
+	if !body_entered.is_connected(self._body_entered):
+		body_entered.connect(self._body_entered)
 
 
 ####
@@ -271,7 +277,9 @@ func _physics_process(delta):
 		var hold_time : int = Time.get_ticks_msec() - grab_time
 		var drag_distance : float = get_viewport().get_mouse_position()\
 		.distance_squared_to(grab_mouse_pos)
-		if drag_distance >= quick_drag_sensitivity and hold_time > 60:
+		if drag_distance >= quick_drag_sensitivity \
+		and hold_time > 60 \
+		and quick_drag:
 			grab_object(true)
 		elif drag_distance < quick_drag_sensitivity and hold_time > 120:
 			hold_object(true)
@@ -300,3 +308,10 @@ func _integrate_forces(state : PhysicsDirectBodyState3D):
 	if grabbed_fast or grabbed_long or menu_mode:
 		state.set_linear_velocity(Vector3.ZERO)
 		state.set_angular_velocity(Vector3.ZERO)
+
+
+func _body_entered(body : Node):
+	print("Body Entered: ", body)
+	if vertical_only and body.is_in_group("floor"):
+		print("Hit Floor! stop Vertical!")
+		min_y = global_position.y
