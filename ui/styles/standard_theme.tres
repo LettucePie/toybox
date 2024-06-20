@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bukwxiqumk1jo"]
+
+[ext_resource type="FontFile" uid="uid://mr53p8r7d1a4" path="res://third_party/kenney_nl/Fonts/Kenney Thick.ttf" id="1_huvhx"]
+
+[resource]
+default_font = ExtResource("1_huvhx")

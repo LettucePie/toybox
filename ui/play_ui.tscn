@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://4ypddxy4wwie"]
+[gd_scene load_steps=13 format=3 uid="uid://4ypddxy4wwie"]
 
 [ext_resource type="Script" path="res://ui/tools/scroll_pad_area.gd" id="1_fk7r4"]
+[ext_resource type="Theme" uid="uid://bukwxiqumk1jo" path="res://ui/styles/standard_theme.tres" id="1_oat7j"]
 [ext_resource type="Script" path="res://ui/play_ui.gd" id="1_ucswn"]
 [ext_resource type="Script" path="res://ui/tools/scroll_container_haptics.gd" id="2_8rjpd"]
 [ext_resource type="PackedScene" uid="uid://ba0uwf0hm8sfe" path="res://ui/toy_listing.tscn" id="2_aus8r"]
@@ -20,6 +21,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("1_oat7j")
 script = ExtResource("1_ucswn")
 toy_listing = ExtResource("2_aus8r")
 

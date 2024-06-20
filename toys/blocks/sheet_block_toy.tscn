@@ -27,7 +27,6 @@ shape = SubResource("BoxShape3D_wykyx")
 [node name="pickup_ray" parent="." node_paths=PackedStringArray("physics_object", "physics_shapes") instance=ExtResource("3_cjg2i")]
 physics_object = NodePath("..")
 physics_shapes = [NodePath("../CollisionShape")]
-hover_height = 2.5
 down_radius = 8.0
 
 [editable path="sheet"]
