@@ -163,13 +163,12 @@ func physics_toy_grabbed(toy : PickupPhysics, held : bool):
 
 func physics_toy_released(toy: PickupPhysics):
 	if physics_toy == toy and current_control != "quick-drag":
-		physics_toy.set_control_mode("clear", false)
+		physics_toy.set_control_mode("clear")
 		if current_control == "translate" \
 		or current_control == "vertical" \
 		or current_control == "rotate":
 			physics_popup.show()
 			_position_physics_popup()
-			toy.mouse_offset = Vector2.ZERO
 			#toy.grab_mouse_pos = get_local_mouse_position()
 			current_control = ""
 		if current_control == "confirm":
@@ -184,7 +183,7 @@ func _forward_control_to_physics_toy(control : String):
 	if control != "":
 		current_control = control
 		physics_popup.hide()
-		physics_toy.set_control_mode(control, true)
+		physics_toy.set_control_mode(control)
 		get_viewport().set_input_as_handled()
 		if control == "confirm":
 			physics_toy.hold_object(false)
