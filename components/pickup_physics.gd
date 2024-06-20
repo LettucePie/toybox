@@ -96,6 +96,7 @@ func set_control_mode(mode : String):
 		rotate_only = false
 	elif mode == "vertical":
 		_find_min_max_y()
+		freeze = false
 		translate_only = false
 		vertical_only = true
 		rotate_only = false
@@ -204,6 +205,7 @@ func _input(event):
 			## Call Hold_object(false) when done with menu.
 			## until then only emit the release signal.
 			emit_signal("object_released", self)
+			freeze = true
 			translate_only = false
 			vertical_only = false
 			rotate_only = false
@@ -234,7 +236,8 @@ func _translate_movement(delta):
 
 
 func _vertical_movement(delta):
-	target_y = lerp(min_y, max_y, _get_y_percent(min_y, max_y))
+	target_y = clamp(lerp(min_y, max_y, _get_y_percent(min_y, max_y)),
+		min_y, max_y)
 	var speed : float = 5.0 * delta
 	if grabbed_long and control_mode_dampener > 0:
 		speed = 2.5 * delta
@@ -311,7 +314,6 @@ func _integrate_forces(state : PhysicsDirectBodyState3D):
 
 
 func _body_entered(body : Node):
-	print("Body Entered: ", body)
-	if vertical_only and body.is_in_group("floor"):
+	if vertical_only and body.is_in_group("floor") and acknowledge_floor:
 		print("Hit Floor! stop Vertical!")
 		min_y = global_position.y
