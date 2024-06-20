@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://hg34auie84ci"]
+
+[ext_resource type="Script" path="res://rooms/photobooth.gd" id="1_8vj5u"]
+[ext_resource type="Material" uid="uid://poqdvy8mrw6s" path="res://rooms/materials/play_floor_mat.tres" id="3_h126t"]
+[ext_resource type="Environment" uid="uid://dvkctexm75m4g" path="res://rooms/materials/environment_room_a.tres" id="4_85l82"]
+[ext_resource type="PackedScene" uid="uid://cv88tkyh53efe" path="res://toys/blocks/basic_block_toy.tscn" id="5_vq3g7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_rqan4"]
+material = ExtResource("3_h126t")
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yh6jf"]
+size = Vector3(200, 1, 200)
+
+[node name="photobooth" type="Node3D"]
+script = ExtResource("1_8vj5u")
+screenshot_destination = "/home/matthew/Projects/Godot4/toybox_screenshots"
+
+[node name="room_a" type="Node3D" parent="."]
+
+[node name="floor" type="MeshInstance3D" parent="room_a"]
+mesh = SubResource("BoxMesh_rqan4")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="room_a/floor" groups=["floor"]]
+collision_layer = 17
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="room_a/floor/StaticBody3D"]
+shape = SubResource("BoxShape3D_yh6jf")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="room_a"]
+environment = ExtResource("4_85l82")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="room_a"]
+transform = Transform3D(1, 0, 0, 0, -0.197828, 0.980237, 0, -0.980237, -0.197828, 0, 0, 0)
+shadow_enabled = true
+
+[node name="pivot" type="Node3D" parent="."]
+transform = Transform3D(0.735423, 0, 0.677608, 0, 1, 0, -0.677608, 0, 0.735423, 0, 0, 0)
+
+[node name="dial" type="Node3D" parent="pivot"]
+transform = Transform3D(1, -2.98023e-08, 0, 0, 0.787129, 0.616789, 0, -0.616789, 0.787129, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="pivot/dial"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 21.446)
+
+[node name="Stage" type="Node3D" parent="."]
+
+[node name="basic_block_toy" parent="Stage" instance=ExtResource("5_vq3g7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5535, 0)
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = -1
+anchor_top = 0.945
+anchor_right = 0.38
+anchor_bottom = 1.0
+offset_top = -0.200073
+offset_right = -0.200012
+grow_vertical = 0
+
+[connection signal="input_event" from="room_a/floor/StaticBody3D" to="room_a" method="_on_static_body_3d_input_event"]
