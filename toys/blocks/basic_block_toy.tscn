@@ -19,9 +19,8 @@ shape = SubResource("BoxShape3D_rs56t")
 
 [node name="block_x1" parent="." instance=ExtResource("2_0w8t3")]
 
-[node name="pickup_ray" parent="." node_paths=PackedStringArray("physics_object", "physics_shapes") instance=ExtResource("3_s00c6")]
+[node name="pickup_ray" parent="." node_paths=PackedStringArray("physics_object") instance=ExtResource("3_s00c6")]
 physics_object = NodePath("..")
-physics_shapes = [NodePath("../CollisionShape")]
 hover_height = 2.5
 down_radius = 1.5
 

@@ -1,13 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://wu1tnr2rtjys"]
+[gd_scene load_steps=8 format=3 uid="uid://wu1tnr2rtjys"]
 
 [ext_resource type="Script" path="res://components/pickup_physics.gd" id="1_j5hm8"]
 [ext_resource type="PackedScene" uid="uid://8nndaf7yg1bx" path="res://toys/blocks/models/arch.glb" id="2_50lol"]
 [ext_resource type="PackedScene" uid="uid://bujev5ndkh6pg" path="res://components/pickup_ray.tscn" id="3_837wc"]
+[ext_resource type="Script" path="res://components/rotate_lock.gd" id="3_mdaw4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f65vf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ttaby"]
 size = Vector3(2, 1, 2)
+
+[sub_resource type="Curve" id="Curve_jgnrh"]
+_data = [Vector2(0, 0), 0.0, 1.97059, 0, 1, Vector2(0.507463, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.0303, 0.0, 1, 0]
+point_count = 3
 
 [node name="arch_block_toy" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.35356, 0)
@@ -82,11 +87,22 @@ shape = SubResource("BoxShape3D_ttaby")
 [node name="arch" parent="." instance=ExtResource("2_50lol")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -2.41519, 0)
 
-[node name="pickup_ray" parent="." node_paths=PackedStringArray("physics_object", "physics_shapes") instance=ExtResource("3_837wc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.20213, 0)
-physics_object = NodePath("..")
-physics_shapes = [NodePath("../Shape"), NodePath("../Shape2"), NodePath("../Shape3"), NodePath("../Shape4"), NodePath("../Shape5"), NodePath("../Shape6"), NodePath("../Shape7"), NodePath("../Shape8"), NodePath("../Shape9"), NodePath("../Shape10"), NodePath("../Shape11"), NodePath("../Shape12"), NodePath("../Shape13"), NodePath("../Shape14"), NodePath("../Shape15"), NodePath("../Shape16")]
-down_distance = 24.625
-down_radius = 3.275
+[node name="rotate_lock" type="Node3D" parent="."]
+script = ExtResource("3_mdaw4")
+dataset = 1
+datapoint = 2
+min_data = -4.0
+max_data = 4.0
+adjust_curve = SubResource("Curve_jgnrh")
+min_var = 0.5
+max_var = -2.25
+varpoint = 1
+
+[node name="pickup_ray" parent="rotate_lock" node_paths=PackedStringArray("physics_object", "physics_shapes") instance=ExtResource("3_837wc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.27828, 0)
+physics_object = NodePath("../..")
+physics_shapes = [NodePath("../../Shape"), NodePath("../../Shape2"), NodePath("../../Shape3"), NodePath("../../Shape4"), NodePath("../../Shape5"), NodePath("../../Shape6"), NodePath("../../Shape7"), NodePath("../../Shape8"), NodePath("../../Shape9"), NodePath("../../Shape10"), NodePath("../../Shape11"), NodePath("../../Shape12"), NodePath("../../Shape13"), NodePath("../../Shape14"), NodePath("../../Shape15"), NodePath("../../Shape16")]
+hover_height = 5.0
+down_radius = 5.0
 
 [editable path="arch"]

@@ -1,13 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://bujev5ndkh6pg"]
+[gd_scene load_steps=6 format=3 uid="uid://bujev5ndkh6pg"]
 
 [ext_resource type="Script" path="res://components/pickup_ray.gd" id="1_p34pj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_433je"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xiw23"]
+albedo_color = Color(0, 0, 1, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_dxcci"]
 resource_local_to_scene = true
 height = 40.0
 
+[sub_resource type="TorusMesh" id="TorusMesh_3132j"]
+inner_radius = 1.412
+outer_radius = 1.894
+
 [node name="pickup_ray" type="Node3D"]
 script = ExtResource("1_p34pj")
+debug_higher_mat = SubResource("StandardMaterial3D_433je")
+debug_lower_mat = SubResource("StandardMaterial3D_xiw23")
 
 [node name="up" type="RayCast3D" parent="."]
 target_position = Vector3(0, 10, 0)
@@ -17,3 +29,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
 shape = SubResource("CylinderShape3D_dxcci")
 target_position = Vector3(0, -20, 0)
 max_results = 6
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="down"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20, 0)
+mesh = SubResource("TorusMesh_3132j")
+skeleton = NodePath("../..")

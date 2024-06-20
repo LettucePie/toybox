@@ -11,6 +11,9 @@ class_name PickupRay
 
 @export var debugging : bool = false
 var debug_dots : Array = []
+@export var debug_higher_mat : StandardMaterial3D
+@export var debug_lower_mat : StandardMaterial3D
+@onready var tube : MeshInstance3D = $down/MeshInstance3D
 
 var hover_point : float = 0.0
 
@@ -18,12 +21,14 @@ var hover_point : float = 0.0
 func _ready():
 	_check_setup()
 	_apply_ray_variables()
+	tube.hide()
 	if debugging:
 		for i in $down.max_results:
 			var new_dot = MeshInstance3D.new()
 			new_dot.mesh = SphereMesh.new()
 			self.add_child(new_dot)
 			debug_dots.append(new_dot)
+			tube.show()
 
 
 func _check_setup():
@@ -47,11 +52,19 @@ func _apply_ray_variables():
 	$down.target_position = Vector3(0, -down_distance, 0)
 	$down.shape.height = down_distance * 2
 	$down.shape.radius = down_radius
+	$down.max_results = physics_shapes.size() + 6
+
+
+func _is_collision_local_shape(collider, shape_id) -> bool:
+	var result = false
+	var owner_id = collider.shape_find_owner(shape_id)
+	result = physics_shapes.has(collider.shape_owner_get_owner(owner_id))
+	return result
 
 
 func _calculate_hoverpoint():
 	if $down.is_colliding():
-		var largest_value : float = physics_object.position.y - down_distance
+		var largest_value : float = global_position.y - down_distance
 		var valid : bool = false
 		if debugging:
 			for dot in debug_dots:
@@ -59,13 +72,23 @@ func _calculate_hoverpoint():
 		for col_index in $down.get_collision_count():
 			if $down.get_collision_point(col_index).y > largest_value \
 			and $down.get_collider(col_index) != physics_object \
-			and !physics_shapes.has($down.get_collider_shape(col_index)):
+			and !_is_collision_local_shape(
+				$down.get_collider(col_index), 
+				$down.get_collider_shape(col_index)):
 				largest_value = $down.get_collision_point(col_index).y
 				valid = true
 			## Debug Tool
 			if debugging:
 				debug_dots[col_index].visible = true
 				debug_dots[col_index].global_position = $down.get_collision_point(col_index)
+				if debug_dots[col_index].global_position.y > global_position.y:
+					debug_dots[col_index].set_surface_override_material(
+						0,
+						debug_higher_mat)
+				else:
+					debug_dots[col_index].set_surface_override_material(
+						0,
+						debug_lower_mat)
 		if valid:
 			hover_point = largest_value + hover_height
 		else:
