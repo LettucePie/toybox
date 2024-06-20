@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://f70evfcqu67v"]
+
+[ext_resource type="Script" path="res://components/pickup_physics.gd" id="1_os8ay"]
+[ext_resource type="PackedScene" uid="uid://bk8gfcn7w26k6" path="res://toys/blocks/models/angle.glb" id="2_3jtq8"]
+[ext_resource type="PackedScene" uid="uid://bujev5ndkh6pg" path="res://components/pickup_ray.tscn" id="4_3x3mo"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f65vf"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_rch6e"]
+points = PackedVector3Array(-1, -1, -1, 1, -1, -1, 1, -1, 1, -1, -1, 1, 1, 1, 1, 1, 1, -1)
+
+[node name="angle_block_toy" type="RigidBody3D"]
+mass = 0.2
+physics_material_override = SubResource("PhysicsMaterial_f65vf")
+script = ExtResource("1_os8ay")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_rch6e")
+
+[node name="angle" parent="." instance=ExtResource("2_3jtq8")]
+
+[node name="pickup_ray" parent="." node_paths=PackedStringArray("physics_object", "physics_shapes") instance=ExtResource("4_3x3mo")]
+physics_object = NodePath("..")
+physics_shapes = [NodePath("../CollisionShape3D")]
+hover_height = 2.5
+
+[editable path="angle"]
