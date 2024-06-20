@@ -144,7 +144,7 @@ manual_text = "Angle"
 layout_mode = 2
 manual_assign = true
 manual_icon = ExtResource("4_o8732")
-manual_text = "Angle"
+manual_text = "Ramp"
 
 [node name="column_button" parent="scroll_pad_area/options_v/VBoxContainer/scroll_pad_area_blocks/block_lists/HBoxContainer" instance=ExtResource("3_3g5pa")]
 layout_mode = 2
