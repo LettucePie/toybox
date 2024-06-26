@@ -8,6 +8,12 @@ class_name PlayUI
 @export var toybox : Toybox
 @export var toy_listing : PackedScene
 
+## UI Assets
+@export var arrow_left : Texture2D
+@export var arrow_right : Texture2D
+@export var arrow_down : Texture2D
+@export var arrow_up : Texture2D
+
 ## Animation Stuff
 #@onready var side_anim : AnimationPlayer = $side_drawer/AnimationPlayer
 #@onready var bottom_anim : AnimationPlayer = $bottom_drawer/AnimationPlayer
