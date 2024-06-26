@@ -1,11 +1,20 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://bukwxiqumk1jo"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://bukwxiqumk1jo"]
 
-[ext_resource type="Texture2D" uid="uid://bdlg45gs8tk4b" path="res://ui/styles/standard_theme_toggle_button_on.png" id="1_bql64"]
+[ext_resource type="Texture2D" uid="uid://bdlg45gs8tk4b" path="res://ui/styles/standard_theme/assets/standard_theme_toggle_button_on.png" id="1_bql64"]
+[ext_resource type="StyleBox" uid="uid://vagp1u60g2ac" path="res://ui/styles/standard_theme/styleboxes/button_disabled_stylebox_texture.tres" id="1_dck6o"]
 [ext_resource type="FontFile" uid="uid://mr53p8r7d1a4" path="res://third_party/kenney_nl/Fonts/Kenney Thick.ttf" id="1_huvhx"]
-[ext_resource type="Texture2D" uid="uid://rajkl0ois81t" path="res://ui/styles/standard_theme_toggle_button_off.png" id="2_ycrne"]
+[ext_resource type="StyleBox" uid="uid://hqhf8h28jh74" path="res://ui/styles/standard_theme/styleboxes/button_focus_stylebox_texture.tres" id="2_5qa03"]
+[ext_resource type="Texture2D" uid="uid://rajkl0ois81t" path="res://ui/styles/standard_theme/assets/standard_theme_toggle_button_off.png" id="2_ycrne"]
+[ext_resource type="StyleBox" uid="uid://d08mcbha3lbg" path="res://ui/styles/standard_theme/styleboxes/button_normal_stylebox_texture.tres" id="3_xvxbb"]
+[ext_resource type="StyleBox" uid="uid://suavdwk2nih3" path="res://ui/styles/standard_theme/styleboxes/button_pressed_stylebox_texture.tres" id="4_ou0vh"]
 
 [resource]
 default_font = ExtResource("1_huvhx")
 default_font_size = 12
+Button/styles/disabled = ExtResource("1_dck6o")
+Button/styles/focus = ExtResource("2_5qa03")
+Button/styles/hover = ExtResource("2_5qa03")
+Button/styles/normal = ExtResource("3_xvxbb")
+Button/styles/pressed = ExtResource("4_ou0vh")
 CheckButton/icons/checked = ExtResource("1_bql64")
 CheckButton/icons/unchecked = ExtResource("2_ycrne")

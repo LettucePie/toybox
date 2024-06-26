@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdlg45gs8tk4b"
-path="res://.godot/imported/standard_theme_toggle_button_on.png-fecaf1e42d361e31a49d68872d32e0a5.ctex"
+uid="uid://blewwssc1374c"
+path="res://.godot/imported/standard_theme_arrow_left.png-3ce6fac87b93a94492102d2b265868af.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/styles/standard_theme_toggle_button_on.png"
-dest_files=["res://.godot/imported/standard_theme_toggle_button_on.png-fecaf1e42d361e31a49d68872d32e0a5.ctex"]
+source_file="res://ui/styles/standard_theme/assets/standard_theme_arrow_left.png"
+dest_files=["res://.godot/imported/standard_theme_arrow_left.png-3ce6fac87b93a94492102d2b265868af.ctex"]
 
 [params]
 
