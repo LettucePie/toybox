@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=16 format=3 uid="uid://bukwxiqumk1jo"]
+[gd_resource type="Theme" load_steps=17 format=3 uid="uid://bukwxiqumk1jo"]
 
 [ext_resource type="StyleBox" uid="uid://vagp1u60g2ac" path="res://ui/styles/standard_theme/styleboxes/button_disabled_stylebox_texture.tres" id="1_dck6o"]
 [ext_resource type="FontFile" uid="uid://mr53p8r7d1a4" path="res://third_party/kenney_nl/Fonts/Kenney Thick.ttf" id="1_huvhx"]
@@ -22,6 +22,19 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_db8mb"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w17tf"]
+bg_color = Color(0.25098, 0.352941, 0.713726, 0.780392)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.681357, 0.809724, 0.993806, 1)
+border_blend = true
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
 [resource]
 default_font = ExtResource("1_huvhx")
 default_font_size = 12
@@ -41,3 +54,4 @@ CheckButton/styles/pressed = SubResource("StyleBoxEmpty_db8mb")
 CheckButton_2x/base_type = &"CheckButton"
 CheckButton_2x/icons/checked = ExtResource("7_h4qrp")
 CheckButton_2x/icons/unchecked = ExtResource("8_quuh7")
+Panel/styles/panel = SubResource("StyleBoxFlat_w17tf")
