@@ -206,8 +206,10 @@ func _ready_position():
 	$bottom_drawer.show_hide(bottom_drawer_visible)
 	$side_drawer.show_hide(side_drawer_visible)
 	## TODO replace with icons
-	side_show_hide.text = "Hide"
-	bottom_show_hide.text = "Show"
+	#side_show_hide.text = "Hide"
+	side_show_hide.icon = arrow_left
+	#bottom_show_hide.text = "Show"
+	bottom_show_hide.icon = arrow_up
 
 
 func _connect_buttons():
@@ -233,27 +235,33 @@ func _show_hide(drawer : Button):
 			bottom_drawer_visible = false
 			## TODO replace text with icons
 			## Maybe put icons in animationplayer
-			bottom_show_hide.text = "Show"
+			#bottom_show_hide.text = "Show"
+			bottom_show_hide.icon = arrow_up
 			$bottom_drawer.show_hide(bottom_drawer_visible)
 		else:
 			bottom_drawer_visible = true
-			bottom_show_hide.text = "Hide"
+			#bottom_show_hide.text = "Hide"
+			bottom_show_hide.icon = arrow_down
 			$bottom_drawer.show_hide(bottom_drawer_visible)
 			if side_drawer_visible:
 				side_drawer_visible = false
-				side_show_hide.text = "Show"
+				#side_show_hide.text = "Show"
+				side_show_hide.icon = arrow_right
 				$side_drawer.show_hide(side_drawer_visible)
 	elif drawer == side_show_hide:
 		print("Side Show Hide")
 		if side_drawer_visible:
 			side_drawer_visible = false
-			side_show_hide.text = "Show"
+			#side_show_hide.text = "Show"
+			side_show_hide.icon = arrow_right
 			$side_drawer.show_hide(side_drawer_visible)
 		else:
 			side_drawer_visible = true
-			side_show_hide.text = "Hide"
+			#side_show_hide.text = "Hide"
+			side_show_hide.icon = arrow_left
 			$side_drawer.show_hide(side_drawer_visible)
 			if bottom_drawer_visible:
 				bottom_drawer_visible = false
 				$bottom_drawer.show_hide(bottom_drawer_visible)
-				bottom_show_hide.text = "Show"
+				#bottom_show_hide.text = "Show"
+				bottom_show_hide.icon = arrow_up

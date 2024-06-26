@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://4ypddxy4wwie"]
+[gd_scene load_steps=17 format=3 uid="uid://4ypddxy4wwie"]
 
 [ext_resource type="Script" path="res://ui/tools/scroll_pad_area.gd" id="1_fk7r4"]
 [ext_resource type="Theme" uid="uid://bukwxiqumk1jo" path="res://ui/styles/standard_theme.tres" id="1_oat7j"]
@@ -7,9 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://ba0uwf0hm8sfe" path="res://ui/toy_listing.tscn" id="2_aus8r"]
 [ext_resource type="Script" path="res://ui/bottom_drawer.gd" id="3_asq1p"]
 [ext_resource type="Script" path="res://ui/side_drawer.gd" id="4_i30pv"]
+[ext_resource type="Texture2D" uid="uid://blewwssc1374c" path="res://ui/styles/standard_theme/assets/standard_theme_arrow_left.png" id="4_krdb3"]
 [ext_resource type="Texture2D" uid="uid://d2d8n0y0fstws" path="res://ui/art/floating_control_icon_translate.png" id="5_66nua"]
+[ext_resource type="Texture2D" uid="uid://b4k5l4ds72bck" path="res://ui/styles/standard_theme/assets/standard_theme_arrow_right.png" id="5_guvsp"]
 [ext_resource type="Script" path="res://ui/tools/rescale.gd" id="5_volr0"]
 [ext_resource type="Texture2D" uid="uid://6bnxetp3nafy" path="res://ui/art/floating_control_icon_vertical.png" id="6_aqkge"]
+[ext_resource type="Texture2D" uid="uid://bi5gvmp5ae07j" path="res://ui/styles/standard_theme/assets/standard_theme_arrow_down.png" id="6_ts70m"]
+[ext_resource type="Texture2D" uid="uid://d0dpor04asads" path="res://ui/styles/standard_theme/assets/standard_theme_arrow_up.png" id="7_4a3sq"]
 [ext_resource type="Texture2D" uid="uid://bqc4ywvj6vnfj" path="res://ui/art/floating_control_icon_rotate.png" id="7_ol2gs"]
 [ext_resource type="Texture2D" uid="uid://dkoxl60rnqiaw" path="res://ui/art/floating_control_icon_confirm.png" id="8_gswdj"]
 
@@ -24,6 +28,10 @@ mouse_filter = 2
 theme = ExtResource("1_oat7j")
 script = ExtResource("1_ucswn")
 toy_listing = ExtResource("2_aus8r")
+arrow_left = ExtResource("4_krdb3")
+arrow_right = ExtResource("5_guvsp")
+arrow_down = ExtResource("6_ts70m")
+arrow_up = ExtResource("7_4a3sq")
 
 [node name="bottom_drawer" type="Panel" parent="."]
 layout_mode = 0
@@ -43,19 +51,28 @@ grow_vertical = 2
 alignment = 1
 
 [node name="previous" type="Button" parent="bottom_drawer/drawer_controls"]
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
-size_flags_horizontal = 7
-text = "Prev"
+size_flags_horizontal = 3
+icon = ExtResource("4_krdb3")
+icon_alignment = 1
+expand_icon = true
 
 [node name="show_hide" type="Button" parent="bottom_drawer/drawer_controls"]
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
-size_flags_horizontal = 7
-text = "S/H"
+size_flags_horizontal = 3
+icon = ExtResource("6_ts70m")
+icon_alignment = 1
+expand_icon = true
 
 [node name="next" type="Button" parent="bottom_drawer/drawer_controls"]
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
-size_flags_horizontal = 7
-text = "Next"
+size_flags_horizontal = 3
+icon = ExtResource("5_guvsp")
+icon_alignment = 1
+expand_icon = true
 
 [node name="toymenu_frame" type="Control" parent="bottom_drawer"]
 layout_mode = 1
@@ -133,7 +150,9 @@ alignment_vertical = 0
 
 [node name="show_hide" type="Button" parent="side_drawer/AspectRatioContainer"]
 layout_mode = 2
-text = "S/H"
+icon = ExtResource("4_krdb3")
+icon_alignment = 1
+expand_icon = true
 
 [node name="popup_controls" type="VBoxContainer" parent="."]
 visible = false
