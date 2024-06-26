@@ -15,6 +15,26 @@ var floor_clicked : bool = false
 var click_index : int = 0
 
 
+####
+#### Utility
+####
+
+func find_raycast_point(from : Vector3) -> Vector3:
+	var result : Vector3 = Vector3.ZERO
+	$spawn_ray.position = from
+	$spawn_ray.position.y = 50
+	$spawn_ray.force_raycast_update()
+	if $spawn_ray.is_colliding():
+		result = $spawn_ray.get_collision_point()
+	else:
+		result = from
+	return result
+
+
+####
+#### Toy Object Instantiation and Stuff
+####
+
 func add_toys(objects : Array, toyname : String, spawn_point : Vector3):
 	var new_toy : Node3D = Node3D.new()
 	new_toy.name = toyname
@@ -25,15 +45,23 @@ func add_toys(objects : Array, toyname : String, spawn_point : Vector3):
 	toy_objects.append(new_toy)
 
 
-func add_toy_object(object : Node3D, root_name : String, spawn_point : Vector3):
+func add_toy_object(
+	object : Node3D, 
+	root_name : String, 
+	spawn_point : Vector3, 
+	raycast_point : bool):
+	##
 	var root_node : Node3D = get_toy(root_name)
 	if self.has_node(root_node.get_path()) \
 	or toy_objects.has(root_node):
 		root_node.add_child(object)
+		var target_position : Vector3 = spawn_point
+		if raycast_point:
+			target_position = find_raycast_point(spawn_point)
 		object.position = Vector3(
-			spawn_point.x, 
-			object.position.y + spawn_point.y, 
-			spawn_point.z)
+			target_position.x, 
+			object.position.y + target_position.y, 
+			target_position.z)
 	else:
 		print("ERROR: Room cannot add toy object onto null Root Node")
 
@@ -46,8 +74,9 @@ func get_toy(root_name : String) -> Node3D:
 	return result
 
 
+####
 #### Camera Stuff
-
+####
 
 func set_camera_position(target : Vector3):
 	cam_dolly.position = target

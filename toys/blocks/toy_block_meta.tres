@@ -17,3 +17,4 @@ objects = Array[PackedScene]([ExtResource("2_akjhd"), ExtResource("3_r021i"), Ex
 objects_have_pickup_physics = true
 spawn_at_camera = true
 spawn_at_position = Vector3(0, 3, 0)
+raycast_spawn_point = true

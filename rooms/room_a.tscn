@@ -14,7 +14,7 @@ size = Vector3(200, 1, 200)
 
 [sub_resource type="Curve3D" id="Curve3D_mndng"]
 _data = {
-"points": PackedVector3Array(0.305254, 2.37928, 1.78386, 0, -2.379, -1.784, 0, 15, 15, 0, 2.106, 2.521, 0, -2.106, -2.521, 0, 3.003, 9, 0, 0, 0, 0, 0, 0, 0, 0.768, 2.216),
+"points": PackedVector3Array(0.305254, 2.37928, 1.78386, 0, -2.379, -3, 0, 25, 25, 0, 2.106, 2.521, 0, -2.106, -2.521, 0, 3.003, 9, 0, 0, 0, 0, 0, 0, 0, 0.768, 2.216),
 "tilts": PackedFloat32Array(0, 0, 0)
 }
 point_count = 3
@@ -50,5 +50,11 @@ environment = ExtResource("2_kfhf2")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.197828, 0.980237, 0, -0.980237, -0.197828, 0, 0, 0)
 shadow_enabled = true
+
+[node name="spawn_ray" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 31.9869, 0)
+target_position = Vector3(0, -50, 0)
+debug_shape_custom_color = Color(0.985913, 0.630335, 0.346601, 1)
+debug_shape_thickness = 5
 
 [connection signal="input_event" from="floor/StaticBody3D" to="." method="_on_static_body_3d_input_event"]

@@ -25,3 +25,6 @@ class_name ToyMeta
 ## Adds this position to the position of each individual Toy Object, but only
 ## if [member ToyMeta.spawn_at_camera] is false.
 @export var spawn_at_position : Vector3 = Vector3(0, 3, 0)
+## Applies raycasting onto target spawn point to see if new object should be 
+## placed higher.
+@export var raycast_spawn_point : bool = true

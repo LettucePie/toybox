@@ -63,7 +63,10 @@ func add_toy_object(toy_object : PackedScene, from : ToyUI) -> Node:
 		if instance.meta.spawn_at_camera:
 			target_position = room.cam_dolly.global_position
 		instance.objects.append(new_toy_object)
-		room.add_toy_object(new_toy_object, instance.random_id, target_position)
+		room.add_toy_object(new_toy_object, 
+		instance.random_id, 
+		target_position,
+		instance.meta.raycast_spawn_point)
 		instance.menu_instance.add_toy_object(new_toy_object)
 		if new_toy_object is PickupPhysics:
 			new_toy_object.object_grabbed.connect(ui.physics_toy_grabbed)
