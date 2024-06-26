@@ -31,6 +31,8 @@ script = ExtResource("1_j5hm8")
 stream = ExtResource("3_h37kh")
 col_obj = NodePath("..")
 magnitude_decibal_curve = SubResource("Curve_3860r")
+min_decibal_linear = 0.0
+max_decibal_linear = 0.8
 
 [node name="Shape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.93179, -3.95721)
