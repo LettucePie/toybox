@@ -1,4 +1,7 @@
 extends Node
+## Nevermind this literally doesn't work
+## https://github.com/godotengine/godot/issues/83547
+
 
 @export var scale_curve : Curve
 @export var min_len : float = 1000.0
