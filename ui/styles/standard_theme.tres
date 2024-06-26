@@ -6,5 +6,6 @@
 
 [resource]
 default_font = ExtResource("1_huvhx")
+default_font_size = 12
 CheckButton/icons/checked = ExtResource("1_bql64")
 CheckButton/icons/unchecked = ExtResource("2_ycrne")
