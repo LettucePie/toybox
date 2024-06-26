@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rajkl0ois81t"
-path="res://.godot/imported/standard_theme_toggle_button_off.png-3670add2f96ea03527321c036b0d546d.ctex"
+uid="uid://cx7oiuqie6aqk"
+path="res://.godot/imported/standard_theme_toggle_button_off_1x.png-c0bc1bd1af6eb7298e73350a319cad63.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/styles/standard_theme/assets/standard_theme_toggle_button_off.png"
-dest_files=["res://.godot/imported/standard_theme_toggle_button_off.png-3670add2f96ea03527321c036b0d546d.ctex"]
+source_file="res://ui/styles/standard_theme/assets/standard_theme_toggle_button_off_1x.png"
+dest_files=["res://.godot/imported/standard_theme_toggle_button_off_1x.png-c0bc1bd1af6eb7298e73350a319cad63.ctex"]
 
 [params]
 

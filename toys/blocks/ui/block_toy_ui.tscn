@@ -184,6 +184,7 @@ manual_text = "Pole"
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_stretch_ratio = 0.27
+theme = ExtResource("1_b7pry")
 text = "Random Colors"
 
 [node name="current_block_container" type="VBoxContainer" parent="scroll_pad_area/options_v/VBoxContainer"]
@@ -232,6 +233,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="position_container" type="HBoxContainer" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container"]
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.64
@@ -246,7 +248,7 @@ text = "X: "
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 size_flags_horizontal = 3
-max_length = 4
+max_length = 5
 context_menu_enabled = false
 
 [node name="y_label" type="Label" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_container"]
@@ -258,7 +260,7 @@ text = "Y: "
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 size_flags_horizontal = 3
-max_length = 4
+max_length = 5
 
 [node name="z_label" type="Label" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_container"]
 layout_mode = 2
@@ -269,7 +271,7 @@ text = "Z: "
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 size_flags_horizontal = 3
-max_length = 4
+max_length = 5
 
 [node name="position_sub" type="HBoxContainer" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container"]
 custom_minimum_size = Vector2(0, 160)

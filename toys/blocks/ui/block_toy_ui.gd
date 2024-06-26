@@ -32,6 +32,8 @@ func _ready():
 		_connect_buttons()
 	if current_block_section != null:
 		current_block_section.hide()
+	get_viewport().size_changed.connect(rescale)
+	rescale()
 
 
 func _connect_buttons():
@@ -61,6 +63,14 @@ func _indoctrinate_blocks(blocks : Array):
 				block.object_grabbed.connect(self.block_selected)
 			if !block.object_released.is_connected(self.block_deselected):
 				block.object_released.connect(self.block_deselected)
+
+
+## Manages Controls that need to be rescaled manually.
+func rescale():
+	if get_viewport().size.length() > 1800:
+		$scroll_pad_area/options_v/VBoxContainer/random_colors.theme_type_variation = "CheckButton_2x"
+	else:
+		$scroll_pad_area/options_v/VBoxContainer/random_colors.theme_type_variation = ""
 
 
 func block_selected(block : PickupPhysics, held : bool):
