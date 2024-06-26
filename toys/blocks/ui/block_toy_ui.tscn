@@ -81,7 +81,7 @@ vertical_alignment = 1
 [node name="scroll_pad_area_blocks" type="Control" parent="scroll_pad_area/options_v/VBoxContainer" node_paths=PackedStringArray("scroll_container")]
 custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
-size_flags_stretch_ratio = 4.39
+size_flags_vertical = 3
 mouse_filter = 1
 script = ExtResource("1_y7qp4")
 scroll_container = NodePath("block_lists")
