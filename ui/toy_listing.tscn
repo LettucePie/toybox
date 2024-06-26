@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b3uetoaqhe2ki" path="res://icon.svg" id="1_adqs3"]
 
 [node name="toy_listing" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 160)
 script = ExtResource("1_5ce1o")
 icon_path = NodePath("hbox/icon")
 label_path = NodePath("hbox/label")

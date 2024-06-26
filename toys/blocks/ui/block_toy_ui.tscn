@@ -1,5 +1,6 @@
-[gd_scene load_steps=30 format=3 uid="uid://cen2intikceej"]
+[gd_scene load_steps=31 format=3 uid="uid://cen2intikceej"]
 
+[ext_resource type="Theme" uid="uid://bukwxiqumk1jo" path="res://ui/styles/standard_theme.tres" id="1_b7pry"]
 [ext_resource type="Script" path="res://toys/blocks/ui/block_toy_ui.gd" id="1_kc1xc"]
 [ext_resource type="Script" path="res://ui/tools/scroll_container_haptics.gd" id="1_qf5sk"]
 [ext_resource type="Script" path="res://ui/tools/scroll_pad_area.gd" id="1_y7qp4"]
@@ -37,6 +38,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_b7pry")
 script = ExtResource("1_kc1xc")
 block_scenes = Array[PackedScene]([ExtResource("2_n6kri"), ExtResource("3_on3jn"), ExtResource("4_mf3j8"), ExtResource("5_te8pl"), ExtResource("6_pr1vd"), ExtResource("7_uiico"), ExtResource("8_o542r"), ExtResource("9_mibvv"), ExtResource("10_6lsrc"), ExtResource("11_usb0d"), ExtResource("12_w7cct"), ExtResource("13_qnbc3")])
 block_names = PackedStringArray("Cube", "Half", "Corner", "Plank", "Plank x2", "Arch", "Sheet", "Angle", "Ramp", "Column", "Cylinder", "Pole")
@@ -79,9 +82,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="scroll_pad_area_blocks" type="Control" parent="scroll_pad_area/options_v/VBoxContainer" node_paths=PackedStringArray("scroll_container")]
-custom_minimum_size = Vector2(0, 160)
+custom_minimum_size = Vector2(0, 240)
 layout_mode = 2
-size_flags_vertical = 3
 mouse_filter = 1
 script = ExtResource("1_y7qp4")
 scroll_container = NodePath("block_lists")
@@ -177,14 +179,19 @@ manual_icon = ExtResource("29_16yub")
 manual_text = "Pole"
 
 [node name="random_colors" type="CheckButton" parent="scroll_pad_area/options_v/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+size_flags_stretch_ratio = 0.27
 text = "Random Colors"
 
 [node name="current_block_container" type="VBoxContainer" parent="scroll_pad_area/options_v/VBoxContainer"]
+custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 
 [node name="current_block" type="Label" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container"]
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.76
 text = "Current Block Selected: "
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -192,11 +199,13 @@ vertical_alignment = 1
 [node name="position" type="Label" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container"]
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
+size_flags_vertical = 3
 text = "Position:"
 vertical_alignment = 1
 
 [node name="position_add" type="HBoxContainer" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="x_add" type="Button" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_add"]
 layout_mode = 2
@@ -215,6 +224,8 @@ text = "+"
 
 [node name="position_container" type="HBoxContainer" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container"]
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.64
 alignment = 1
 
 [node name="x_label" type="Label" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_container"]
@@ -253,6 +264,7 @@ max_length = 4
 
 [node name="position_sub" type="HBoxContainer" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="x_sub" type="Button" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_sub"]
 layout_mode = 2

@@ -18,7 +18,6 @@ func rescale_theme_fonts():
 	var size_factor = get_viewport().size.length()
 	var target_scale = lerp(min_sca, max_sca, scale_curve.sample(inverse_lerp(min_len, max_len, size_factor)))
 	target_scale = int(target_scale)
-	print("SETTING THEME SCALE TO ", target_scale)
 	ThemeDB.fallback_font_size = target_scale
 	if scaled_themes.size() > 0:
 		for font in scaled_themes:
