@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://f70evfcqu67v"]
+[gd_scene load_steps=8 format=3 uid="uid://f70evfcqu67v"]
 
 [ext_resource type="Script" path="res://components/pickup_physics.gd" id="1_os8ay"]
 [ext_resource type="PackedScene" uid="uid://bk8gfcn7w26k6" path="res://toys/blocks/models/angle.glb" id="2_3jtq8"]
 [ext_resource type="PackedScene" uid="uid://bujev5ndkh6pg" path="res://components/pickup_ray.tscn" id="4_3x3mo"]
+[ext_resource type="PackedScene" uid="uid://dluvt80rpolq0" path="res://components/impact_sound.tscn" id="4_cufj2"]
+[ext_resource type="AudioStream" uid="uid://d1g1mf6ixbah1" path="res://third_party/kenney_nl/Impact Sounds/footstep_grass_004.ogg" id="5_dq16n"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f65vf"]
 
@@ -23,5 +25,9 @@ shape = SubResource("ConvexPolygonShape3D_l7sl0")
 physics_object = NodePath("..")
 physics_shapes = [NodePath("../CollisionShape3D")]
 hover_height = 2.5
+
+[node name="impact_sound" parent="." node_paths=PackedStringArray("col_obj") instance=ExtResource("4_cufj2")]
+stream = ExtResource("5_dq16n")
+col_obj = NodePath("..")
 
 [editable path="angle"]

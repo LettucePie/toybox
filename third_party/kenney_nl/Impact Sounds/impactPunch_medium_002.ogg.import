@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dlpeqawlasrel"
+path="res://.godot/imported/impactPunch_medium_002.ogg-4b174768a995c320c394f9a88b2d1882.oggvorbisstr"
+
+[deps]
+
+source_file="res://third_party/kenney_nl/Impact Sounds/impactPunch_medium_002.ogg"
+dest_files=["res://.godot/imported/impactPunch_medium_002.ogg-4b174768a995c320c394f9a88b2d1882.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

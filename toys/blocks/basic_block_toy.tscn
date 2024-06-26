@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cv88tkyh53efe"]
+[gd_scene load_steps=8 format=3 uid="uid://cv88tkyh53efe"]
 
 [ext_resource type="Script" path="res://components/pickup_physics.gd" id="1_4gwkw"]
 [ext_resource type="PackedScene" uid="uid://dusgg58mu0o5f" path="res://toys/blocks/models/block_x1.glb" id="2_0w8t3"]
 [ext_resource type="PackedScene" uid="uid://bujev5ndkh6pg" path="res://components/pickup_ray.tscn" id="3_s00c6"]
+[ext_resource type="PackedScene" uid="uid://dluvt80rpolq0" path="res://components/impact_sound.tscn" id="4_t3vqq"]
+[ext_resource type="AudioStream" uid="uid://nex4bkfqwd0j" path="res://third_party/kenney_nl/Impact Sounds/footstep_grass_003.ogg" id="5_njnmn"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f65vf"]
 
@@ -23,5 +25,8 @@ shape = SubResource("BoxShape3D_rs56t")
 physics_object = NodePath("..")
 hover_height = 2.5
 down_radius = 1.5
+
+[node name="impact_sound" parent="." instance=ExtResource("4_t3vqq")]
+stream = ExtResource("5_njnmn")
 
 [editable path="block_x1"]
