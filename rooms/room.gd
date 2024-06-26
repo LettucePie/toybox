@@ -30,7 +30,10 @@ func add_toy_object(object : Node3D, root_name : String, spawn_point : Vector3):
 	if self.has_node(root_node.get_path()) \
 	or toy_objects.has(root_node):
 		root_node.add_child(object)
-		object.position = spawn_point
+		object.position = Vector3(
+			spawn_point.x, 
+			object.position.y + spawn_point.y, 
+			spawn_point.z)
 	else:
 		print("ERROR: Room cannot add toy object onto null Root Node")
 
