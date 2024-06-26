@@ -1,6 +1,10 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bukwxiqumk1jo"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://bukwxiqumk1jo"]
 
+[ext_resource type="Texture2D" uid="uid://bdlg45gs8tk4b" path="res://ui/styles/standard_theme_toggle_button_on.png" id="1_bql64"]
 [ext_resource type="FontFile" uid="uid://mr53p8r7d1a4" path="res://third_party/kenney_nl/Fonts/Kenney Thick.ttf" id="1_huvhx"]
+[ext_resource type="Texture2D" uid="uid://rajkl0ois81t" path="res://ui/styles/standard_theme_toggle_button_off.png" id="2_ycrne"]
 
 [resource]
 default_font = ExtResource("1_huvhx")
+CheckButton/icons/checked = ExtResource("1_bql64")
+CheckButton/icons/unchecked = ExtResource("2_ycrne")
