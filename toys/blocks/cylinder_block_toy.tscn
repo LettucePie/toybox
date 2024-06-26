@@ -1,14 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://b0tms0nypxo7t"]
+[gd_scene load_steps=9 format=3 uid="uid://b0tms0nypxo7t"]
 
 [ext_resource type="Script" path="res://components/pickup_physics.gd" id="1_8m2o7"]
 [ext_resource type="PackedScene" uid="uid://bujev5ndkh6pg" path="res://components/pickup_ray.tscn" id="2_mkf8f"]
 [ext_resource type="PackedScene" uid="uid://dhym10h4g57iv" path="res://toys/blocks/models/cylinder.glb" id="3_xmpqf"]
+[ext_resource type="PackedScene" uid="uid://dluvt80rpolq0" path="res://components/impact_sound.tscn" id="4_j6k02"]
+[ext_resource type="AudioStream" uid="uid://dqb43f1pnbdyx" path="res://third_party/kenney_nl/Impact Sounds/footstep_wood_004.ogg" id="5_o4ljx"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f65vf"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_e2ebx"]
 height = 4.0
 radius = 1.0
+
+[sub_resource type="Curve" id="Curve_cdh2s"]
+resource_local_to_scene = true
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 1.4, 0.0, 0, 0]
+point_count = 2
 
 [node name="cylinder_block_toy" type="RigidBody3D"]
 mass = 0.4
@@ -26,3 +33,8 @@ hover_height = 2.5
 down_radius = 3.5
 
 [node name="cylinder" parent="." instance=ExtResource("3_xmpqf")]
+
+[node name="impact_sound" parent="." node_paths=PackedStringArray("col_obj") instance=ExtResource("4_j6k02")]
+stream = ExtResource("5_o4ljx")
+col_obj = NodePath("..")
+magnitude_decibal_curve = SubResource("Curve_cdh2s")

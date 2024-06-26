@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dkuuxd0nl1yhi"]
+[gd_scene load_steps=10 format=3 uid="uid://dkuuxd0nl1yhi"]
 
 [ext_resource type="Script" path="res://components/pickup_physics.gd" id="1_ennbn"]
 [ext_resource type="PackedScene" uid="uid://dawm3yp1k8bih" path="res://toys/blocks/models/l_block.glb" id="2_70bq8"]
 [ext_resource type="PackedScene" uid="uid://bujev5ndkh6pg" path="res://components/pickup_ray.tscn" id="3_m43s5"]
+[ext_resource type="PackedScene" uid="uid://dluvt80rpolq0" path="res://components/impact_sound.tscn" id="4_fcqw6"]
+[ext_resource type="AudioStream" uid="uid://u218n2brepia" path="res://third_party/kenney_nl/Impact Sounds/footstep_wood_002.ogg" id="5_g3302"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f65vf"]
 
@@ -11,6 +13,11 @@ size = Vector3(2.01117, 3.99857, 1.92468)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ta5vb"]
 size = Vector3(3.97433, 1.99228, 1.96332)
+
+[sub_resource type="Curve" id="Curve_s3gp0"]
+resource_local_to_scene = true
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 1.4, 0.0, 0, 0]
+point_count = 2
 
 [node name="L_block_toy" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
@@ -33,5 +40,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 physics_object = NodePath("..")
 physics_shapes = [NodePath("../CollisionShape3D"), NodePath("../CollisionShape3D2")]
 down_radius = 3.0
+
+[node name="impact_sound" parent="." node_paths=PackedStringArray("col_obj") instance=ExtResource("4_fcqw6")]
+stream = ExtResource("5_g3302")
+col_obj = NodePath("..")
+magnitude_decibal_curve = SubResource("Curve_s3gp0")
 
 [editable path="l_block2"]

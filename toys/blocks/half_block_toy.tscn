@@ -1,13 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://cnyctpauobynt"]
+[gd_scene load_steps=9 format=3 uid="uid://cnyctpauobynt"]
 
 [ext_resource type="Script" path="res://components/pickup_physics.gd" id="1_cff6l"]
 [ext_resource type="PackedScene" uid="uid://cu3xcpce3h13e" path="res://toys/blocks/models/half_block.glb" id="2_kxx1o"]
 [ext_resource type="PackedScene" uid="uid://bujev5ndkh6pg" path="res://components/pickup_ray.tscn" id="3_ib3o2"]
+[ext_resource type="PackedScene" uid="uid://dluvt80rpolq0" path="res://components/impact_sound.tscn" id="4_5hotf"]
+[ext_resource type="AudioStream" uid="uid://c3icrad4dkaxa" path="res://third_party/kenney_nl/Impact Sounds/footstep_wood_001.ogg" id="5_1vsel"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f65vf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yt5l3"]
 size = Vector3(2, 1, 2)
+
+[sub_resource type="Curve" id="Curve_nylhh"]
+resource_local_to_scene = true
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 1.4, 0.0, 0, 0]
+point_count = 2
 
 [node name="half_block_toy" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
@@ -26,5 +33,10 @@ physics_object = NodePath("..")
 physics_shapes = [NodePath("../CollisionShape3D")]
 hover_height = 2.5
 down_radius = 1.5
+
+[node name="impact_sound" parent="." node_paths=PackedStringArray("col_obj") instance=ExtResource("4_5hotf")]
+stream = ExtResource("5_1vsel")
+col_obj = NodePath("..")
+magnitude_decibal_curve = SubResource("Curve_nylhh")
 
 [editable path="half_block2"]

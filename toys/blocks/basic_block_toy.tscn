@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cv88tkyh53efe"]
+[gd_scene load_steps=9 format=3 uid="uid://cv88tkyh53efe"]
 
 [ext_resource type="Script" path="res://components/pickup_physics.gd" id="1_4gwkw"]
 [ext_resource type="PackedScene" uid="uid://dusgg58mu0o5f" path="res://toys/blocks/models/block_x1.glb" id="2_0w8t3"]
@@ -10,6 +10,11 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rs56t"]
 size = Vector3(2, 2, 2)
+
+[sub_resource type="Curve" id="Curve_5lkdc"]
+resource_local_to_scene = true
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 1.4, 0.0, 0, 0]
+point_count = 2
 
 [node name="basic_block_toy" type="RigidBody3D"]
 mass = 0.2
@@ -26,7 +31,9 @@ physics_object = NodePath("..")
 hover_height = 2.5
 down_radius = 1.5
 
-[node name="impact_sound" parent="." instance=ExtResource("4_t3vqq")]
+[node name="impact_sound" parent="." node_paths=PackedStringArray("col_obj") instance=ExtResource("4_t3vqq")]
 stream = ExtResource("5_njnmn")
+col_obj = NodePath("..")
+magnitude_decibal_curve = SubResource("Curve_5lkdc")
 
 [editable path="block_x1"]

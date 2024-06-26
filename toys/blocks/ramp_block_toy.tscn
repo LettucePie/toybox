@@ -1,13 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1s7ca2dpij1e"]
+[gd_scene load_steps=9 format=3 uid="uid://d1s7ca2dpij1e"]
 
 [ext_resource type="Script" path="res://components/pickup_physics.gd" id="1_7lgu2"]
 [ext_resource type="PackedScene" uid="uid://c0ltlygfwxecl" path="res://toys/blocks/models/ramp.glb" id="2_odup2"]
 [ext_resource type="PackedScene" uid="uid://bujev5ndkh6pg" path="res://components/pickup_ray.tscn" id="3_yt0c3"]
+[ext_resource type="PackedScene" uid="uid://dluvt80rpolq0" path="res://components/impact_sound.tscn" id="4_or1xp"]
+[ext_resource type="AudioStream" uid="uid://u218n2brepia" path="res://third_party/kenney_nl/Impact Sounds/footstep_wood_002.ogg" id="5_gbca4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f65vf"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5bel7"]
 points = PackedVector3Array(-2, -1, -1, 2, -1, -1, 2, -1, 1, -2, -1, 1, 2, 1, 1, 2, 1, -1)
+
+[sub_resource type="Curve" id="Curve_l5it5"]
+resource_local_to_scene = true
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 1.4, 0.0, 0, 0]
+point_count = 2
 
 [node name="ramp_block_toy" type="RigidBody3D"]
 mass = 0.3
@@ -24,3 +31,7 @@ physics_object = NodePath("..")
 physics_shapes = [NodePath("../CollisionShape3D")]
 hover_height = 2.5
 down_radius = 4.0
+
+[node name="impact_sound" parent="." instance=ExtResource("4_or1xp")]
+stream = ExtResource("5_gbca4")
+magnitude_decibal_curve = SubResource("Curve_l5it5")
