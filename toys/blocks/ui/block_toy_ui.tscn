@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cen2intikceej"]
+[gd_scene load_steps=33 format=3 uid="uid://cen2intikceej"]
 
 [ext_resource type="Theme" uid="uid://bukwxiqumk1jo" path="res://ui/styles/standard_theme.tres" id="1_b7pry"]
 [ext_resource type="Script" path="res://toys/blocks/ui/block_toy_ui.gd" id="1_kc1xc"]
@@ -30,6 +30,8 @@
 [ext_resource type="Texture2D" uid="uid://byier80o1vtk7" path="res://toys/blocks/ui/column_block_toy.jpg" id="27_lisst"]
 [ext_resource type="Texture2D" uid="uid://celthdw1henuu" path="res://toys/blocks/ui/cylinder_block_toy_icon.jpg" id="28_fv10w"]
 [ext_resource type="Texture2D" uid="uid://bo6yvmoqxhgs2" path="res://toys/blocks/ui/pole_block_toy.jpg" id="29_16yub"]
+[ext_resource type="Texture2D" uid="uid://d0dpor04asads" path="res://ui/styles/standard_theme/assets/standard_theme_arrow_up.png" id="31_brv10"]
+[ext_resource type="Texture2D" uid="uid://bi5gvmp5ae07j" path="res://ui/styles/standard_theme/assets/standard_theme_arrow_down.png" id="32_5q5u5"]
 
 [node name="block_toy_ui" type="Control" node_paths=PackedStringArray("block_button_container")]
 layout_mode = 3
@@ -204,23 +206,30 @@ text = "Position:"
 vertical_alignment = 1
 
 [node name="position_add" type="HBoxContainer" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container"]
+custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="x_add" type="Button" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_add"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "+"
+icon = ExtResource("31_brv10")
+icon_alignment = 1
+expand_icon = true
 
 [node name="y_add" type="Button" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_add"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "+"
+icon = ExtResource("31_brv10")
+icon_alignment = 1
+expand_icon = true
 
 [node name="z_add" type="Button" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_add"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "+"
+icon = ExtResource("31_brv10")
+icon_alignment = 1
+expand_icon = true
 
 [node name="position_container" type="HBoxContainer" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container"]
 layout_mode = 2
@@ -263,23 +272,30 @@ size_flags_horizontal = 3
 max_length = 4
 
 [node name="position_sub" type="HBoxContainer" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container"]
+custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="x_sub" type="Button" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_sub"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "-"
+icon = ExtResource("32_5q5u5")
+icon_alignment = 1
+expand_icon = true
 
 [node name="y_sub" type="Button" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_sub"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "-"
+icon = ExtResource("32_5q5u5")
+icon_alignment = 1
+expand_icon = true
 
 [node name="z_sub" type="Button" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container/position_sub"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "-"
+icon = ExtResource("32_5q5u5")
+icon_alignment = 1
+expand_icon = true
 
 [node name="scale" type="Label" parent="scroll_pad_area/options_v/VBoxContainer/current_block_container"]
 visible = false
