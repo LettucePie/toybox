@@ -25,12 +25,13 @@ class_name PlayUI
 @onready var bottom_next : Button = $bottom_drawer/drawer_controls/next
 @onready var side_toy_list : VBoxContainer = $side_drawer/ScrollPadArea/ScrollHaptics/VBoxContainer
 @onready var toymenu_frame : Control = $bottom_drawer/toymenu_frame
-@onready var putaway_range : Range = $side_drawer/putaway
+@onready var putaway_all : Range = $side_drawer/putaway_all
 
 ## Drawer States
 var side_drawer_visible : bool = true
 var bottom_drawer_visible : bool = false
-var putting_away : bool = false
+var putting_away_all : bool = false
+var putting_away_toy : bool = false
 
 ## Control Menus
 @onready var physics_popup : Control = $popup_controls
@@ -40,6 +41,7 @@ var putting_away : bool = false
 @onready var confirm_button : TextureButton = $popup_controls/confirm_button
 var physics_toy : PickupPhysics
 var current_control : String = ""
+@onready var putaway_toy : Range = $AspectRatioContainer/putaway
 
 ## Toy Menus
 var toy_menus : Array[ToyUI] = []
@@ -53,11 +55,16 @@ func _ready():
 
 
 func _process(delta):
-	if putting_away:
-		putaway_range.set_value_no_signal(
-			putaway_range.value + putaway_range.step * 8)
-		if putaway_range.value >= 100:
+	if putting_away_all:
+		putaway_all.set_value_no_signal(
+			putaway_all.value + putaway_all.step * 8)
+		if putaway_all.value >= 100:
 			print("PUT AWAY TOYS")
+	if putting_away_toy:
+		putaway_toy.set_value_no_signal(
+			putaway_toy.value + putaway_toy.step * 8)
+		if putaway_toy.value >= 100:
+			print("PUT AWAY CURRENT TOY")
 
 
 ####
@@ -220,6 +227,7 @@ func _ready_position():
 	side_show_hide.icon = arrow_left
 	#bottom_show_hide.text = "Show"
 	bottom_show_hide.icon = arrow_up
+	putaway_toy.hide()
 
 
 func _connect_buttons():
@@ -235,6 +243,8 @@ func _connect_buttons():
 		_forward_control_to_physics_toy.bind("rotate"))
 	confirm_button.button_down.connect(
 		_forward_control_to_physics_toy.bind("confirm"))
+	putaway_all.gui_input.connect(_on_putaway_gui_input.bind(true))
+	putaway_toy.gui_input.connect(_on_putaway_gui_input.bind(false))
 
 
 func _show_hide(drawer : Button):
@@ -247,11 +257,13 @@ func _show_hide(drawer : Button):
 			## Maybe put icons in animationplayer
 			#bottom_show_hide.text = "Show"
 			bottom_show_hide.icon = arrow_up
+			putaway_toy.hide()
 			$bottom_drawer.show_hide(bottom_drawer_visible)
 		else:
 			bottom_drawer_visible = true
 			#bottom_show_hide.text = "Hide"
 			bottom_show_hide.icon = arrow_down
+			putaway_toy.show()
 			$bottom_drawer.show_hide(bottom_drawer_visible)
 			if side_drawer_visible:
 				side_drawer_visible = false
@@ -275,18 +287,16 @@ func _show_hide(drawer : Button):
 				$bottom_drawer.show_hide(bottom_drawer_visible)
 				#bottom_show_hide.text = "Show"
 				bottom_show_hide.icon = arrow_up
+				putaway_toy.hide()
 
 
-func _begin_hold(tf : bool):
-	print("Begin Hold ", tf)
-	$side_drawer/putaway.value = 0.0
-	putting_away = tf
-
-
-func _on_putaway_gui_input(event):
+func _on_putaway_gui_input(event, all):
 	if event is InputEventMouseButton and event.button_index <= 1:
-		_begin_hold(event.pressed)
-
-
-func _on_putaway_mouse_exited():
-	_begin_hold(false)
+		putaway_all.value = 0.0
+		putaway_toy.value = 0.0
+		if all:
+			putting_away_all = event.pressed
+			putting_away_toy = false
+		else:
+			putting_away_toy = event.pressed
+			putting_away_all = false
