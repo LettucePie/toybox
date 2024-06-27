@@ -19,11 +19,14 @@ class_name PlayUI
 #@onready var bottom_anim : AnimationPlayer = $bottom_drawer/AnimationPlayer
 
 ## Drawer Elements
-@onready var side_show_hide : Button = $side_drawer/AspectRatioContainer/show_hide
-@onready var bottom_show_hide : Button = $bottom_drawer/drawer_controls/show_hide
+@onready var side_show_hide : Button = \
+$side_drawer/AspectRatioContainer/show_hide
+@onready var bottom_show_hide : Button = \
+$bottom_drawer/drawer_controls/show_hide
 @onready var bottom_prev : Button = $bottom_drawer/drawer_controls/previous
 @onready var bottom_next : Button = $bottom_drawer/drawer_controls/next
-@onready var side_toy_list : VBoxContainer = $side_drawer/ScrollPadArea/ScrollHaptics/VBoxContainer
+@onready var side_toy_list : VBoxContainer = \
+$side_drawer/ScrollPadArea/ScrollHaptics/VBoxContainer
 @onready var toymenu_frame : Control = $bottom_drawer/toymenu_frame
 @onready var putaway_all : Range = $side_drawer/putaway_all
 
@@ -54,12 +57,24 @@ func _ready():
 	_connect_buttons()
 
 
+func reset_popups():
+	current_control = ""
+	physics_toy = null
+	physics_popup.hide()
+
+
 func _process(delta):
 	if putting_away_all:
 		putaway_all.set_value_no_signal(
 			putaway_all.value + putaway_all.step * 8)
 		if putaway_all.value >= 100:
 			print("PUT AWAY TOYS")
+			if play != null:
+				play.remove_all_toys()
+			putaway_all.value = 0
+			putting_away_all = false
+			putting_away_toy = false
+			putaway_toy.hide()
 	if putting_away_toy:
 		putaway_toy.set_value_no_signal(
 			putaway_toy.value + putaway_toy.step * 8)
@@ -67,6 +82,11 @@ func _process(delta):
 			print("PUT AWAY CURRENT TOY")
 			if play != null:
 				play.remove_toy_by_menu(toy_menus[current_toy_menu])
+			putaway_toy.value = 0
+			putting_away_toy = false
+			putting_away_all = false
+			if toy_menus.size() == 0:
+				putaway_toy.hide()
 
 
 ####
@@ -125,7 +145,10 @@ func focus_toy_menu(menu_node : ToyUI):
 
 func remove_toy_menu(menu_node : ToyUI):
 	print("Removing MenuNode: ", menu_node)
+	if menu_node == toy_menus[current_toy_menu]:
+		_shift_current_toy_menu(-1)
 	toy_menus.erase(menu_node)
+	reset_popups()
 	## Some other stuff then queue_free
 	menu_node.queue_free()
 	if toy_menus.size() <= 1:

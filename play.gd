@@ -79,6 +79,11 @@ func add_toy_object(toy_object : PackedScene, from : ToyUI) -> Node:
 
 func remove_toy_instance(toy : ToyInstance):
 	print("Removing toy... ", toy.random_id)
+	for toy_object in toy.objects:
+		toy_object.queue_free()
+	ui.remove_toy_menu(toy.menu_instance)
+	room.remove_toy(toy.random_id)
+	loaded_toys.erase(toy)
 
 
 func remove_toy_by_menu(toy_menu : ToyUI):
@@ -91,6 +96,12 @@ func remove_toy_by_id(toy_id : String):
 	var target : ToyInstance = find_instance_by_id(toy_id)
 	if target != null:
 		remove_toy_instance(target)
+
+
+func remove_all_toys():
+	print("Removing All Toys")
+	for index in loaded_toys.size():
+		remove_toy_instance(loaded_toys.back())
 
 
 ## This function is meant to be reached from the Play UI.
@@ -115,3 +126,4 @@ func find_instance_by_id(id : String) -> ToyInstance:
 		if instance.random_id == id:
 			result = instance
 	return result
+

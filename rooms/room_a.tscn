@@ -39,7 +39,7 @@ active = false
 curve = SubResource("Curve3D_mndng")
 
 [node name="cam_follow" type="PathFollow3D" parent="camera_doll/cam_path"]
-transform = Transform3D(1, 0, 0, 0, 0.599935, 0.800025, 0, -0.800025, 0.599935, 0, 15, 15)
+transform = Transform3D(1, 0, 0, 0, 0.783522, 0.621333, 0, -0.621333, 0.783522, 0, 25, 25)
 
 [node name="camera_room" type="Camera3D" parent="camera_doll/cam_path/cam_follow"]
 transform = Transform3D(1, 0, 0, 0, 0.945115, -0.326738, 0, 0.326738, 0.945115, 0, 0, 0)

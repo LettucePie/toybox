@@ -74,6 +74,13 @@ func get_toy(root_name : String) -> Node3D:
 	return result
 
 
+func remove_toy(toy_id : String):
+	var target = get_toy(toy_id)
+	if target != null:
+		toy_objects.erase(target)
+		target.queue_free()
+
+
 ####
 #### Camera Stuff
 ####
