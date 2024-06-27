@@ -34,15 +34,16 @@ In the case of this project, a Toy is;
 This app will be using a standardization system for each toy. To briefly understand what is required, read through the "load_toy" function on `play.gd` and the variables of `components/toy_meta.gd`.
 
  1. Make a folder for your new Toy in `/toys/`.
-   - This will contain Scenes, Assets, GUI, and Metadata.
-   - Organize your files however you like within your toys folder.
+	- This will contain Scenes, Assets, GUI, and Metadata.
+	- Organize your files however you like within your toys folder.
  2. Make a new ToyUI scene within your toy folder.
-   - New Scene -> Other Node -> Navigate to `Node > CanvasItem > Control > ToyUI` or just search "toyui".
+	- New Scene -> Other Node -> Navigate to `Node > CanvasItem > Control > ToyUI` or just search "toyui".
+	- Or you can `extend ToyUI` into your own Control Node UI.
  3. Make a new ToyMeta resource within your toy folder.
-   - Right-Click on your toy folder, select Create New Resource, search for ToyMeta.
+	- Right-Click on your toy folder, select Create New Resource, search for ToyMeta.
  4. Make your toy.
-   - If your toy has multiple pieces, consider making each piece it's own scene.
-   - If your toy will be picked up and moved around alot, consider making its root node my custom class `PickupPhysics`, and add the component scene `PickupRay` as a child. Of course if you need a more intricate solution then go for it. The only necessary components are `ToyUI` and `ToyMeta`.
+	- If your toy has multiple pieces, consider making each piece it's own scene.
+	- If your toy will be picked up and moved around alot, consider making its root node my custom class `PickupPhysics`, and add the component scene `PickupRay` as a child. Of course if you need a more intricate solution then go for it. The only necessary components are `ToyUI` and `ToyMeta`.
  5. Fill out the ToyMeta resource.
  6. Load up the Toybox scene `/toybox.tscn`, and append your ToyMeta to the Toy Metadatas array in the inspector.
 
