@@ -3,6 +3,9 @@ A Virtual Space for Android where players are presented with virtual toys. Toys 
 
 Made with Godot 4.2.2-stable
 
+Available on Itch.io
+https://lettucepie.itch.io/toybox
+
 As economics continue to get more insane, I have found a refreshed purpose in this project. There's a very real possibility that free apps will become the primary avenue for kids to play. Smartphones appear to be more of a necessity via virtual integrations, and parents want the ability to track/call their kids. So in the scenario where you can buy your kid a smartphone once every couple years or several different toys every few months; kids might not have toys anymore. I suddenly feel importance in providing non-predatory or addictive applications... 
 
 ## What is a "Toy"
