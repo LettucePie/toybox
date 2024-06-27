@@ -5,4 +5,4 @@
 
 [node name="toybox" type="Node" groups=["data", "persist", "toybox"]]
 script = ExtResource("1_81sd8")
-toy_metadatas = Array[Resource("res://toys/toy_meta.gd")]([ExtResource("2_goqct")])
+toy_metadatas = Array[Resource("res://components/toy_meta.gd")]([ExtResource("2_goqct")])

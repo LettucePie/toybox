@@ -54,6 +54,7 @@ grow_vertical = 2
 alignment = 1
 
 [node name="previous" type="Button" parent="bottom_drawer/drawer_controls"]
+visible = false
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -70,6 +71,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="next" type="Button" parent="bottom_drawer/drawer_controls"]
+visible = false
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 size_flags_horizontal = 3
