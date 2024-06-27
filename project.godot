@@ -11,9 +11,10 @@ config_version=5
 [application]
 
 config/name="Toybox"
+config/version="0.1"
 run/main_scene="res://play.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
-config/icon="res://icon.svg"
+config/icon="res://webpage/app_icon_512.png"
 
 [display]
 
