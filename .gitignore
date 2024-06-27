@@ -8,3 +8,8 @@ export_presets.cfg
 # krita
 *.kra~
 *.png~
+
+# android gradle build template thing
+/android/
+/android
+android/
