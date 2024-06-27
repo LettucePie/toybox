@@ -26,7 +26,7 @@ size = Vector3(200, 1, 200)
 [node name="photobooth" type="Node3D"]
 script = ExtResource("1_8vj5u")
 screenshot_destination = "/home/matthew/Projects/Godot4/toybox_screenshots"
-screenshot_name_override = "toyblocks"
+screenshot_name_override = "bg_banner"
 spin_stage = false
 
 [node name="room_a" type="Node3D" parent="."]
@@ -111,6 +111,7 @@ visible = false
 [node name="plank_1x_block_toy" parent="Stage" instance=ExtResource("14_7a6jw")]
 process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12289, 0)
+visible = false
 
 [node name="plank_2x_block_toy" parent="Stage" instance=ExtResource("15_j51rb")]
 process_mode = 4
