@@ -263,7 +263,8 @@ func _show_hide(drawer : Button):
 			bottom_drawer_visible = true
 			#bottom_show_hide.text = "Hide"
 			bottom_show_hide.icon = arrow_down
-			putaway_toy.show()
+			if toy_menus.size() > 0:
+				putaway_toy.show()
 			$bottom_drawer.show_hide(bottom_drawer_visible)
 			if side_drawer_visible:
 				side_drawer_visible = false
