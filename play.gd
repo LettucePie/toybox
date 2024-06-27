@@ -77,6 +77,22 @@ func add_toy_object(toy_object : PackedScene, from : ToyUI) -> Node:
 	return result
 
 
+func remove_toy_instance(toy : ToyInstance):
+	print("Removing toy... ", toy.random_id)
+
+
+func remove_toy_by_menu(toy_menu : ToyUI):
+	var target : ToyInstance = find_instance_by_menu(toy_menu)
+	if target != null:
+		remove_toy_instance(target)
+
+
+func remove_toy_by_id(toy_id : String):
+	var target : ToyInstance = find_instance_by_id(toy_id)
+	if target != null:
+		remove_toy_instance(target)
+
+
 ## This function is meant to be reached from the Play UI.
 ## When player toggles through the different toymenus in the bottom \
 ## drawer, we want the game to highlight and "fit in screen" all the pieces \
@@ -89,5 +105,13 @@ func find_instance_by_menu(menu : ToyUI) -> ToyInstance:
 	var result = loaded_toys.front()
 	for instance in loaded_toys:
 		if instance.menu_instance == menu:
+			result = instance
+	return result
+
+
+func find_instance_by_id(id : String) -> ToyInstance:
+	var result = loaded_toys.front()
+	for instance in loaded_toys:
+		if instance.random_id == id:
 			result = instance
 	return result

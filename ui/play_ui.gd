@@ -65,6 +65,8 @@ func _process(delta):
 			putaway_toy.value + putaway_toy.step * 8)
 		if putaway_toy.value >= 100:
 			print("PUT AWAY CURRENT TOY")
+			if play != null:
+				play.remove_toy_by_menu(toy_menus[current_toy_menu])
 
 
 ####
