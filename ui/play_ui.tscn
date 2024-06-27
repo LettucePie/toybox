@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://4ypddxy4wwie"]
+[gd_scene load_steps=19 format=3 uid="uid://4ypddxy4wwie"]
 
 [ext_resource type="Script" path="res://ui/tools/scroll_pad_area.gd" id="1_fk7r4"]
 [ext_resource type="Theme" uid="uid://bukwxiqumk1jo" path="res://ui/styles/standard_theme.tres" id="1_oat7j"]
@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://d0dpor04asads" path="res://ui/styles/standard_theme/assets/standard_theme_arrow_up.png" id="7_4a3sq"]
 [ext_resource type="Texture2D" uid="uid://bqc4ywvj6vnfj" path="res://ui/art/floating_control_icon_rotate.png" id="7_ol2gs"]
 [ext_resource type="Texture2D" uid="uid://dkoxl60rnqiaw" path="res://ui/art/floating_control_icon_confirm.png" id="8_gswdj"]
+[ext_resource type="Texture2D" uid="uid://8ovh03ggufjs" path="res://ui/styles/standard_theme/assets/standard_theme_basic_button_disabled.png" id="12_howl7"]
+[ext_resource type="Texture2D" uid="uid://bo5w4sap08ejv" path="res://ui/styles/standard_theme/assets/standard_theme_basic_button_lifted.png" id="13_36e21"]
 
 [node name="play_ui" type="Control"]
 layout_mode = 3
@@ -107,8 +109,10 @@ vertical_alignment = 1
 layout_mode = 1
 anchor_top = 0.113
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.888
 offset_top = 0.141998
+offset_right = 0.220001
+offset_bottom = -0.00805664
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
@@ -153,6 +157,38 @@ layout_mode = 2
 icon = ExtResource("4_krdb3")
 icon_alignment = 1
 expand_icon = true
+
+[node name="putaway" type="TextureProgressBar" parent="side_drawer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.009
+anchor_top = 0.882
+anchor_right = 0.995
+anchor_bottom = 1.0
+offset_left = 0.0499799
+offset_top = 0.187988
+offset_right = -0.141113
+grow_horizontal = 2
+grow_vertical = 0
+step = 0.1
+nine_patch_stretch = true
+stretch_margin_left = 26
+stretch_margin_top = 26
+stretch_margin_right = 26
+stretch_margin_bottom = 26
+texture_under = ExtResource("12_howl7")
+texture_progress = ExtResource("13_36e21")
+
+[node name="Label" type="Label" parent="side_drawer/putaway"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PUT AWAY ALL TOYS..."
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="popup_controls" type="VBoxContainer" parent="."]
 visible = false
@@ -218,3 +254,6 @@ texture_disabled = ExtResource("8_gswdj")
 texture_focused = ExtResource("8_gswdj")
 ignore_texture_size = true
 stretch_mode = 5
+
+[connection signal="gui_input" from="side_drawer/putaway" to="." method="_on_putaway_gui_input"]
+[connection signal="mouse_exited" from="side_drawer/putaway" to="." method="_on_putaway_mouse_exited"]

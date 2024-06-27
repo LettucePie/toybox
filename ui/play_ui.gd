@@ -25,10 +25,12 @@ class_name PlayUI
 @onready var bottom_next : Button = $bottom_drawer/drawer_controls/next
 @onready var side_toy_list : VBoxContainer = $side_drawer/ScrollPadArea/ScrollHaptics/VBoxContainer
 @onready var toymenu_frame : Control = $bottom_drawer/toymenu_frame
+@onready var putaway_range : Range = $side_drawer/putaway
 
 ## Drawer States
 var side_drawer_visible : bool = true
 var bottom_drawer_visible : bool = false
+var putting_away : bool = false
 
 ## Control Menus
 @onready var physics_popup : Control = $popup_controls
@@ -48,6 +50,14 @@ func _ready():
 	_load_toybox()
 	_ready_position()
 	_connect_buttons()
+
+
+func _process(delta):
+	if putting_away:
+		putaway_range.set_value_no_signal(
+			putaway_range.value + putaway_range.step * 8)
+		if putaway_range.value >= 100:
+			print("PUT AWAY TOYS")
 
 
 ####
@@ -265,3 +275,18 @@ func _show_hide(drawer : Button):
 				$bottom_drawer.show_hide(bottom_drawer_visible)
 				#bottom_show_hide.text = "Show"
 				bottom_show_hide.icon = arrow_up
+
+
+func _begin_hold(tf : bool):
+	print("Begin Hold ", tf)
+	$side_drawer/putaway.value = 0.0
+	putting_away = tf
+
+
+func _on_putaway_gui_input(event):
+	if event is InputEventMouseButton and event.button_index <= 1:
+		_begin_hold(event.pressed)
+
+
+func _on_putaway_mouse_exited():
+	_begin_hold(false)
