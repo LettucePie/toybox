@@ -37,7 +37,7 @@ arrow_up = ExtResource("7_4a3sq")
 
 [node name="bottom_drawer" type="Panel" parent="."]
 layout_mode = 0
-offset_top = 625.0
+offset_top = 546.0
 offset_right = 540.0
 offset_bottom = 960.0
 script = ExtResource("3_asq1p")
