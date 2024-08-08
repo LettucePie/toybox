@@ -24,8 +24,7 @@ var min_y : float = 0.0
 var max_y : float = 0.0
 var start_y : float = 0.0
 var target_y : float = 0.0
-## Room Input
-var room : Room
+var mouse_relative : Vector2 = Vector2.ZERO
 var mouse_displace : Vector2 = Vector2.ZERO
 ## Control Input -> Process variables
 var menu_mode : bool = false
@@ -37,8 +36,6 @@ var rotate_only : bool = false
 
 func _ready():
 	_connect_signals()
-	if room == null:
-		room = get_tree().get_nodes_in_group("room").front()
 	if acknowledge_floor:
 		contact_monitor = true
 		max_contacts_reported = 6
@@ -91,6 +88,7 @@ func hold_object(tf : bool):
 
 func set_control_mode(mode : String):
 	control_mode_dampener = 30
+	mouse_relative = Vector2.ZERO
 	mouse_displace = grab_mouse_pos
 	if mode == "translate":
 		translate_only = true
@@ -120,7 +118,6 @@ func set_control_mode(mode : String):
 ## using intersect_ray
 func _get_mouse_world() -> Vector3:
 	var world_pos : Vector3 = position
-	#var mouse_pos := get_viewport().get_mouse_position()
 	var mouse_pos := mouse_displace
 	var cam := get_viewport().get_camera_3d()
 	var origin := cam.project_ray_origin(mouse_pos)
@@ -212,7 +209,9 @@ func _input(event):
 			vertical_only = false
 			rotate_only = false
 	if event is InputEventMouseMotion:
-		mouse_displace += room.mouse_rel
+		mouse_relative = event.relative
+		if translate_only or rotate_only or vertical_only:
+			mouse_displace += mouse_relative
 
 
 ####
@@ -223,12 +222,17 @@ func _input(event):
 func _translate_movement(delta):
 	## Check if Mouse Velocity is actually moving
 	if Input.get_last_mouse_velocity().length_squared() > 2:
-		var target : Vector3 = position + room.mouse_rel_3d
+		var mouse_world : Vector3 = _get_mouse_world()
+		var flattened_target : Vector3 = Vector3(
+			mouse_world.x,
+			position.y,
+			mouse_world.z
+		)
 		var speed : float = 5.0 * delta
 		if grabbed_long and control_mode_dampener > 0:
 			speed = 2.5 * delta
 		## TODO Somehow replace position manipulation with proper force/impulse
-		position = position.lerp(target, speed)
+		position = position.lerp(flattened_target, speed)
 
 
 func _vertical_movement(delta):
@@ -255,16 +259,17 @@ func _rotate_movement(delta):
 		.global_basis * Vector3.RIGHT
 	var cam_dialed : Vector3 = cam_right.rotated(
 		cam_forward,
-		room.mouse_rel.angle()
+		mouse_relative.angle()
 	)
 	var mouse_relative_axis := cam_dialed.rotated(cam_forward, PI / -2)
 	## Horizontal == spin override
-	if abs(room.mouse_rel.x) > 0 and abs(room.mouse_rel.y) < 2:
+	if abs(mouse_relative.x) > 0 and abs(mouse_relative.y) < 2:
 		mouse_relative_axis = Vector3.UP
-		if room.mouse_rel.x < 0:
+		if mouse_relative.x < 0:
 			mouse_relative_axis = Vector3.DOWN
 	## Gather strength by getting mouse_relative length()
-	rotate(mouse_relative_axis, room.mouse_rel.length() * delta)
+	rotate(mouse_relative_axis, mouse_relative.length() * delta)
+	mouse_relative = mouse_relative.lerp(Vector2.ZERO, 0.33)
 
 
 func _physics_process(delta):
