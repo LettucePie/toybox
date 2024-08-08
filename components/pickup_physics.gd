@@ -118,7 +118,6 @@ func set_control_mode(mode : String):
 ## using intersect_ray
 func _get_mouse_world() -> Vector3:
 	var world_pos : Vector3 = position
-	#var mouse_pos := get_viewport().get_mouse_position()
 	var mouse_pos := mouse_displace
 	var cam := get_viewport().get_camera_3d()
 	var origin := cam.project_ray_origin(mouse_pos)
@@ -211,7 +210,8 @@ func _input(event):
 			rotate_only = false
 	if event is InputEventMouseMotion:
 		mouse_relative = event.relative
-		mouse_displace += mouse_relative
+		if translate_only or rotate_only or vertical_only:
+			mouse_displace += mouse_relative
 
 
 ####
