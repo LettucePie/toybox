@@ -17,6 +17,7 @@ var click_index : int = 0
 ## Input Stuff
 var mouse_rel : Vector2 = Vector2.ZERO
 var mouse_rel_3d : Vector3 = Vector3.ZERO
+var zoom_amp : float
 
 
 func _ready():
