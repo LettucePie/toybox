@@ -24,6 +24,8 @@ var min_y : float = 0.0
 var max_y : float = 0.0
 var start_y : float = 0.0
 var target_y : float = 0.0
+## Room Input
+var room : Room
 var mouse_relative : Vector2 = Vector2.ZERO
 var mouse_displace : Vector2 = Vector2.ZERO
 ## Control Input -> Process variables
@@ -36,6 +38,8 @@ var rotate_only : bool = false
 
 func _ready():
 	_connect_signals()
+	if room == null:
+		room = get_tree().get_nodes_in_group("room").front()
 	if acknowledge_floor:
 		contact_monitor = true
 		max_contacts_reported = 6

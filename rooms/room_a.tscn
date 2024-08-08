@@ -19,7 +19,7 @@ _data = {
 }
 point_count = 3
 
-[node name="room_a" type="Node3D"]
+[node name="room_a" type="Node3D" groups=["room"]]
 script = ExtResource("1_5rwtt")
 
 [node name="floor" type="MeshInstance3D" parent="."]

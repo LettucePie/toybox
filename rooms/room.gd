@@ -14,6 +14,15 @@ var toy_objects : Array = []
 var floor_clicked : bool = false
 var click_index : int = 0
 
+## Input Stuff
+var mouse_rel : Vector2 = Vector2.ZERO
+var mouse_rel_3d : Vector3 = Vector3.ZERO
+
+
+func _ready():
+	if !self.is_in_group("room"):
+		self.add_to_group("room")
+
 
 ####
 #### Utility
@@ -117,13 +126,29 @@ func _input(event):
 	and floor_clicked:
 		click_index = clamp(click_index - 1, 0, 2)
 		floor_clicked = false
-	if event is InputEventMouseMotion and floor_clicked:
-		if click_index == 1:
-			var orientated_dir = Vector3(event.relative.x, 0, event.relative.y) * -1.0
-			cam_dolly.translate(orientated_dir * 0.01)
-		elif click_index == 2:
-			cam_dolly.rotate(Vector3.UP, event.relative.x * 0.01)
-			cam_track.progress_ratio = clamp(
-				cam_track.progress_ratio + event.relative.y * -0.001,
-				0.0,
-				1.0)
+	if event is InputEventMouseMotion:
+		mouse_rel = event.relative
+		mouse_rel_3d = _localize_mouse_rel(event.relative, Vector3.UP)
+		## Handle Camera Panning
+		## TODO this seems silly, learn about input handling
+		if floor_clicked:
+			if click_index == 1:
+				var orientated_dir = Vector3(event.relative.x, 0, event.relative.y) * -1.0
+				cam_dolly.translate(orientated_dir * 0.01)
+			elif click_index == 2:
+				cam_dolly.rotate(Vector3.UP, event.relative.x * 0.01)
+				cam_track.progress_ratio = clamp(
+					cam_track.progress_ratio + event.relative.y * -0.001,
+					0.0,
+					1.0)
+
+
+func _localize_mouse_rel(rel : Vector2, axis : Vector3) -> Vector3:
+	var result : Vector3 = Vector3.ZERO
+	
+	var cam : Camera3D = get_viewport().get_camera_3d()
+	var cam_rot : Vector3 = cam.global_rotation
+	result = Vector3(rel.x, 0, rel.y)
+	result = result.rotated(axis, cam_rot.y)
+	
+	return result
